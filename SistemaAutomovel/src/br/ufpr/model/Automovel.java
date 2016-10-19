@@ -10,5 +10,5 @@ package br.ufpr.model;
  * @author Giovanni
  */
 public class Automovel {
-    
+    //OI, Tudo BEM ?
 }
