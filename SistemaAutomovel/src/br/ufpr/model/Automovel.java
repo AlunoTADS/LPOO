@@ -10,19 +10,19 @@ package br.ufpr.model;
  * @author Matheus
  */
 public class Automovel extends Veiculo {
-    
+
     private ModeloAutomovel modelo;
-    
-    public Automovel (ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, double valorDeCompra, String placa, int ano){
+
+    public Automovel(ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, double valorDeCompra, String placa, int ano) {
         super(marca, estado, locacao, categoria, valorDeCompra, placa, ano);
-        this.modelo = modelo; 
+        this.modelo = modelo;
     }
-    
-    public ModeloAutomovel getModelo(){
+
+    public ModeloAutomovel getModelo() {
         return modelo;
     }
-    
-    double getValorDiariaLocacao(){
+
+    double getValorDiariaLocacao() {
         switch (categoria){
             case (Categoria.POPULAR):
                 return 100.00;
@@ -32,5 +32,5 @@ public class Automovel extends Veiculo {
                 return 450.00;
         }
     }
- 
+
 }
