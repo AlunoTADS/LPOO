@@ -5,21 +5,20 @@
  */
 package br.ufpr.model;
 
-import java.util.Calendar;
 /**
  *
  * @author Matheus
  */
 public class Automovel extends Veiculo {
     
-    private ModeloAutoMovel modelo;
+    private ModeloAutomovel modelo;
     
     public Automovel (ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, double valorDeCompra, String placa, int ano){
         super(marca, estado, locacao, categoria, valorDeCompra, placa, ano);
         this.modelo = modelo; 
     }
     
-    public ModeloAutoMovel getModelo(){
+    public ModeloAutomovel getModelo(){
         return modelo;
     }
     
