@@ -5,6 +5,7 @@
  */
 package br.ufpr.model;
 
+import java.util.Calendar;
 /**
  *
  * @author Matheus
@@ -12,22 +13,29 @@ package br.ufpr.model;
 public class Automovel extends Veiculo {
     
     private String marca;
-    private String estado;
+    private Estado estado;
     private Locacao locacao;
-    private String categoria;
+    private Categoria categoria;
     private double valorDeCompra;
     private String placa;
     private int ano;
    
-    /*
+    
     //Muda estado para LOCADO. Cria uma instância de Locacao e armazena no atributo
-locacao. Chama o método getValorDiariaLocacao para calcular o valor da locação.
-public void locar(int dias, Calendar data, Cliente cliente);
-//Muda estado para VENDIDO e não pode mais ser alugado
-public void vender();
-//Muda estado para DISPONIVEL
-public void devolver();
-public Estado getEstado();
+//locacao. Chama o método getValorDiariaLocacao para calcular o valor da locação.
+public void locar(int dias, Calendar data, Cliente cliente){
+    //Muda estado para VENDIDO e não pode mais ser alugado
+}
+public void vender(){
+    
+}
+
+public void devolver(){
+    this.estado = Estado.DISPONIVEL;
+}
+public Estado getEstado(){
+    
+}
 public Marca getMarca();
 public Categoria getCategoria();
 public Locacao getLocacao();
