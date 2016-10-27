@@ -12,45 +12,26 @@ import java.util.Calendar;
  */
 public class Automovel extends Veiculo {
     
-    private String marca;
-    private Estado estado;
-    private Locacao locacao;
-    private Categoria categoria;
-    private double valorDeCompra;
-    private String placa;
-    private int ano;
-   
+    private ModeloAutoMovel modelo;
     
-    //Muda estado para LOCADO. Cria uma instância de Locacao e armazena no atributo
-//locacao. Chama o método getValorDiariaLocacao para calcular o valor da locação.
-public void locar(int dias, Calendar data, Cliente cliente){
-    //Muda estado para VENDIDO e não pode mais ser alugado
-}
-public void vender(){
+    public Automovel (ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, double valorDeCompra, String placa, int ano){
+        super(marca, estado, locacao, categoria, valorDeCompra, placa, ano);
+        this.modelo = modelo; 
+    }
     
-}
-
-public void devolver(){
-    this.estado = Estado.DISPONIVEL;
-}
-public Estado getEstado(){
+    public ModeloAutoMovel getModelo(){
+        return modelo;
+    }
     
-}
-public Marca getMarca();
-public Categoria getCategoria();
-public Locacao getLocacao();
-public String getPlaca();
-public int getAno();
-//Método que calcula um valor para venda. Utilizar o seguinte cálculo:
-//valorParaVenda = valorDeCompra – idadeVeiculoEmAnos*0,15*valorDeCompra
-//Se o resultado for menor do que 10% do valorDeCompra ou negative, então
-// varlorParaVenda = valorDeCompra*0,1
-public double getValorParaVenda();
-//Método que será abstrato na classe Veiculo
-    public double getValorDiariaLocacao();
-    */
-
-    
-    
-    
+    double getValorDiariaLocacao(){
+        switch (categoria){
+            case (Categoria.POPULAR):
+                return 100.00;
+            case (Categoria.INTERMEDIARIO):
+                return 300.00;
+            case (Categoria.LUXO):
+                return 450.00;
+        }
+    }
+ 
 }
