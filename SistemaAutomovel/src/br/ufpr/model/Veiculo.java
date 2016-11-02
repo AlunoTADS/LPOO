@@ -100,7 +100,14 @@ public abstract class Veiculo implements VeiculoI {
 
     @Override
     public double getValorParaVenda() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        @SuppressWarnings("LocalVariableHidesMemberVariable")
+        double valorCompra = this.getValorCompra() == null ? 0.00 : this.getValorCompra();
+        int idadeVeiculoEmAnos = Calendar.getInstance().get(Calendar.YEAR) - this.getAno();
+        double valorVenda = valorCompra - idadeVeiculoEmAnos * 0.15 * valorCompra;
+        if(valorVenda < 0.00 || valorVenda < 0.10 * valorCompra) {
+            valorVenda = 0.10 * valorCompra;
+        }
+        return valorVenda;
     }
 
     @Override

@@ -30,11 +30,12 @@ public interface VeiculoI {
     public void devolver();
 
     /**
-     * Método que calcula um valor para venda. 
+     * Método que calcula um valor para venda
      * @return valor 
-     *      Se o resultado for menor do que 10% do valorCompra ou negativo, então     
+     *      valor = valorCompra – idadeVeiculoEmAnos * 0,15 * valorCompra <br>
+     *      Se o resultado for menor do que 10% do valorCompra ou negativo, 
+     *      então <br>  
      *      valor = valorCompra*0,1 
-     *      valor = valorCompra – idadeVeiculoEmAnos * 0,15 * valorCompra 
      * 
      */
     public double getValorParaVenda();    
