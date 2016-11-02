@@ -22,15 +22,18 @@ public class Van extends Veiculo {
         return modelo;
     }
 
-    double getValorDiariaLocacao() {
-        switch (categoria){
-            case (Categoria.POPULAR):
+    public double getValorDiariaLocacao() {
+        if (categoria == Categoria.POPULAR){
                 return 200.00;
-            case (Categoria.INTERMEDIARIO):
+        }
+        else if(categoria == Categoria.INTERMEDIARIO){
                 return 400.00;
-            case (Categoria.LUXO):
+        }
+        else if (categoria == Categoria.LUXO){
                 return 600.00;
         }
+        else
+            return 0;
     }
 
 }

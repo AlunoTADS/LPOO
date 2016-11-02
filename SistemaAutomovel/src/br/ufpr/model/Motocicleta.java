@@ -22,15 +22,18 @@ public class Motocicleta extends Veiculo {
         return modelo;
     }
     
-    double getValorDiariaLocacao(){
-        switch (categoria){
-            case (Categoria.POPULAR):
+    public double getValorDiariaLocacao(){
+        if(categoria == Categoria.POPULAR){
                 return 70.00;
-            case (Categoria.INTERMEDIARIO):
+        }
+        else if(categoria == Categoria.INTERMEDIARIO){
                 return 200.00;
-            case (Categoria.LUXO):
+        }
+        else if (categoria == Categoria.LUXO){
                 return 350.00;
         }
+        else
+            return 0;
     }
  
 }
