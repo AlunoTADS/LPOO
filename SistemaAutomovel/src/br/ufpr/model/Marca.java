@@ -9,23 +9,32 @@ package br.ufpr.model;
  *
  * @author Giovanni
  */
-public enum ModeloVan {
+public enum Marca {
     
-    KOMBI(1, "Kombi"),
-    SPRINTER(2, "Sprinter"),
-    BESTA(3, "Besta"),
-    DOBLO(4, "Doblo"),
-    TRANSIT(5, "Transit");
+    VW(1, "Volkswagen"),
+    GM(2, "General Motors"),
+    FIAT(3, "Fiat"),
+    HONDA(4, "Honda"),
+    MERCEDES(5, "Mercedes"),
+    VOLVO(6, "Volvo"),
+    AUDI(7, "Audi"),
+    FORD(8, "Ford"),
+    KIA(9, "KIA"),
+    TOYOTA(10, "Toyota"),
+    LAND_ROVER(11, "Land Rover"),
+    DODGE(12, "Dodge"),
+    JAGUAR(13, "Jaguar"),
+    PORSCHE(14, "Porsche");
     
     private Integer codigo;
     private String descricao;
 
-    private ModeloVan(Integer codigo, String descricao) {
+    private Marca(Integer codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
     
-    public int getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
     
