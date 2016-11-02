@@ -17,9 +17,9 @@ public enum ModeloVan {
     DOBLO(4),
     TRANSIT(5);
     
-    private int codigo;
+    private Integer codigo;
 
-    private ModeloVan(int codigo) {
+    private ModeloVan(Integer codigo) {
         this.codigo = codigo;
     }
     
