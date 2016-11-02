@@ -10,7 +10,7 @@ import java.sql.ResultSet;
  *
  * @author Giovanni
  */
-public abstract class Dao {
+public abstract class Dao<T> {
 
     public static Connection con;
     PreparedStatement stmt;
