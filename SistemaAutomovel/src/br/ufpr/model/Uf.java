@@ -41,6 +41,15 @@ public enum Uf {
     
     private String sigla;
     private String descricao;
+    
+    public static Uf fromValue(String sigla) {
+        for (Uf uf : Uf.values()) {
+            if (uf.getSigla().equals(sigla)) {
+                return uf;
+            }
+        }
+        return null;
+    }
 
     private Uf(String sigla, String descricao) {
         this.sigla = sigla;

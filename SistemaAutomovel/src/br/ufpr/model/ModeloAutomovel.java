@@ -10,21 +10,40 @@ package br.ufpr.model;
  * @author Matheus
  */
 public enum ModeloAutomovel {
-     GOL(1, "Gol"),
-     CELTA(2, "Celta"),
-     PALIO(3, "Palio"),
-     CORSA(4, "Corsa");/*Quem quiser adicionar valores aqui, fique a vontade*/
+    GOL(1, "Gol"),
+    CELTA(2, "Celta"),
+    PALIO(3, "Palio"),
+    CORSA(4, "Corsa");/*Quem quiser adicionar valores aqui, fique a vontade*/
      
-     private Integer codigo;
+<<<<<<< HEAD
+    private Integer codigo;
+    private String descricao;
+     
+    private ModeloAutomovel(Integer codigo, String descricao) {
+        this.codigo = codigo;
+        this.descricao = descricao;
+    }
+    
+    public static ModeloAutomovel fromValue(Integer codigo) {
+        for (ModeloAutomovel modelo : ModeloAutomovel.values()) {
+            if (modelo.getCodigo() == codigo) {
+                return modelo;
+            }
+        }
+        return null;
+    }
+=======
+     private Integer idModeloAutomovel;
      private String descricao;
      
-     ModeloAutomovel(Integer codigo, String descricao){
-         this.codigo = codigo;
+     ModeloAutomovel(Integer idModeloAutomovel, String descricao){
+         this.idModeloAutomovel = idModeloAutomovel;
          this.descricao = descricao;
      }
+>>>>>>> origin/master
      
-    public Integer getCodigo() {
-        return codigo;
+    public Integer getIdModeloAutomovel() {
+        return idModeloAutomovel;
     }
     
     public String getDescricao() {
