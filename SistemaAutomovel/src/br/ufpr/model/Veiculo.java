@@ -15,7 +15,29 @@ public abstract class Veiculo implements VeiculoI {
     private Double valorCompra;
     private String placa;
     private Integer ano;
+    private Locacao locacao;
 
+    /**
+     *
+     * @param modelo
+     * @param marca
+     * @param estado
+     * @param locacao
+     * @param categoria
+     * @param valorCompra
+     * @param placa
+     * @param ano
+     */
+    public Veiculo(ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
+        this.marca = marca;
+        this.estado = estado;
+        this.locacao = locacao;
+        this.categoria = categoria;
+        this.valorCompra = valorCompra;
+        this.placa = placa;
+        this.ano = ano;
+    }
+    
     @Override
     public void locar(int dias, Calendar dataInicio, Cliente cliente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
