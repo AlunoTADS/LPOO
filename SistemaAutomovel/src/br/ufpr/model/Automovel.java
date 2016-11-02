@@ -14,7 +14,7 @@ public class Automovel extends Veiculo {
     private ModeloAutomovel modelo;
 
     public Automovel(ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, double valorDeCompra, String placa, int ano) {
-        super(marca, estado, locacao, categoria, valorDeCompra, placa, ano);
+        super(null, marca, estado, locacao, categoria, valorDeCompra, placa, ano);
         this.modelo = modelo;
     }
 
@@ -22,7 +22,7 @@ public class Automovel extends Veiculo {
         return modelo;
     }
 
-    double getValorDiariaLocacao() {
+    public double getValorDiariaLocacao() {
         switch (categoria){
             case (Categoria.POPULAR):
                 return 100.00;
