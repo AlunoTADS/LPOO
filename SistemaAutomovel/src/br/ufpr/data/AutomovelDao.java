@@ -51,14 +51,14 @@ public class AutomovelDao extends Dao {
             if (automovel.getModelo() != null && automovel.getModelo().getCodigo() != null) {
                 query.append(String.format(" AND IDMODELOAUTOMOVEL = %d ", automovel.getModelo().getCodigo()));
             }
-            if (automovel.getMarca() != null && automovel.getMarca().getCodigo() != null) {
-                query.append(String.format(" AND IDMARCA = %d ", automovel.getMarca().getCodigo()));
+            if (automovel.getMarca() != null && automovel.getMarca().getIdMarca() != null) {
+                query.append(String.format(" AND IDMARCA = %d ", automovel.getMarca().getIdMarca()));
             }
             if (automovel.getEstado() != null && automovel.getEstado().getCodigo() != null) {
                 query.append(String.format(" AND IDESTADO = %d ", automovel.getEstado().getCodigo()));
             }
-            if (automovel.getCategoria() != null && automovel.getCategoria().getCodigo() != null) {
-                query.append(String.format(" AND IDCATEGORIA = %d ", automovel.getCategoria().getCodigo()));
+            if (automovel.getCategoria() != null && automovel.getCategoria().getIdCategoria() != null) {
+                query.append(String.format(" AND IDCATEGORIA = %d ", automovel.getCategoria().getIdCategoria()));
             }
             if (automovel.getValorCompra() != null) {
                 query.append(String.format(" AND VALORCOMPRA = %f ", automovel.getValorCompra()));

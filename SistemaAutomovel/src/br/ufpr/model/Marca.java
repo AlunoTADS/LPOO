@@ -26,16 +26,16 @@ public enum Marca {
     JAGUAR(13, "Jaguar"),
     PORSCHE(14, "Porsche");
     
-    private Integer codigo;
+    private Integer idMarca;
     private String descricao;
 
-    private Marca(Integer codigo, String descricao) {
-        this.codigo = codigo;
+    private Marca(Integer idMarca, String descricao) {
+        this.idMarca = idMarca;
         this.descricao = descricao;
     }
     
-    public Integer getCodigo() {
-        return codigo;
+    public Integer getIdMarca() {
+        return idMarca;
     }
     
     public String getDescricao() {
