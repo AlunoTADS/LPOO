@@ -10,15 +10,24 @@ package br.ufpr.model;
  * @author Matheus
  */
 public enum Estado {
-     NOVO(1), LOCADO(2), DISPONIVEL(3), VENDIDO(4);
+     NOVO(1, "Novo"),
+     LOCADO(2, "Locado"),
+     DISPONIVEL(3, "Disponivel"),
+     VENDIDO(4, "Vendido");
      
-     private final int estado;
-     Estado(int valorEstado){
-         estado = valorEstado;
+     private Integer codigo;
+     private String descricao;
+     
+     Estado(Integer codigo, String descricao){
+         this.codigo = codigo;
+         this.descricao = descricao;
      }
      
-     public int getEstado(){
-         return estado;
-     }
+    public int getCodigo() {
+        return codigo;
+    }
+    
+    public String getDescricao() {
+        return descricao;
+    }
 }
-
