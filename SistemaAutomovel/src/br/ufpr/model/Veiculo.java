@@ -83,7 +83,7 @@ public abstract class Veiculo implements VeiculoI {
     
     @Override
     public void locar(int dias, Calendar dataInicio, Cliente cliente) {
-        this.locacao = new Locacao(cliente, this, dias, dataInicio.getTime(), getValorCompra());
+        this.locacao = new Locacao(this.getIdVeiculo() ,cliente, dias, dataInicio.getTime(), getValorCompra());
         this.estado = Estado.LOCADO;
     }
 
