@@ -31,11 +31,11 @@ public interface VeiculoI {
 
     /**
      * Método que calcula um valor para venda. 
-     * Utilizar o seguinte cálculo:
-     * Se o resultado for menor do que 10% do valorDeCompra ou negative, então     
-     *      varlorParaVenda = valorDeCompra*0,1 
-     *      valorParaVenda = valorDeCompra – idadeVeiculoEmAnos*0,15*valorDeCompra 
-     * @return
+     * @return valor 
+     *      Se o resultado for menor do que 10% do valorCompra ou negativo, então     
+     *      valor = valorCompra*0,1 
+     *      valor = valorCompra – idadeVeiculoEmAnos * 0,15 * valorCompra 
+     * 
      */
     public double getValorParaVenda();    
     
