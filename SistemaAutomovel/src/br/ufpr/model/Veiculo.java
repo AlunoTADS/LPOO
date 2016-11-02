@@ -36,7 +36,7 @@ public abstract class Veiculo implements VeiculoI {
     protected Marca marca;
     protected Estado estado;
     protected Categoria categoria;
-    private Double valorCompra;
+    protected Double valorCompra;
     protected String placa;
     protected Integer ano;
     protected Locacao locacao;
@@ -137,14 +137,14 @@ public abstract class Veiculo implements VeiculoI {
      * @return o idVeiculo
      */
     public Integer getIdVeiculo() {
-        return idVeiculo;
+        return this.idVeiculo;
     }
 
     /**
      * @return o valorCompra
      */
     public Double getValorCompra() {
-        return valorCompra;
+        return this.valorCompra;
     }
 
 }
