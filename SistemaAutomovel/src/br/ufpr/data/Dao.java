@@ -41,4 +41,13 @@ public abstract class Dao<T> {
         } catch (Exception e) {
         }
     }
+    
+    @Override
+    public void finalize() throws Throwable {
+        try {
+            close();
+        } finally {
+            super.finalize();
+        }
+    }
 }
