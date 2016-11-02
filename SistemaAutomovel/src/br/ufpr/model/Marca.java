@@ -34,7 +34,43 @@ public enum Marca {
         this.descricao = descricao;
     }
     
-<<<<<<< HEAD
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package br.ufpr.model;
+
+/**
+ *
+ * @author Giovanni
+ */
+public enum Marca {
+    
+    VW(1, "Volkswagen"),
+    GM(2, "General Motors"),
+    FIAT(3, "Fiat"),
+    HONDA(4, "Honda"),
+    MERCEDES(5, "Mercedes"),
+    VOLVO(6, "Volvo"),
+    AUDI(7, "Audi"),
+    FORD(8, "Ford"),
+    KIA(9, "KIA"),
+    TOYOTA(10, "Toyota"),
+    LAND_ROVER(11, "Land Rover"),
+    DODGE(12, "Dodge"),
+    JAGUAR(13, "Jaguar"),
+    PORSCHE(14, "Porsche");
+    
+    private Integer idMarca;
+    private String descricao;
+
+    private Marca(Integer idMarca, String descricao) {
+        this.idMarca = idMarca;
+        this.descricao = descricao;
+    }
+    
+
     public static Marca fromValue(Integer codigo) {
         for (Marca marca : Marca.values()) {
             if (marca.getCodigo() == codigo) {
@@ -49,7 +85,8 @@ public enum Marca {
 =======
     public Integer getIdMarca() {
         return idMarca;
->>>>>>> origin/master
+    public Integer getIdMarca() {
+        return idMarca;
     }
     
     public String getDescricao() {

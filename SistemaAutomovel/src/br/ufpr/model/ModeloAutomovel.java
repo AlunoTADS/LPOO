@@ -1,4 +1,10 @@
 /*
+
+
+
+
+
+
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,30 +15,7 @@ package br.ufpr.model;
  *
  * @author Matheus
  */
-public enum ModeloAutomovel {
-    GOL(1, "Gol"),
-    CELTA(2, "Celta"),
-    PALIO(3, "Palio"),
-    CORSA(4, "Corsa");/*Quem quiser adicionar valores aqui, fique a vontade*/
-     
-<<<<<<< HEAD
-    private Integer codigo;
-    private String descricao;
-     
-    private ModeloAutomovel(Integer codigo, String descricao) {
-        this.codigo = codigo;
-        this.descricao = descricao;
-    }
-    
-    public static ModeloAutomovel fromValue(Integer codigo) {
-        for (ModeloAutomovel modelo : ModeloAutomovel.values()) {
-            if (modelo.getCodigo() == codigo) {
-                return modelo;
-            }
-        }
-        return null;
-    }
-=======
+
      private Integer idModeloAutomovel;
      private String descricao;
      
@@ -40,8 +23,6 @@ public enum ModeloAutomovel {
          this.idModeloAutomovel = idModeloAutomovel;
          this.descricao = descricao;
      }
->>>>>>> origin/master
-     
     public Integer getIdModeloAutomovel() {
         return idModeloAutomovel;
     }

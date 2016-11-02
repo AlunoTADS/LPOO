@@ -10,7 +10,6 @@ package br.ufpr.model;
  * @author Matheus
  */
 public enum Categoria {
-<<<<<<< HEAD
     POPULAR(1, "Popular"),
     INTERMEDIARIO(2, "Intermediario"),
     LUXO(3, "Luxo");
@@ -34,7 +33,6 @@ public enum Categoria {
 
     public Integer getCodigo() {
         return codigo;
-=======
      POPULAR(1, "Popular"),
      INTERMEDIARIO(2, "Intermediario"),
      LUXO(3, "Luxo");
@@ -49,7 +47,7 @@ public enum Categoria {
      
     public Integer getIdCategoria() {
         return idCategoria;
->>>>>>> origin/master
+
     }
 
     public String getDescricao() {

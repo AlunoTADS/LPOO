@@ -64,13 +64,12 @@ CREATE TABLE Veiculo (
 );
 
 CREATE TABLE Locacao (
-	idLocacao INTEGER NOT NULL,
-	idCliente INTEGER NOT NULL,
 	idVeiculo INTEGER NOT NULL,
+	idCliente INTEGER NOT NULL,
 	dataInicio DATE NOT NULL,
 	dias INTEGER NOT NULL,
 	valor NUMERIC NOT NULL,
-	CONSTRAINT Locacao_pk PRIMARY KEY (idLocacao),
+	CONSTRAINT Locacao_pk PRIMARY KEY (idVeiculo),
 	FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente),
 	FOREIGN KEY (idVeiculo) REFERENCES Estado (idVeiculo)
 );

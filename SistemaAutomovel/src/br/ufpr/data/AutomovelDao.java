@@ -78,8 +78,13 @@ public class AutomovelDao extends Dao implements DaoI<Automovel> {
                 query.append(String.format(" AND idmodeloautomovel = %d ", automovel.getModelo().getCodigo()));
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (automovel.getMarca() != null && automovel.getMarca().getCodigo() != null) {
                 query.append(String.format(" AND idmarca = %d ", automovel.getMarca().getCodigo()));
+=======
+            if (automovel.getMarca() != null && automovel.getMarca().getIdMarca() != null) {
+                query.append(String.format(" AND IDMARCA = %d ", automovel.getMarca().getIdMarca()));
+>>>>>>> origin/master
 =======
             if (automovel.getMarca() != null && automovel.getMarca().getIdMarca() != null) {
                 query.append(String.format(" AND IDMARCA = %d ", automovel.getMarca().getIdMarca()));
@@ -89,8 +94,13 @@ public class AutomovelDao extends Dao implements DaoI<Automovel> {
                 query.append(String.format(" AND idestado = %d ", automovel.getEstado().getCodigo()));
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (automovel.getCategoria() != null && automovel.getCategoria().getCodigo() != null) {
                 query.append(String.format(" AND idcategoria = %d ", automovel.getCategoria().getCodigo()));
+=======
+            if (automovel.getCategoria() != null && automovel.getCategoria().getIdCategoria() != null) {
+                query.append(String.format(" AND IDCATEGORIA = %d ", automovel.getCategoria().getIdCategoria()));
+>>>>>>> origin/master
 =======
             if (automovel.getCategoria() != null && automovel.getCategoria().getIdCategoria() != null) {
                 query.append(String.format(" AND IDCATEGORIA = %d ", automovel.getCategoria().getIdCategoria()));
