@@ -1,6 +1,7 @@
 package br.ufpr.model;
 
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 /**
  * A classe veículo deve ter os seguintes atributos: <br>
@@ -31,26 +32,46 @@ import java.util.Calendar;
  */
 public abstract class Veiculo implements VeiculoI {
 
-    protected Integer idVeiculo;
+    private Integer idVeiculo;
     protected Marca marca;
     protected Estado estado;
     protected Categoria categoria;
-    protected Double valorCompra;
+    private Double valorCompra;
     protected String placa;
     protected Integer ano;
     protected Locacao locacao;
 
     /**
-     *
+     * @param idVeiculo identificador do veiculo, deixar nulo para 
+     *          veiculos que ainda não foram persistidos no banco de dados.
      * @param marca
      * @param estado
-     * @param locacao
+     * @param locacao nulo caso estado == Estado.LOCADO não esteja locado
      * @param categoria
      * @param valorCompra
-     * @param placa
-     * @param ano
+     * @param placa a placa deve ser nula ou seguir a expressao regular 
+     *          [A-Z]{4,4}-\\d{4,4}
+     * @param ano ano do modelo do veiculo, não pode ser menor ou igual a zero.
      */
-    public Veiculo(Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
+    public Veiculo(Integer idVeiculo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
+
+        if(placa != null && !Pattern.compile("[A-Z]{4,4}-\\d{4,4}").matcher(placa).matches()) {
+            throw new IllegalArgumentException("placa não é um argumento valido");
+        }
+        
+        if(estado == Estado.LOCADO && locacao == null) {
+            throw new IllegalArgumentException("estado == Estado.LOCADO implica em locacao != null");
+        }
+
+        if((estado != Estado.LOCADO || estado != Estado.VENDIDO) && locacao != null) {
+            throw new IllegalArgumentException("(estado != Estado.LOCADO || Estado.VENDIDO) implica em locacao == null");
+        }
+ 
+        if(ano <= 0) {
+            throw new IllegalArgumentException("ano não pode ser <= 0");
+        }
+        
+        this.idVeiculo = idVeiculo;
         this.marca = marca;
         this.estado = estado;
         this.locacao = locacao;
@@ -62,7 +83,7 @@ public abstract class Veiculo implements VeiculoI {
     
     @Override
     public void locar(int dias, Calendar dataInicio, Cliente cliente) {
-        this.locacao = new Locacao(cliente, this, dias, dataInicio, valorCompra);
+        this.locacao = new Locacao(cliente, this, dias, dataInicio.getTime(), getValorCompra());
         this.estado = Estado.LOCADO;
     }
 
@@ -89,17 +110,17 @@ public abstract class Veiculo implements VeiculoI {
 
     @Override
     public Marca getMarca() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.marca;
     }
 
     @Override
     public Categoria getCategoria() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.categoria;
     }
 
     @Override
     public Locacao getLocacao() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.locacao;
     }
 
     @Override
@@ -110,6 +131,20 @@ public abstract class Veiculo implements VeiculoI {
     @Override
     public int getAno() {
         return this.ano;
+    }
+
+    /**
+     * @return o idVeiculo
+     */
+    public Integer getIdVeiculo() {
+        return idVeiculo;
+    }
+
+    /**
+     * @return o valorCompra
+     */
+    public Double getValorCompra() {
+        return valorCompra;
     }
 
 }
