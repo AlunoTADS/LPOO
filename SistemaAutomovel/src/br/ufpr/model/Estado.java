@@ -15,25 +15,25 @@ public enum Estado {
     DISPONIVEL(3, "Disponivel"),
     VENDIDO(4, "Vendido");
 
-    private Integer codigo;
+    private Integer idEstado;
     private String descricao;
 
     private Estado(Integer codigo, String descricao) {
-        this.codigo = codigo;
+        this.idEstado = codigo;
         this.descricao = descricao;
     }
     
-    public static Estado fromValue(Integer codigo) {
+    public static Estado fromValue(Integer idEstado) {
         for (Estado estado : Estado.values()) {
-            if (estado.getCodigo() == codigo) {
+            if (estado.getIdEstado() == idEstado) {
                 return estado;
             }
         }
         return null;
     }
 
-    public Integer getCodigo() {
-        return codigo;
+    public Integer getIdEstado() {
+        return idEstado;
     }
 
     public String getDescricao() {
