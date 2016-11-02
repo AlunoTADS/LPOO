@@ -20,6 +20,7 @@ public abstract class Dao<T> {
     private final String URL = "jdbc:sqlite:src/br/ufpr/data/db/database.db";
 
     public void open() throws Exception {
+        close();
         if (con == null || con.isClosed()) {
             con = DriverManager.getConnection(URL);
         }

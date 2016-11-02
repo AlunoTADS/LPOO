@@ -11,6 +11,7 @@ import br.ufpr.model.Estado;
 import br.ufpr.model.Locacao;
 import br.ufpr.model.Marca;
 import br.ufpr.model.ModeloAutomovel;
+import br.ufpr.model.Veiculo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,29 +19,27 @@ import java.util.List;
  *
  * @author Giovanni
  */
-public class AutomovelDao extends Dao implements DaoI<Automovel> {
+public class AutomovelDao extends VeiculoDao implements DaoI<Veiculo> {
 
-    @Override
-    public void inserir(Automovel t) throws Exception {
+    public void inserir(Automovel automovel) throws Exception {
+        super.inserir(automovel);
+        open();
+        
+        stmt = con.prepareStatement("INSERT INTO automovel VALUES (?, ?)");
+    }
+
+    public void editar(Automovel automovel) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void editar(Automovel t) throws Exception {
+    public void excluir(Automovel automovel) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void excluir(Automovel t) throws Exception {
+    public Automovel buscar(Automovel automovel) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Automovel buscar(Automovel t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<Automovel> listar(Automovel automovel) throws Exception {
         List<Automovel> resultado = new ArrayList<Automovel>();
         open();
@@ -58,8 +57,9 @@ public class AutomovelDao extends Dao implements DaoI<Automovel> {
             if (estado.equals(Estado.LOCADO)) {
                 Locacao locacao = new Locacao(null, rs.getInt("idveiculo"), null, null, null);
                 locacao = LocacaoDao.buscar(locacao);
-            }            
-            Automovel a = new Automovel(modeloAutomovel, marca, estado, null, categoria, valorCompra, placa, ano);
+            }
+            Automovel a = new Automovel(modeloAutomovel, marca, estado, locacao, categoria, valorCompra, placa, ano);
+            resultado.add(a);
         }
         
         close();
@@ -69,22 +69,25 @@ public class AutomovelDao extends Dao implements DaoI<Automovel> {
     public String montarQuery(Automovel automovel) {
         StringBuffer query = new StringBuffer();
         
-        query.append("SELECT * FROM automovel WHERE 1=1");
+        query.append(" SELECT a.idmodeloautomovel, v.* ");
+        query.append(" FROM automovel a ");
+        query.append(" INNER JOIN veiculo v ON v.idveiculo = a.idveiculo ");
+        query.append(" WHERE 1=1 ");
         if (automovel != null) {
             if (automovel.getIdVeiculo() != null) {
                 query.append(String.format(" AND idveiculo = %d ", automovel.getIdVeiculo()));
             }
-            if (automovel.getModelo() != null && automovel.getModelo().getCodigo() != null) {
-                query.append(String.format(" AND idmodeloautomovel = %d ", automovel.getModelo().getCodigo()));
+            if (automovel.getModelo() != null && automovel.getModelo().getIdModeloAutomovel() != null) {
+                query.append(String.format(" AND idmodeloautomovel = %d ", automovel.getModelo().getIdModeloAutomovel()));
             }
             if (automovel.getMarca() != null && automovel.getMarca().getIdMarca() != null) {
-                query.append(String.format(" AND IDMARCA = %d ", automovel.getMarca().getIdMarca()));
+                query.append(String.format(" AND idmarca = %d ", automovel.getMarca().getIdMarca()));
             }
             if (automovel.getEstado() != null && automovel.getEstado().getIdEstado() != null) {
                 query.append(String.format(" AND idestado = %d ", automovel.getEstado().getIdEstado()));
             }
             if (automovel.getCategoria() != null && automovel.getCategoria().getIdCategoria() != null) {
-                query.append(String.format(" AND IDCATEGORIA = %d ", automovel.getCategoria().getIdCategoria()));
+                query.append(String.format(" AND idcategoria = %d ", automovel.getCategoria().getIdCategoria()));
             }
             if (automovel.getValorCompra() != null) {
                 query.append(String.format(" AND valorcompra = %f ", automovel.getValorCompra()));
