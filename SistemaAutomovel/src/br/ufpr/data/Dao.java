@@ -16,14 +16,11 @@ public class Dao {
 	ResultSet rs;
 	CallableStatement call;
 	
-//	private final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
-//	private final String USER = "system";
-//	private final String PASS = "admin";
+	private final String URL = "jdbc:sqlite:src/br/ufpr/data/db/database.db";
 	
 	public void open() throws Exception {
             if(con == null || con.isClosed()) {
-//                Class.forName("oracle.jdbc.OracleDriver");
-//		con = DriverManager.getConnection(URL, USER, PASS);
+		con = DriverManager.getConnection(URL);
             }
 	}
         
