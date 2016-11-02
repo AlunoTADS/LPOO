@@ -26,6 +26,12 @@ public class AutomovelDao extends VeiculoDao implements DaoI<Veiculo> {
         open();
         
         stmt = con.prepareStatement("INSERT INTO automovel VALUES (?, ?)");
+        int idx = 0;
+        stmt.setInt(++idx, automovel.getIdVeiculo());
+        stmt.setInt(++idx, automovel.getModelo().getIdModeloAutomovel());
+        stmt.execute();
+        
+        close();
     }
 
     public void editar(Automovel automovel) throws Exception {
