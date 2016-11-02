@@ -25,11 +25,14 @@ public class Dao {
 	}
         
 	protected void close() throws Exception {
-            if(rs != null)
-                rs.close();
-            if(stmt != null)
+            if(rs != null) {
+               rs.close(); 
+            }                
+            if(stmt != null) {
                 stmt.close();
-            if(con != null)
+            }
+            if(con != null) {
                 con.close();
+            }
 	}
 }
