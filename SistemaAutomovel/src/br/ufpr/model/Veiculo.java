@@ -19,7 +19,6 @@ public abstract class Veiculo implements VeiculoI {
 
     /**
      *
-     * @param modelo
      * @param marca
      * @param estado
      * @param locacao
@@ -28,7 +27,7 @@ public abstract class Veiculo implements VeiculoI {
      * @param placa
      * @param ano
      */
-    public Veiculo(ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
+    public Veiculo(Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
         this.marca = marca;
         this.estado = estado;
         this.locacao = locacao;
