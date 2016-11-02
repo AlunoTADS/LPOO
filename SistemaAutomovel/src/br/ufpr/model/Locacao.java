@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Locacao {
     
-//    private Cliente cliente;
+    private Cliente cliente;
 //    private Veiculo veiculo;
     private Integer dias;
     private Date dataInicio;
@@ -27,14 +27,14 @@ public class Locacao {
 //        this.valor = valor;
 //    }
     
-//    public Cliente getCliente() {
-//        return cliente;
-//    }
-//    
-//    public void setCliente(Cliente cliente) {
-//        this.cliente = cliente;
-//    }
-//    
+    public Cliente getCliente() {
+        return cliente;
+    }
+    
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
 //    public Veiculo getVeiculo() {
 //        return veiculo;
 //    }
