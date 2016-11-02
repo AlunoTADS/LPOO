@@ -86,31 +86,63 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
 
     @Override
     public Locacao buscar(Locacao locacao) throws Exception {
-
         String sql = new StringBuilder()
-                .append(" SELECT idveiculo, dias, datainicio, idcliente, valor ")
+                .append(" SELECT idveiculo, idcliente, dias, datainicio, valor ")
                 .append(" FROM locacao ")
                 .append(String.format(" WHERE idveiculo = %d ", locacao.getIdVeiculo()))
                 .toString();
-        
+
         stmt = con.prepareStatement(sql);
-        
+
         try {
             rs = stmt.executeQuery();
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             throw e;
-        }
-        finally {
+        } finally {
             close();
         }
-        //Integer idVeiculo, Cliente cliente, Integer dias, Date dataInicio, Double valor
-        return new Locacao(rs.getInt(0), rs.getInt(1), rs.getDate(2), rs., Double.NaN);
+        return new Locacao(rs.getInt(1), null, rs.getInt(3), rs.getDate(4), rs.getDouble(5));
     }
 
     @Override
-    public List<Locacao> listar(Locacao t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Locacao> listar(Locacao locacao) throws Exception {
+        StringBuilder sql = new StringBuilder()
+                .append(" SELECT idveiculo, idcliente, dias, datainicio, valor ")
+                .append(" FROM locacao ")
+                .append(" WHERE 1 = 1 ");
+
+        if (locacao.getIdVeiculo() != null) {
+            sql.append(String.format(" AND idveiculo = %d ", locacao.getIdVeiculo()));
+        }
+        
+        if (locacao.getCliente() != null && locacao.getCliente().getIdCliente() != null) {
+            sql.append(String.format(" AND idcliente = %d ", locacao.getCliente().getIdCliente()));
+        }
+
+        if (locacao.getDias() != null) {
+            sql.append(String.format(" AND dias = %d ", locacao.getIdVeiculo()));
+        }
+        
+        if (locacao.getDataInicio() != null) {
+            sql.append(String.format(" AND datainicio = '%s' ", new SimpleDateFormat("yyyy-MM-dd").format(locacao.getDataInicio())));
+        }
+
+        if (locacao.getValor() != null) {
+            sql.append(String.format(" AND valor = %f ", locacao.getValor()));
+        }
+        
+        stmt = con.prepareStatement(sql.toString());
+
+        try {
+            rs = stmt.executeQuery();
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            close();
+        }
+        
+        
+        return new Locacao(rs.getInt(1), null, rs.getInt(3), rs.getDate(4), rs.getDouble(5));
     }
 
 }
