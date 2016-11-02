@@ -32,8 +32,9 @@ public class Motocicleta extends Veiculo {
         else if (categoria == Categoria.LUXO){
                 return 350.00;
         }
-        else
+        else {
             return 0;
+        }
     }
  
 }

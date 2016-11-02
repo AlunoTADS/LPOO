@@ -13,15 +13,15 @@ import java.util.Date;
  */
 public class Locacao {
     
+    private Integer idVeiculo;
     private Cliente cliente;
-    private Veiculo veiculo;
     private Integer dias;
     private Date dataInicio;
     private Double valor;
     
-    public Locacao(Cliente cliente, Veiculo veiculo, Integer dias, Date dataInicio, Double valor) {
+    public Locacao(Integer idVeiculo, Cliente cliente, Integer dias, Date dataInicio, Double valor) {
+        this.idVeiculo = idVeiculo;
         this.cliente = cliente;
-        this.veiculo = veiculo;
         this.dias = dias;
         this.dataInicio = dataInicio;
         this.valor = valor;
@@ -35,12 +35,12 @@ public class Locacao {
         this.cliente = cliente;
     }
     
-    public Veiculo getVeiculo() {
-        return veiculo;
+    public Integer getIdVeiculo() {
+        return idVeiculo;
     }
     
-    public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
+    public void setIdVeiculo(Integer idVeiculo) {
+        this.idVeiculo = idVeiculo;
     }
 
     public Integer getDias() {
