@@ -10,14 +10,24 @@ package br.ufpr.model;
  * @author Matheus
  */
 public enum ModeloAutomovel {
-     GOL(1), CELTA(2), PALIO(3), CORSA(4);/*Quem quiser adicionar valores aqui, fique a vontade*/
+     GOL(1, "Gol"),
+     CELTA(2, "Celta"),
+     PALIO(3, "Palio"),
+     CORSA(4, "Corsa");/*Quem quiser adicionar valores aqui, fique a vontade*/
      
-     private final int modeloAutomovel;
-     ModeloAutomovel(int valorModelo){
-         modeloAutomovel = valorModelo;
+     private Integer codigo;
+     private String descricao;
+     
+     ModeloAutomovel(Integer codigo, String descricao){
+         this.codigo = codigo;
+         this.descricao = descricao;
      }
      
-     public int getModelo(){
-         return modeloAutomovel;
-     }
+    public int getCodigo() {
+        return codigo;
+    }
+    
+    public String getDescricao() {
+        return descricao;
+    }
 }
