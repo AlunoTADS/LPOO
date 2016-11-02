@@ -14,18 +14,18 @@ import java.util.Date;
 public class Locacao {
     
     private Cliente cliente;
-//    private Veiculo veiculo;
+    private Veiculo veiculo;
     private Integer dias;
     private Date dataInicio;
     private Double valor;
     
-//    public Locacao(Cliente cliente, Veiculo veiculo, Integer dias, Date dataInicio, Double valor) {
-//        this.cliente = cliente;
-//        this.veiculo = veiculo;
-//        this.dias = dias;
-//        this.dataInicio = dataInicio;
-//        this.valor = valor;
-//    }
+    public Locacao(Cliente cliente, Veiculo veiculo, Integer dias, Date dataInicio, Double valor) {
+        this.cliente = cliente;
+        this.veiculo = veiculo;
+        this.dias = dias;
+        this.dataInicio = dataInicio;
+        this.valor = valor;
+    }
     
     public Cliente getCliente() {
         return cliente;
@@ -35,13 +35,13 @@ public class Locacao {
         this.cliente = cliente;
     }
     
-//    public Veiculo getVeiculo() {
-//        return veiculo;
-//    }
-//    
-//    public void setVeiculo(Veiculo veiculo) {
-//        this.veiculo = veiculo;
-//    }
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+    
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
 
     public Integer getDias() {
         return dias;
