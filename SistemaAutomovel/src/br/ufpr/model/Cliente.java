@@ -64,4 +64,8 @@ public class Cliente {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }    
+
+    public int getIdCliente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
