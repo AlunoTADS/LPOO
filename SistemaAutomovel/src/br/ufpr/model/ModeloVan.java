@@ -17,16 +17,16 @@ public enum ModeloVan {
     DOBLO(4, "Doblo"),
     TRANSIT(5, "Transit");
     
-    private Integer idModeloVan;
+    private Integer codigo;
     private String descricao;
 
-    private ModeloVan(Integer idModeloVan, String descricao) {
-        this.idModeloVan = idModeloVan;
+    private ModeloVan(Integer codigo, String descricao) {
+        this.codigo = codigo;
         this.descricao = descricao;
     }
     
-    public int getIdModeloVan() {
-        return idModeloVan;
+    public int getCodigo() {
+        return codigo;
     }
     
     public String getDescricao() {

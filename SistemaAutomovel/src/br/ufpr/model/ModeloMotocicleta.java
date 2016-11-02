@@ -11,16 +11,16 @@ public enum ModeloMotocicleta {
     CBR_500(3, "CBR 500"),
     XTZ_125(4, "XTZ 125");/*Quem quiser adicionar valores aqui, fique a vontade*/
 
-    private Integer idModeloMotocicleta;
+    private Integer codigo;
     private String descricao;
 
-    ModeloMotocicleta(Integer idModeloMotocicleta, String descricao) {
-        this.idModeloMotocicleta = idModeloMotocicleta;
+    ModeloMotocicleta(Integer codigo, String descricao) {
+        this.codigo = codigo;
         this.descricao = descricao;
     }
 
-    public int getIdModeloMotocicleta() {
-        return idModeloMotocicleta;
+    public int getCodigo() {
+        return codigo;
     }
 
     public String getDescricao() {

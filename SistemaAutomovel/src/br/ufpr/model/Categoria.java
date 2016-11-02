@@ -14,16 +14,16 @@ public enum Categoria {
      INTERMEDIARIO(2, "Intermediario"),
      LUXO(3, "Luxo");
      
-     private Integer idCategoria;
+     private Integer codigo;
      private String descricao;
      
-     Categoria(Integer idCategoria, String descricao){
-         this.idCategoria = idCategoria;
+     Categoria(Integer codigo, String descricao){
+         this.codigo = codigo;
          this.descricao = descricao;
      }
      
-    public Integer getIdCategoria() {
-        return idCategoria;
+    public Integer getCodigo() {
+        return codigo;
     }
     
     public String getDescricao() {

@@ -15,16 +15,16 @@ public enum ModeloAutomovel {
      PALIO(3, "Palio"),
      CORSA(4, "Corsa");/*Quem quiser adicionar valores aqui, fique a vontade*/
      
-     private Integer idModeloAutomovel;
+     private Integer codigo;
      private String descricao;
      
-     ModeloAutomovel(Integer idModeloAutomovel, String descricao){
-         this.idModeloAutomovel = idModeloAutomovel;
+     ModeloAutomovel(Integer codigo, String descricao){
+         this.codigo = codigo;
          this.descricao = descricao;
      }
      
-    public Integer getIdModeloAutomovel() {
-        return idModeloAutomovel;
+    public Integer getCodigo() {
+        return codigo;
     }
     
     public String getDescricao() {
