@@ -136,7 +136,7 @@ public abstract class Veiculo implements VeiculoI {
     }
 
     @Override
-    public int getAno() {
+    public Integer getAno() {
         return this.ano;
     }
 

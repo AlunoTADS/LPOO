@@ -23,7 +23,7 @@ public enum ModeloAutomovel {
          this.descricao = descricao;
      }
      
-    public int getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
     
