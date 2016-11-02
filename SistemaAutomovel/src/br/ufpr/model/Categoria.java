@@ -10,14 +10,23 @@ package br.ufpr.model;
  * @author Matheus
  */
 public enum Categoria {
-     POPULAR(1), INTERMEDIARIO(2), LUXO(3);
+     POPULAR(1, "Popular"),
+     INTERMEDIARIO(2, "Intermediario"),
+     LUXO(3, "Luxo");
      
-     private final int categoria;
-     Categoria(int valorCategoria){
-         categoria = valorCategoria;
+     private Integer codigo;
+     private String descricao;
+     
+     Categoria(Integer codigo, String descricao){
+         this.codigo = codigo;
+         this.descricao = descricao;
      }
      
-     public int getCategoria(){
-         return categoria;
-     }
+    public int getCodigo() {
+        return codigo;
+    }
+    
+    public String getDescricao() {
+        return descricao;
+    }
 }
