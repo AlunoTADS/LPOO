@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 /**
  *
  * @author Giovanni
+ * @param <T>
  */
 public abstract class Dao<T> {
 

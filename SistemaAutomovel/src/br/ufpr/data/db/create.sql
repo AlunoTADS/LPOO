@@ -1,17 +1,17 @@
 --select 'DROP TABLE ' || name || ';' from sqlite_master where type = 'table';
-DROP TABLE unidadefederativa;
-DROP TABLE cliente;
-DROP TABLE estado;
-DROP TABLE marca;
-DROP TABLE categoria;
-DROP TABLE veiculo;
-DROP TABLE locacao;
-DROP TABLE modelomotocicleta;
-DROP TABLE motocicleta;
-DROP TABLE modelovan;
-DROP TABLE van;
-DROP TABLE modeloautomovel;
-DROP TABLE automovel;
+DROP TABLE UnidadeFederativa;
+DROP TABLE Cliente;
+DROP TABLE Estado;
+DROP TABLE Marca;
+DROP TABLE Categoria;
+DROP TABLE Veiculo;
+DROP TABLE Locacao;
+DROP TABLE ModeloMotocicleta;
+DROP TABLE Motocicleta;
+DROP TABLE ModeloVan;
+DROP TABLE Van;
+DROP TABLE ModeloAutomovel;
+DROP TABLE Automovel;
 
 CREATE TABLE UnidadeFederativa (
 	siglaUF CHAR(2) NOT NULL,

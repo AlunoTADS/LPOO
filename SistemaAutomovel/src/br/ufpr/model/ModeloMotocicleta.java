@@ -1,3 +1,10 @@
+package br.ufpr.model;
+
+/**
+ *
+ * @author Lucas
+ */
+
 public enum ModeloMotocicleta {
 
     CG_125(1, "CG 125"),
