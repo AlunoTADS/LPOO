@@ -1,4 +1,4 @@
-package br.ufpr.view;
+package br.ufpr.view.util;
 
 import br.ufpr.model.Column;
 import java.lang.reflect.InvocationTargetException;
