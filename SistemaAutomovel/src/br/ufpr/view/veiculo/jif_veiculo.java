@@ -29,8 +29,28 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenu13 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu14 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
+        jMenu11 = new javax.swing.JMenu();
+        jMenu12 = new javax.swing.JMenu();
+        jMenu15 = new javax.swing.JMenu();
 
+        setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Gerenciamento de Veículos");
         setPreferredSize(new java.awt.Dimension(991, 676));
 
@@ -40,8 +60,68 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         jMenu1.setEnabled(false);
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/menu40.png"))); // NOI18N
+
+        jMenuItem1.setText("Duplicar veículo selecionado");
+        jMenu13.add(jMenuItem1);
+        jMenu13.add(jSeparator1);
+
+        jMenuItem2.setText("Voltar para tela principal");
+        jMenu13.add(jMenuItem2);
+
+        jMenuItem3.setText("Sair do sistema");
+        jMenu13.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu13);
+
+        jMenu14.setText("     ");
+        jMenuBar1.add(jMenu14);
+
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/criar25.png"))); // NOI18N
+        jMenu2.setText("NOVO (F2)");
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("     ");
+        jMenu3.setEnabled(false);
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/edit-icon.png"))); // NOI18N
+        jMenu4.setText("ALTERAR (F3)");
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("     ");
+        jMenu5.setEnabled(false);
+        jMenuBar1.add(jMenu5);
+
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/salvar.png"))); // NOI18N
+        jMenu6.setText("GRAVAR (F4)");
+        jMenuBar1.add(jMenu6);
+
+        jMenu7.setText("     ");
+        jMenu7.setEnabled(false);
+        jMenuBar1.add(jMenu7);
+
+        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/atualizar.png"))); // NOI18N
+        jMenu8.setText("BUSCAR (F5)");
+        jMenuBar1.add(jMenu8);
+
+        jMenu9.setText("     ");
+        jMenu9.setEnabled(false);
+        jMenuBar1.add(jMenu9);
+
+        jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/Cancelar25.png"))); // NOI18N
+        jMenu10.setText("CANCELAR (F6)");
+        jMenuBar1.add(jMenu10);
+
+        jMenu11.setText("     ");
+        jMenuBar1.add(jMenu11);
+
+        jMenu12.setPreferredSize(new java.awt.Dimension(100, 19));
+        jMenuBar1.add(jMenu12);
+
+        jMenu15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/excluir25.png"))); // NOI18N
+        jMenu15.setText("EXCLUIR (F12)");
+        jMenuBar1.add(jMenu15);
 
         setJMenuBar(jMenuBar1);
 
@@ -62,7 +142,24 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu12;
+    private javax.swing.JMenu jMenu13;
+    private javax.swing.JMenu jMenu14;
+    private javax.swing.JMenu jMenu15;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

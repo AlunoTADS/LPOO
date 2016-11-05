@@ -27,97 +27,97 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        jtf_codigo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jtf_nome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jtf_Sobrenome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcb_UF = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jtf_endereco = new javax.swing.JTextField();
+        jb_pesquisar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jtf_RG = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jtf_CPF = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jm_menuprincipalclientes = new javax.swing.JMenu();
+        jm_duplicarregistro = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jm_voltatelaprincipal = new javax.swing.JMenuItem();
+        jm_sairdosistema = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
+        jb_novo = new javax.swing.JMenu();
+        jm_espaco3 = new javax.swing.JMenu();
+        jb_alterar = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
-        jMenu8 = new javax.swing.JMenu();
+        jb_gravar = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
-        jMenu10 = new javax.swing.JMenu();
+        jb_buscar = new javax.swing.JMenu();
         jMenu11 = new javax.swing.JMenu();
-        jMenu12 = new javax.swing.JMenu();
+        jb_cancelar = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
-        jMenu14 = new javax.swing.JMenu();
+        jb_excluir = new javax.swing.JMenu();
 
         setClosable(true);
         setTitle("Gerenciamento de Clientes");
 
-        jTextField1.setBackground(new java.awt.Color(240, 235, 240));
-        jTextField1.setPreferredSize(new java.awt.Dimension(59, 35));
+        jtf_codigo.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_codigo.setPreferredSize(new java.awt.Dimension(59, 35));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Código");
 
-        jTextField2.setBackground(new java.awt.Color(240, 235, 240));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jtf_nome.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_nome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jtf_nomeActionPerformed(evt);
             }
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Nome");
 
-        jTextField3.setBackground(new java.awt.Color(240, 235, 240));
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jtf_Sobrenome.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_Sobrenome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                jtf_SobrenomeActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Sobrenome");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcb_UF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("UF");
 
-        jTextField4.setBackground(new java.awt.Color(240, 235, 240));
-        jTextField4.setPreferredSize(new java.awt.Dimension(59, 35));
+        jtf_endereco.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_endereco.setPreferredSize(new java.awt.Dimension(59, 35));
 
-        jButton1.setText("...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jb_pesquisar.setText("...");
+        jb_pesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jb_pesquisarActionPerformed(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Endereço");
 
-        jTextField5.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_RG.setBackground(new java.awt.Color(240, 235, 240));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("RG");
 
-        jTextField6.setBackground(new java.awt.Color(240, 235, 240));
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        jtf_CPF.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_CPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                jtf_CPFActionPerformed(evt);
             }
         });
 
@@ -130,83 +130,88 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jMenu1.setEnabled(false);
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/menu40.png"))); // NOI18N
-
-        jMenuItem1.setText("Duplicar registro selecionado");
-        jMenuItem1.setEnabled(false);
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jm_menuprincipalclientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/menu40.png"))); // NOI18N
+        jm_menuprincipalclientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jm_menuprincipalclientesActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
-        jMenu2.add(jSeparator1);
 
-        jMenuItem2.setText("Voltar para tela principal");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jm_duplicarregistro.setText("Duplicar registro selecionado");
+        jm_duplicarregistro.setEnabled(false);
+        jm_duplicarregistro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jm_duplicarregistroActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        jm_menuprincipalclientes.add(jm_duplicarregistro);
+        jm_menuprincipalclientes.add(jSeparator1);
 
-        jMenuItem3.setText("Sair do sistema");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jm_voltatelaprincipal.setText("Voltar para tela principal");
+        jm_voltatelaprincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jm_voltatelaprincipalActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jm_menuprincipalclientes.add(jm_voltatelaprincipal);
 
-        jMenuBar1.add(jMenu2);
+        jm_sairdosistema.setText("Sair do sistema");
+        jm_sairdosistema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jm_sairdosistemaActionPerformed(evt);
+            }
+        });
+        jm_menuprincipalclientes.add(jm_sairdosistema);
+
+        jMenuBar1.add(jm_menuprincipalclientes);
 
         jMenu3.setText("     ");
         jMenu3.setEnabled(false);
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/criar25.png"))); // NOI18N
-        jMenu4.setText("NOVO (F2)");
-        jMenuBar1.add(jMenu4);
+        jb_novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/criar25.png"))); // NOI18N
+        jb_novo.setText("NOVO (F2)");
+        jMenuBar1.add(jb_novo);
 
-        jMenu5.setText("     ");
-        jMenu5.setEnabled(false);
-        jMenuBar1.add(jMenu5);
+        jm_espaco3.setText("     ");
+        jm_espaco3.setEnabled(false);
+        jMenuBar1.add(jm_espaco3);
 
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/edit-icon.png"))); // NOI18N
-        jMenu6.setText("ALTERAR (F3)");
-        jMenuBar1.add(jMenu6);
+        jb_alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/edit-icon.png"))); // NOI18N
+        jb_alterar.setText("ALTERAR (F3)");
+        jMenuBar1.add(jb_alterar);
 
         jMenu7.setText("     ");
         jMenu7.setEnabled(false);
         jMenuBar1.add(jMenu7);
 
-        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/salvar.png"))); // NOI18N
-        jMenu8.setText("GRAVAR (F4)");
-        jMenuBar1.add(jMenu8);
+        jb_gravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/salvar.png"))); // NOI18N
+        jb_gravar.setText("GRAVAR (F4)");
+        jMenuBar1.add(jb_gravar);
 
         jMenu9.setText("     ");
         jMenu9.setEnabled(false);
         jMenuBar1.add(jMenu9);
 
-        jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/atualizar.png"))); // NOI18N
-        jMenu10.setText("BUSCAR (F5)");
-        jMenuBar1.add(jMenu10);
+        jb_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/atualizar.png"))); // NOI18N
+        jb_buscar.setText("BUSCAR (F5)");
+        jMenuBar1.add(jb_buscar);
 
         jMenu11.setText("     ");
         jMenu11.setEnabled(false);
         jMenuBar1.add(jMenu11);
 
-        jMenu12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/Cancelar25.png"))); // NOI18N
-        jMenu12.setText("CANCELAR (F6)");
-        jMenuBar1.add(jMenu12);
+        jb_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/Cancelar25.png"))); // NOI18N
+        jb_cancelar.setText("CANCELAR (F6)");
+        jMenuBar1.add(jb_cancelar);
 
         jMenu13.setText("                                       ");
         jMenu13.setEnabled(false);
         jMenuBar1.add(jMenu13);
 
-        jMenu14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/excluir25.png"))); // NOI18N
-        jMenu14.setText("EXCLUIR (F12)");
-        jMenuBar1.add(jMenu14);
+        jb_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/excluir25.png"))); // NOI18N
+        jb_excluir.setText("EXCLUIR (F12)");
+        jMenuBar1.add(jb_excluir);
 
         setJMenuBar(jMenuBar1);
 
@@ -227,26 +232,26 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtf_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtf_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtf_Sobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtf_endereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtf_RG, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jtf_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jcb_UF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jb_pesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
@@ -259,66 +264,68 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField2))
+                    .addComponent(jtf_codigo, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(jb_pesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtf_Sobrenome, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jtf_nome))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtf_endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcb_UF, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jTextField5))
+                    .addComponent(jtf_CPF, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(jtf_RG))
                 .addContainerGap(333, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 981, 670);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jm_duplicarregistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_duplicarregistroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jm_duplicarregistroActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jm_voltatelaprincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_voltatelaprincipalActionPerformed
         this.dispose();
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jm_voltatelaprincipalActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jtf_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_nomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jtf_nomeActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void jtf_SobrenomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_SobrenomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_jtf_SobrenomeActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jm_sairdosistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_sairdosistemaActionPerformed
         System.exit(0);
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jm_sairdosistemaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jb_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pesquisarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jb_pesquisarActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void jtf_CPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_CPFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_jtf_CPFActionPerformed
+
+    private void jm_menuprincipalclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_menuprincipalclientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jm_menuprincipalclientesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -327,29 +334,31 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
-    private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
-    private javax.swing.JMenu jMenu14;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JMenu jb_alterar;
+    private javax.swing.JMenu jb_buscar;
+    private javax.swing.JMenu jb_cancelar;
+    private javax.swing.JMenu jb_excluir;
+    private javax.swing.JMenu jb_gravar;
+    private javax.swing.JMenu jb_novo;
+    private javax.swing.JButton jb_pesquisar;
+    private javax.swing.JComboBox<String> jcb_UF;
+    private javax.swing.JMenuItem jm_duplicarregistro;
+    private javax.swing.JMenu jm_espaco3;
+    private javax.swing.JMenu jm_menuprincipalclientes;
+    private javax.swing.JMenuItem jm_sairdosistema;
+    private javax.swing.JMenuItem jm_voltatelaprincipal;
+    private javax.swing.JTextField jtf_CPF;
+    private javax.swing.JTextField jtf_RG;
+    private javax.swing.JTextField jtf_Sobrenome;
+    private javax.swing.JTextField jtf_codigo;
+    private javax.swing.JTextField jtf_endereco;
+    private javax.swing.JTextField jtf_nome;
     // End of variables declaration//GEN-END:variables
 }
