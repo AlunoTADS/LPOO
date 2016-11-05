@@ -63,6 +63,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jMenu14 = new javax.swing.JMenu();
 
         setClosable(true);
+        setTitle("Gerenciamento de Clientes");
 
         jTextField1.setBackground(new java.awt.Color(240, 235, 240));
         jTextField1.setPreferredSize(new java.awt.Dimension(59, 35));
@@ -277,10 +278,10 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(jTextField5))
-                .addContainerGap(335, Short.MAX_VALUE))
+                .addContainerGap(333, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 991, 672);
+        setBounds(0, 0, 981, 670);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

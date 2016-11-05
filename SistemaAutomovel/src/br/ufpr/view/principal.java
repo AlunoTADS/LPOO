@@ -122,7 +122,7 @@ public class principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmi_CadastroVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_CadastroVeiculosActionPerformed
-        TestReflectTableModel obj = new TestReflectTableModel();
+        jif_veiculo obj = new jif_veiculo();
         jdp_Principal.add(obj);
         obj.setVisible(true);
 
