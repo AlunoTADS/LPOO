@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufpr.data;
 
 import br.ufpr.model.Automovel;
@@ -60,9 +55,10 @@ public class AutomovelDao extends VeiculoDao implements DaoI<Veiculo> {
             Double valorCompra = rs.getDouble("valorcompra");
             String placa = rs.getString("placa");
             Integer ano = rs.getInt("ano");
+            Locacao locacao = null;
             if (estado.equals(Estado.LOCADO)) {
-                Locacao locacao = new Locacao(null, rs.getInt("idveiculo"), null, null, null);
-                locacao = LocacaoDao.buscar(locacao);
+                locacao = new Locacao(rs.getInt("idveiculo"));
+                //locacao = new LocacaoDao.buscar(locacao);
             }
             Automovel a = new Automovel(modeloAutomovel, marca, estado, locacao, categoria, valorCompra, placa, ano);
             resultado.add(a);

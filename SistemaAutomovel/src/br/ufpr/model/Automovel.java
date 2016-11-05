@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufpr.model;
 
 /**
@@ -22,6 +17,7 @@ public class Automovel extends Veiculo {
         return modelo;
     }
 
+    @Override
     public double getValorDiariaLocacao() {
         if (categoria == Categoria.POPULAR){
             return 100.00;
@@ -32,8 +28,9 @@ public class Automovel extends Veiculo {
         else if(categoria == Categoria.LUXO){
             return 450.00;
         }
-        else
+        else {
             return 0;
+        }
     }
 
 
