@@ -9,7 +9,7 @@ package br.ufpr.model;
  *
  * @author Giovanni
  */
-public enum Uf {
+public enum UnidadeFederativa {
     
     ACRE("AC", "Acre"),
     ALAGOAS("AL", "Alagoas"),
@@ -39,25 +39,25 @@ public enum Uf {
     SERGIPE("SE", "Sergipe"),
     TOCANTINS("TO", "Tocantins");
     
-    private String sigla;
+    private String siglaUF;
     private String descricao;
     
-    public static Uf fromValue(String sigla) {
-        for (Uf uf : Uf.values()) {
-            if (uf.getSigla().equals(sigla)) {
+    public static UnidadeFederativa fromValue(String sigla) {
+        for (UnidadeFederativa uf : UnidadeFederativa.values()) {
+            if (uf.getSiglaUF().equals(sigla)) {
                 return uf;
             }
         }
         return null;
     }
 
-    private Uf(String sigla, String descricao) {
-        this.sigla = sigla;
+    private UnidadeFederativa(String siglaUF, String descricao) {
+        this.siglaUF = siglaUF;
         this.descricao = descricao;
     }
 
-    public String getSigla() {
-        return sigla;
+    public String getSiglaUF() {
+        return siglaUF;
     }
     
     public String getDescricao() {

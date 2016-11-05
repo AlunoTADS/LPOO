@@ -16,6 +16,7 @@ public class Cliente {
     private String sobrenome;
     private String cpf;
     private String rg;
+    private UnidadeFederativa rgUF;
     private String endereco;
 
     public Cliente(Integer idCliente, String nome, String sobrenome, String cpf, String rg, String endereco) {
