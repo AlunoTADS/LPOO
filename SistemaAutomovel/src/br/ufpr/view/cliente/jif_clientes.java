@@ -180,6 +180,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jMenu7.setEnabled(false);
         jMenuBar1.add(jMenu7);
 
+        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/salvar.png"))); // NOI18N
         jMenu8.setText("GRAVAR (F4)");
         jMenuBar1.add(jMenu8);
 
