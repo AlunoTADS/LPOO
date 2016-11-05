@@ -31,9 +31,9 @@ public class principal extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jdp_Principal = new javax.swing.JDesktopPane();
         MenuBarPrincipal = new javax.swing.JMenuBar();
-        MenuCadastro = new javax.swing.JMenu();
+        menucadastro = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jmi_CadastroClientes = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
@@ -51,22 +51,32 @@ public class principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Locadora de Veículos");
 
-        jDesktopPane1.setBackground(new java.awt.Color(109, 132, 180));
-        jDesktopPane1.setLayout(new java.awt.GridBagLayout());
-        getContentPane().add(jDesktopPane1, java.awt.BorderLayout.CENTER);
+        jdp_Principal.setBackground(new java.awt.Color(109, 132, 180));
+        jdp_Principal.setLayout(new java.awt.GridBagLayout());
+        getContentPane().add(jdp_Principal, java.awt.BorderLayout.CENTER);
 
         MenuBarPrincipal.setBackground(new java.awt.Color(153, 153, 0));
         MenuBarPrincipal.setPreferredSize(new java.awt.Dimension(105, 30));
 
-        MenuCadastro.setBackground(new java.awt.Color(255, 51, 51));
-        MenuCadastro.setText("CADASTRO");
-        MenuCadastro.setBorderPainted(true);
-        MenuCadastro.add(jSeparator1);
+        menucadastro.setBackground(new java.awt.Color(255, 51, 51));
+        menucadastro.setText("CADASTRO");
+        menucadastro.setBorderPainted(true);
+        menucadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menucadastroActionPerformed(evt);
+            }
+        });
+        menucadastro.add(jSeparator1);
 
         jmi_CadastroClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jmi_CadastroClientes.setText("Clientes");
-        MenuCadastro.add(jmi_CadastroClientes);
-        MenuCadastro.add(jSeparator2);
+        jmi_CadastroClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_CadastroClientesActionPerformed(evt);
+            }
+        });
+        menucadastro.add(jmi_CadastroClientes);
+        menucadastro.add(jSeparator2);
 
         jmi_CadastroVeiculos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         jmi_CadastroVeiculos.setText("Veículos");
@@ -75,9 +85,9 @@ public class principal extends javax.swing.JFrame {
                 jmi_CadastroVeiculosActionPerformed(evt);
             }
         });
-        MenuCadastro.add(jmi_CadastroVeiculos);
+        menucadastro.add(jmi_CadastroVeiculos);
 
-        MenuBarPrincipal.add(MenuCadastro);
+        MenuBarPrincipal.add(menucadastro);
 
         jMenu2.setText("     ");
         jMenu2.setEnabled(false);
@@ -123,6 +133,20 @@ public class principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jmi_LocacaoDevolverActionPerformed
 
+    private void menucadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menucadastroActionPerformed
+        
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menucadastroActionPerformed
+
+    private void jmi_CadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_CadastroClientesActionPerformed
+        jif_clientes obj = new jif_clientes();
+        jdp_Principal.add(obj);
+        obj.setVisible(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmi_CadastroClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -160,18 +184,18 @@ public class principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar MenuBarPrincipal;
-    private javax.swing.JMenu MenuCadastro;
     private javax.swing.JMenu MenuLocacao;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JDesktopPane jdp_Principal;
     private javax.swing.JMenuItem jmi_CadastroClientes;
     private javax.swing.JMenuItem jmi_CadastroVeiculos;
     private javax.swing.JMenuItem jmi_LocacaoDevolver;
     private javax.swing.JMenuItem jmi_LocacaoLocar;
+    private javax.swing.JMenu menucadastro;
     // End of variables declaration//GEN-END:variables
 }

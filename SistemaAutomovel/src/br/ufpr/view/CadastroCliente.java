@@ -9,12 +9,12 @@ package br.ufpr.view;
  *
  * @author edenm
  */
-public class jifCadastroCliente extends javax.swing.JInternalFrame {
+public class CadastroCliente extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form jifCadastroCliente
      */
-    public jifCadastroCliente() {
+    public CadastroCliente() {
         initComponents();
     }
 
@@ -53,6 +53,7 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenu1 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
         btn_Novo = new javax.swing.JMenu();
         jMenu12 = new javax.swing.JMenu();
         btnAlterar = new javax.swing.JMenu();
@@ -62,13 +63,15 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
         btnAtualizar = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
         btnCancelar = new javax.swing.JMenu();
-        jMenu10 = new javax.swing.JMenu();
         btnExcluir = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Gerenciamento de Clientes");
+        setPreferredSize(new java.awt.Dimension(880, 700));
 
         tf_Codigo.setBackground(new java.awt.Color(240, 235, 240));
         tf_Codigo.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +140,7 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(179, 60));
 
-        jMenu2.setText("     ");
+        jMenu2.setText("      ");
         jMenu2.setEnabled(false);
         jMenuBar1.add(jMenu2);
 
@@ -166,9 +169,15 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu1.setText("     ");
+        jMenu1.setBorder(null);
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/menu40.png"))); // NOI18N
         jMenu1.setEnabled(false);
+        jMenu1.setFocusable(false);
         jMenuBar1.add(jMenu1);
+
+        jMenu5.setText("     ");
+        jMenu5.setEnabled(false);
+        jMenuBar1.add(jMenu5);
 
         btn_Novo.setText("NOVO (F2)");
         jMenuBar1.add(btn_Novo);
@@ -205,12 +214,16 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
         });
         jMenuBar1.add(btnCancelar);
 
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/excluir25.png"))); // NOI18N
+        jMenuBar1.add(btnExcluir);
+
         jMenu10.setText("     ");
         jMenu10.setEnabled(false);
         jMenuBar1.add(jMenu10);
 
-        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/excluir25.png"))); // NOI18N
-        jMenuBar1.add(btnExcluir);
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/excluir25.png"))); // NOI18N
+        jMenu7.setText("EXCLUIR (F12)");
+        jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
 
@@ -249,7 +262,7 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(tf_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(202, Short.MAX_VALUE))))
+                                .addContainerGap(206, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1)
@@ -298,11 +311,11 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
                             .addComponent(tf_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel7))
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 904, 728);
+        setBounds(0, 0, 908, 728);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_CodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_CodigoActionPerformed
@@ -355,7 +368,9 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
