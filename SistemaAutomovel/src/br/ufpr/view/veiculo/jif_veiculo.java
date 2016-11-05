@@ -5,6 +5,13 @@
  */
 package br.ufpr.view.veiculo;
 
+import br.ufpr.model.Categoria;
+import br.ufpr.model.Estado;
+import br.ufpr.model.Marca;
+import br.ufpr.model.Veiculo;
+import br.ufpr.view.util.SimpleReflectTableModel;
+import java.util.Arrays;
+
 /**
  *
  * @author edenm
@@ -16,6 +23,15 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
      */
     public jif_veiculo() {
         initComponents();
+        SimpleReflectTableModel simpleReflectTableModel = veiculoTable1.getSimpleReflectTableModel();
+        simpleReflectTableModel.setDataList(Arrays.asList(
+            new Veiculo(HEIGHT, Marca.HONDA, Estado.DISPONIVEL, null, Categoria.POPULAR, 50.00, "XXXX-0000", ABORT) {
+            @Override
+            public double getValorDiariaLocacao() {
+                return 0;
+            }
+        }
+    ));
     }
 
     /**
@@ -27,6 +43,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        veiculoTable1 = new br.ufpr.view.veiculo.VeiculoTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
@@ -61,6 +78,11 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/menu40.png"))); // NOI18N
+        jMenu13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu13ActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setText("Duplicar veículo selecionado");
         jMenu13.add(jMenuItem1);
@@ -129,15 +151,25 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 964, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(veiculoTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 580, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(veiculoTable1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(465, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenu13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu13ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -161,5 +193,6 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private br.ufpr.view.veiculo.VeiculoTable veiculoTable1;
     // End of variables declaration//GEN-END:variables
 }
