@@ -4,7 +4,6 @@ package br.ufpr.model;
  *
  * @author Lucas
  */
-
 public enum ModeloMotocicleta {
 
     CG_125(1, "CG 125"),
@@ -15,12 +14,11 @@ public enum ModeloMotocicleta {
     private Integer idModeloMotocicleta;
     private String descricao;
 
-
     private ModeloMotocicleta(Integer idModeloMotocicleta, String descricao) {
         this.idModeloMotocicleta = idModeloMotocicleta;
         this.descricao = descricao;
     }
-    
+
     public static ModeloMotocicleta fromValue(Integer idModeloMotocicleta) {
         for (ModeloMotocicleta modelo : ModeloMotocicleta.values()) {
             if (modelo.getIdModeloMotocicleta() == idModeloMotocicleta) {
@@ -33,8 +31,13 @@ public enum ModeloMotocicleta {
     public int getIdModeloMotocicleta() {
         return idModeloMotocicleta;
     }
-    
+
     public String getDescricao() {
         return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return getDescricao();
     }
 }

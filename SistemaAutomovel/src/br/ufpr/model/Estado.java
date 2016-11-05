@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufpr.model;
 
 /**
@@ -22,7 +17,7 @@ public enum Estado {
         this.idEstado = codigo;
         this.descricao = descricao;
     }
-    
+
     public static Estado fromValue(Integer idEstado) {
         for (Estado estado : Estado.values()) {
             if (estado.getIdEstado() == idEstado) {
@@ -38,5 +33,10 @@ public enum Estado {
 
     public String getDescricao() {
         return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return getDescricao();
     }
 }

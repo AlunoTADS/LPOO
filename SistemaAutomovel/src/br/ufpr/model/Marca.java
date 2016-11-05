@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufpr.model;
 
 /**
@@ -10,7 +5,7 @@ package br.ufpr.model;
  * @author Giovanni
  */
 public enum Marca {
-    
+
     VW(1, "Volkswagen"),
     GM(2, "General Motors"),
     FIAT(3, "Fiat"),
@@ -25,14 +20,14 @@ public enum Marca {
     DODGE(12, "Dodge"),
     JAGUAR(13, "Jaguar"),
     PORSCHE(14, "Porsche");
-    
+
     private Integer idMarca;
     private String descricao;
 
     private Marca(Integer idMarca, String descricao) {
         this.idMarca = idMarca;
         this.descricao = descricao;
-    }    
+    }
 
     public static Marca fromValue(Integer idMarca) {
         for (Marca marca : Marca.values()) {
@@ -42,12 +37,17 @@ public enum Marca {
         }
         return null;
     }
-    
+
     public Integer getIdMarca() {
         return idMarca;
     }
-    
+
     public String getDescricao() {
         return descricao;
+    }
+
+    @Override
+    public String toString() {
+        return getDescricao();
     }
 }
