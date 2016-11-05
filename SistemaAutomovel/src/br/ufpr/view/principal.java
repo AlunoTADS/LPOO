@@ -1,5 +1,8 @@
 package br.ufpr.view;
 
+import br.ufpr.view.veiculo.jif_veiculo;
+import br.ufpr.view.cliente.jif_clientes;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
