@@ -11,18 +11,24 @@ package br.ufpr.model;
  */
 public class Cliente {
     
+    private Integer idCliente;
     private String nome;
     private String sobrenome;
     private String cpf;
     private String rg;
     private String endereco;
 
-    public Cliente(String nome, String sobrenome, String cpf, String rg, String endereco) {
+    public Cliente(Integer idCliente, String nome, String sobrenome, String cpf, String rg, String endereco) {
+        this.idCliente = idCliente;
         this.nome = nome;
         this.sobrenome = nome;
         this.cpf = cpf;
         this.rg = rg;
         this.endereco = endereco;
+    }
+
+    public Cliente(Integer idCliente) {
+        this.idCliente = idCliente;
     }
     
     public String getNome() {
@@ -66,6 +72,6 @@ public class Cliente {
     }    
 
     public Integer getIdCliente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.idCliente;
     }
 }

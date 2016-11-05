@@ -1,5 +1,6 @@
 package br.ufpr.data;
 
+import br.ufpr.model.Cliente;
 import br.ufpr.model.Locacao;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -102,7 +103,7 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
         } finally {
             close();
         }
-        return new Locacao(rs.getInt(1), null, rs.getInt(3), rs.getDate(4), rs.getDouble(5));
+        return new Locacao(rs.getInt(1), new Cliente(rs.getInt(2)), rs.getInt(3), rs.getDate(4), rs.getDouble(5));
     }
 
     @Override
@@ -137,7 +138,7 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
         List<Locacao> list = new LinkedList<>();
         try {
             rs = stmt.executeQuery();
-            list.add(new Locacao(rs.getInt(1), null, rs.getInt(3), rs.getDate(4), rs.getDouble(5)));
+            list.add(new Locacao(rs.getInt(1), new Cliente(rs.getInt(2)), rs.getInt(3), rs.getDate(4), rs.getDouble(5)));
         } catch (Exception e) {
             throw e;
         } finally {

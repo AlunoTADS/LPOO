@@ -18,6 +18,10 @@ public class Locacao {
     private Integer dias;
     private Date dataInicio;
     private Double valor;
+
+    public Locacao(Integer idVeiculo) {
+        this.idVeiculo = idVeiculo;
+    }
     
     public Locacao(Integer idVeiculo, Cliente cliente, Integer dias, Date dataInicio, Double valor) {
         this.idVeiculo = idVeiculo;
