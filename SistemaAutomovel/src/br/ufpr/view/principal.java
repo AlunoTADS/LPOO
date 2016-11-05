@@ -122,6 +122,10 @@ public class principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmi_CadastroVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_CadastroVeiculosActionPerformed
+        TestReflectTableModel obj = new TestReflectTableModel();
+        jdp_Principal.add(obj);
+        obj.setVisible(true);
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jmi_CadastroVeiculosActionPerformed
 

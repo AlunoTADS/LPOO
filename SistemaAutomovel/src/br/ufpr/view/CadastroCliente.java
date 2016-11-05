@@ -93,6 +93,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Sobrenome");
 
+        jb_Pesquisar.setBackground(new java.awt.Color(240, 235, 240));
         jb_Pesquisar.setText("...");
         jb_Pesquisar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
