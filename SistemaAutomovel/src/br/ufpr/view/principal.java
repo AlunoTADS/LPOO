@@ -35,14 +35,14 @@ public class principal extends javax.swing.JFrame {
         MenuBarPrincipal = new javax.swing.JMenuBar();
         MenuCadastro = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmi_CadastroClientes = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmi_CadastroVeiculos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         MenuLocacao = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jmi_LocacaoLocar = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jmi_LocacaoDevolver = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -63,21 +63,19 @@ public class principal extends javax.swing.JFrame {
         MenuCadastro.setBorderPainted(true);
         MenuCadastro.add(jSeparator1);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/cliente30.png"))); // NOI18N
-        jMenuItem1.setText("Clientes");
-        MenuCadastro.add(jMenuItem1);
+        jmi_CadastroClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        jmi_CadastroClientes.setText("Clientes");
+        MenuCadastro.add(jmi_CadastroClientes);
         MenuCadastro.add(jSeparator2);
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/veiculos40.png"))); // NOI18N
-        jMenuItem3.setText("Veículos");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jmi_CadastroVeiculos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        jmi_CadastroVeiculos.setText("Veículos");
+        jmi_CadastroVeiculos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jmi_CadastroVeiculosActionPerformed(evt);
             }
         });
-        MenuCadastro.add(jMenuItem3);
+        MenuCadastro.add(jmi_CadastroVeiculos);
 
         MenuBarPrincipal.add(MenuCadastro);
 
@@ -87,26 +85,24 @@ public class principal extends javax.swing.JFrame {
 
         MenuLocacao.setText("LOCAÇÃO");
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/locar40.png"))); // NOI18N
-        jMenuItem2.setText("Locar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jmi_LocacaoLocar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+        jmi_LocacaoLocar.setText("Locar");
+        jmi_LocacaoLocar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jmi_LocacaoLocarActionPerformed(evt);
             }
         });
-        MenuLocacao.add(jMenuItem2);
+        MenuLocacao.add(jmi_LocacaoLocar);
         MenuLocacao.add(jSeparator3);
 
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/devolver40.png"))); // NOI18N
-        jMenuItem4.setText("Devolver");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jmi_LocacaoDevolver.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        jmi_LocacaoDevolver.setText("Devolver");
+        jmi_LocacaoDevolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jmi_LocacaoDevolverActionPerformed(evt);
             }
         });
-        MenuLocacao.add(jMenuItem4);
+        MenuLocacao.add(jmi_LocacaoDevolver);
 
         MenuBarPrincipal.add(MenuLocacao);
 
@@ -115,17 +111,17 @@ public class principal extends javax.swing.JFrame {
         setBounds(0, 0, 1348, 763);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jmi_CadastroVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_CadastroVeiculosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jmi_CadastroVeiculosActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jmi_LocacaoLocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_LocacaoLocarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jmi_LocacaoLocarActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jmi_LocacaoDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_LocacaoDevolverActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jmi_LocacaoDevolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,12 +166,12 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JMenuItem jmi_CadastroClientes;
+    private javax.swing.JMenuItem jmi_CadastroVeiculos;
+    private javax.swing.JMenuItem jmi_LocacaoDevolver;
+    private javax.swing.JMenuItem jmi_LocacaoLocar;
     // End of variables declaration//GEN-END:variables
 }

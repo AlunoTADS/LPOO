@@ -57,9 +57,6 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="btn_Novo">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/view/imagens/criar25.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="NOVO (F2)"/>
           </Properties>
         </Menu>
@@ -70,9 +67,6 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="btnAlterar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/view/imagens/edit-icon.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="ALTERAR (F3)"/>
           </Properties>
         </Menu>
@@ -84,9 +78,6 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="btnGravar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\TADS nao sincronizado\LPOO - trabalho4semestre\salvar.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="GRAVAR (F4)"/>
           </Properties>
         </Menu>
@@ -98,9 +89,6 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="btnAtualizar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/view/imagens/atualizar.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="ATUALIZAR (F5)"/>
           </Properties>
         </Menu>
@@ -112,11 +100,11 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="btnCancelar">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/view/imagens/Cancelar25.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="CANCELAR (F6)"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu10">
           <Properties>
@@ -129,7 +117,6 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/view/imagens/excluir25.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="EXCLUIR (F11)"/>
           </Properties>
         </Menu>
       </SubComponents>

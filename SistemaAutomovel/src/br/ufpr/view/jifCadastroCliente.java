@@ -170,14 +170,12 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
         jMenu1.setEnabled(false);
         jMenuBar1.add(jMenu1);
 
-        btn_Novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/criar25.png"))); // NOI18N
         btn_Novo.setText("NOVO (F2)");
         jMenuBar1.add(btn_Novo);
 
         jMenu12.setText("     ");
         jMenuBar1.add(jMenu12);
 
-        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/edit-icon.png"))); // NOI18N
         btnAlterar.setText("ALTERAR (F3)");
         jMenuBar1.add(btnAlterar);
 
@@ -185,7 +183,6 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
         jMenu4.setEnabled(false);
         jMenuBar1.add(jMenu4);
 
-        btnGravar.setIcon(new javax.swing.ImageIcon("D:\\TADS nao sincronizado\\LPOO - trabalho4semestre\\salvar.png")); // NOI18N
         btnGravar.setText("GRAVAR (F4)");
         jMenuBar1.add(btnGravar);
 
@@ -193,7 +190,6 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
         jMenu6.setEnabled(false);
         jMenuBar1.add(jMenu6);
 
-        btnAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/atualizar.png"))); // NOI18N
         btnAtualizar.setText("ATUALIZAR (F5)");
         jMenuBar1.add(btnAtualizar);
 
@@ -201,8 +197,12 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
         jMenu8.setEnabled(false);
         jMenuBar1.add(jMenu8);
 
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/Cancelar25.png"))); // NOI18N
         btnCancelar.setText("CANCELAR (F6)");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(btnCancelar);
 
         jMenu10.setText("     ");
@@ -210,7 +210,6 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
         jMenuBar1.add(jMenu10);
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/imagens/excluir25.png"))); // NOI18N
-        btnExcluir.setText("EXCLUIR (F11)");
         jMenuBar1.add(btnExcluir);
 
         setJMenuBar(jMenuBar1);
@@ -329,6 +328,10 @@ public class jifCadastroCliente extends javax.swing.JInternalFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
