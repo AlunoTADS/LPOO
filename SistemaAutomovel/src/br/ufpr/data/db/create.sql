@@ -1,4 +1,5 @@
 --select 'DROP TABLE ' || name || ';' from sqlite_master where type = 'table';
+DROP TABLE Sequence;
 DROP TABLE UnidadeFederativa;
 DROP TABLE Cliente;
 DROP TABLE Estado;
@@ -12,6 +13,11 @@ DROP TABLE ModeloVan;
 DROP TABLE Van;
 DROP TABLE ModeloAutomovel;
 DROP TABLE Automovel;
+
+CREATE TABLE Sequence (
+    idSequence VARCHAR(64) PRIMARY KEY,
+    valor INTEGER DEFAULT 0
+);
 
 CREATE TABLE UnidadeFederativa (
 	siglaUF CHAR(2) NOT NULL,
@@ -115,3 +121,6 @@ CREATE TABLE Automovel (
 	FOREIGN KEY (idVeiculo) REFERENCES Veiculo (idVeiculo),
 	FOREIGN KEY (idModeloAutomovel) REFERENCES ModeloAutomovel (idModeloAutomovel)
 );
+
+INSERT INTO Sequence (idSequence)
+SELECT lower('seq_id'||name) FROM sqlite_master WHERE type = 'table';
