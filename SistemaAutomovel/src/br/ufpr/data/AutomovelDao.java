@@ -30,19 +30,37 @@ public class AutomovelDao extends VeiculoDao implements DaoI<Veiculo> {
     }
 
     public void editar(Automovel automovel) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        super.editar(automovel);
+        open();
+        
+        stmt = con.prepareStatement("UPDATE automovel SET idveiculo = ?, idmodeloautomovel = ?");
+        int idx = 0;
+        stmt.setInt(++idx, automovel.getIdVeiculo());
+        stmt.setInt(++idx, automovel.getModelo().getIdModeloAutomovel());
+        stmt.execute();
+        
+        close();
     }
 
     public void excluir(Automovel automovel) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        open();
+        
+        stmt = con.prepareStatement("DELETE FROM automovel WHERE idveiculo = ?");
+        int idx = 0;
+        stmt.setInt(++idx, automovel.getIdVeiculo());
+        stmt.execute();
+        
+        close();
+        super.excluir(automovel);
     }
 
     public Automovel buscar(Automovel automovel) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Automovel> lista = this.listar(automovel);
+        return lista.size() == 1 ? lista.get(0) : null;
     }
 
     public List<Automovel> listar(Automovel automovel) throws Exception {
-        List<Automovel> resultado = new ArrayList<Automovel>();
+        List<Automovel> resultado = new ArrayList<>();
         open();
         
         stmt = con.prepareStatement(montarQuery(automovel));
@@ -69,7 +87,7 @@ public class AutomovelDao extends VeiculoDao implements DaoI<Veiculo> {
     }
     
     public String montarQuery(Automovel automovel) {
-        StringBuffer query = new StringBuffer();
+        StringBuilder query = new StringBuilder();
         
         query.append(" SELECT a.idmodeloautomovel, v.* ");
         query.append(" FROM automovel a ");
