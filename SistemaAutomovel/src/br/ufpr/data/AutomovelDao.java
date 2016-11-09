@@ -33,10 +33,10 @@ public class AutomovelDao extends VeiculoDao implements DaoI<Veiculo> {
         super.editar(automovel);
         open();
         
-        stmt = con.prepareStatement("UPDATE automovel SET idveiculo = ?, idmodeloautomovel = ?");
+        stmt = con.prepareStatement("UPDATE automovel SET idmodeloautomovel = ? WHERE idveiculo = ?");
         int idx = 0;
-        stmt.setInt(++idx, automovel.getIdVeiculo());
         stmt.setInt(++idx, automovel.getModelo().getIdModeloAutomovel());
+        stmt.setInt(++idx, automovel.getIdVeiculo());
         stmt.execute();
         
         close();
@@ -63,7 +63,7 @@ public class AutomovelDao extends VeiculoDao implements DaoI<Veiculo> {
         List<Automovel> resultado = new ArrayList<>();
         open();
         
-        stmt = con.prepareStatement(montarQuery(automovel));
+        stmt = con.prepareStatement(this.montarQuery(automovel));
         rs = stmt.executeQuery();
         while (rs.next()) {
             ModeloAutomovel modeloAutomovel = ModeloAutomovel.fromValue(rs.getInt("idmodeloautomovel"));

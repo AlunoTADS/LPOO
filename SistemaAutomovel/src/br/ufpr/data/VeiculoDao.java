@@ -76,7 +76,7 @@ public class VeiculoDao extends Dao implements DaoI<Veiculo> {
         List<Veiculo> resultado = new ArrayList<>();
         open();
         
-        stmt = con.prepareStatement(montarQuery(veiculo));
+        stmt = con.prepareStatement(this.montarQuery(veiculo));
         rs = stmt.executeQuery();
         while (rs.next()) {
             Marca marca = Marca.fromValue(rs.getInt("idmarca"));
