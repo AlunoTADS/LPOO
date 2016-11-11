@@ -43,6 +43,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jtf_CPF = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         clienteTable1 = new br.ufpr.view.cliente.ClienteTable();
+        testar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jm_menuprincipalclientes = new javax.swing.JMenu();
@@ -125,6 +126,9 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("CPF");
 
+        testar.setText("jButton1");
+        testar.setEnabled(false);
+
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
 
         jMenu1.setText("     ");
@@ -172,6 +176,11 @@ public class jif_clientes extends javax.swing.JInternalFrame {
 
         jb_novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/criar25.png"))); // NOI18N
         jb_novo.setText("NOVO (F2)");
+        jb_novo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_novoActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jb_novo);
 
         jm_espaco3.setText("     ");
@@ -180,6 +189,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
 
         jb_alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/edit-icon.png"))); // NOI18N
         jb_alterar.setText("ALTERAR (F3)");
+        jb_alterar.setEnabled(false);
         jMenuBar1.add(jb_alterar);
 
         jMenu7.setText("     ");
@@ -259,6 +269,10 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jb_pesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addGap(29, 29, 29))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addComponent(testar, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,7 +306,9 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                     .addComponent(jtf_RG))
                 .addGap(27, 27, 27)
                 .addComponent(clienteTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(testar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 981, 670);
@@ -321,6 +337,8 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jm_sairdosistemaActionPerformed
 
     private void jb_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pesquisarActionPerformed
+        testar.setEnabled(true);
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_pesquisarActionPerformed
 
@@ -331,6 +349,12 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     private void jm_menuprincipalclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_menuprincipalclientesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jm_menuprincipalclientesActionPerformed
+
+    private void jb_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_novoActionPerformed
+        testar.setEnabled(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_novoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -369,5 +393,6 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtf_codigo;
     private javax.swing.JTextField jtf_endereco;
     private javax.swing.JTextField jtf_nome;
+    private javax.swing.JButton testar;
     // End of variables declaration//GEN-END:variables
 }

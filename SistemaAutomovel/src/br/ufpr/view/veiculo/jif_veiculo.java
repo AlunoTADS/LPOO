@@ -47,14 +47,14 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmi_duplicarveiculo = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu14 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        jbtn_alterar = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
@@ -65,6 +65,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         jMenu12 = new javax.swing.JMenu();
         jMenu15 = new javax.swing.JMenu();
 
+        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         setClosable(true);
         setMaximizable(true);
         setResizable(true);
@@ -84,14 +85,25 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
             }
         });
 
-        jMenuItem1.setText("Duplicar veículo selecionado");
-        jMenu13.add(jMenuItem1);
+        jmi_duplicarveiculo.setText("Duplicar veículo selecionado");
+        jmi_duplicarveiculo.setEnabled(false);
+        jMenu13.add(jmi_duplicarveiculo);
         jMenu13.add(jSeparator1);
 
         jMenuItem2.setText("Voltar para tela principal");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu13.add(jMenuItem2);
 
         jMenuItem3.setText("Sair do sistema");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu13.add(jMenuItem3);
 
         jMenuBar1.add(jMenu13);
@@ -101,15 +113,21 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/criar25.png"))); // NOI18N
         jMenu2.setText("NOVO (F2)");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("     ");
         jMenu3.setEnabled(false);
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/edit-icon.png"))); // NOI18N
-        jMenu4.setText("ALTERAR (F3)");
-        jMenuBar1.add(jMenu4);
+        jbtn_alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/edit-icon.png"))); // NOI18N
+        jbtn_alterar.setText("ALTERAR (F3)");
+        jbtn_alterar.setEnabled(false);
+        jMenuBar1.add(jbtn_alterar);
 
         jMenu5.setText("     ");
         jMenu5.setEnabled(false);
@@ -152,16 +170,16 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(veiculoTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(26, 26, 26)
+                .addComponent(veiculoTable1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(461, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(veiculoTable1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(465, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addComponent(veiculoTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(414, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,6 +188,24 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     private void jMenu13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu13ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu13ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        this.dispose();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+
+        System.exit(0);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        jbtn_alterar.setEnabled(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -182,17 +218,17 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jMenu15;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenu jbtn_alterar;
+    private javax.swing.JMenuItem jmi_duplicarveiculo;
     private br.ufpr.view.veiculo.VeiculoTable veiculoTable1;
     // End of variables declaration//GEN-END:variables
 }
