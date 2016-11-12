@@ -43,6 +43,27 @@ public abstract class Dao<T> {
         } catch (Exception e) {
         }
     }
+
+    public Integer getNextId() throws Exception {
+        open();
+        String sql = "SELECT valor FROM Sequence WHERE id = ?";
+        String seqName = String.format("seq_%s", this.getClass().getSimpleName().toLowerCase());
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, seqName);
+        rs = stmt.executeQuery();
+        Integer id = null;
+        if (rs.next()) {
+            id = rs.getInt("valor");
+            sql = "UPDATE Sequence set valor = ? WHERE id = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id + 1);
+            stmt.setString(2, seqName);
+            stmt.execute();
+        }
+        close();
+        return id;
+    }
+
     
     @Override
     public void finalize() throws Throwable {
