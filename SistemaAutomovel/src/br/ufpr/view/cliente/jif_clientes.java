@@ -18,7 +18,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
      */
     public jif_clientes() {
         initComponents();
-        //simpleReflectTable1.setClass(Cliente.class);
+        simpleReflectTable1.setClass(Cliente.class);
     }
 
     /**
@@ -45,6 +45,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jtf_CPF = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        simpleReflectTable1 = new br.ufpr.view.util.SimpleReflectTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jm_menuprincipalclientes = new javax.swing.JMenu();
@@ -71,6 +72,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Gerenciamento de Clientes");
         setAutoscrolls(true);
+        setPreferredSize(new java.awt.Dimension(970, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtf_codigo.setBackground(new java.awt.Color(240, 235, 240));
@@ -146,6 +148,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("CPF");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 186, -1, -1));
+        getContentPane().add(simpleReflectTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 920, 190));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
 
@@ -323,5 +326,6 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtf_codigo;
     private javax.swing.JTextField jtf_endereco;
     private javax.swing.JTextField jtf_nome;
+    private br.ufpr.view.util.SimpleReflectTable simpleReflectTable1;
     // End of variables declaration//GEN-END:variables
 }
