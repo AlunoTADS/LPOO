@@ -14,5 +14,6 @@ import java.lang.annotation.Target;
 public @interface Column {
     String label();
     int position();
+    int width() default 100;
     String format() default "%s";
 }
