@@ -1,7 +1,9 @@
 package br.ufpr.data;
 
 import br.ufpr.model.Cliente;
+import br.ufpr.model.UnidadeFederativa;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -95,13 +97,64 @@ public class ClienteDao extends Dao<Cliente> implements DaoI<Cliente> {
 
     @Override
     public Cliente buscar(Cliente t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Cliente> lista = this.listar(t);
+        return lista.size() == 1 ? lista.get(0) : null;
     }
 
     @Override
     public List<Cliente> listar(Cliente t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        open();
+        List<Cliente> resultado = new ArrayList<>();
+
+        stmt = con.prepareStatement(this.montarQuery(t));
+        rs = stmt.executeQuery();
+        while (rs.next()) {
+            Cliente a = new Cliente(rs.getInt("idcliente"), rs.getString("nome"), rs.getString("sobrenome"), rs.getString("cpf"), rs.getString("rg"), UnidadeFederativa.fromValue(rs.getString("rguf")), rs.getString("endereco"));
+            resultado.add(a);
+        }
+
+        close();
+        return resultado;
     }
 
+    public String montarQuery(Cliente t) {
+        StringBuilder query = new StringBuilder();
+
+        query.append(" SELECT * ");
+        query.append(" FROM   cliente ");
+        query.append(" WHERE  1 = 1 ");
+        if (t != null) {
+            if (t.getIdCliente() != null) {
+                query.append(String.format(" AND idcliente = %d ", t.getIdCliente()));
+            }
+
+            if (t.getNome() != null) {
+                query.append(String.format(" AND nome = '%s' ", t.getNome()));
+            }
+
+            if (t.getSobrenome() != null) {
+                query.append(String.format(" AND sobrenome = '%s' ", t.getSobrenome()));
+            }
+
+            if (t.getCpf() != null) {
+                query.append(String.format(" AND cpf = '%s' ", t.getCpf()));
+            }
+
+            if (t.getRg() != null) {
+                query.append(String.format(" AND rg = '%s' ", t.getRg()));
+            }
+
+            if (t.getRgUF()!= null) {
+                query.append(String.format(" AND rguf = '%s' ", t.getRgUF().getSiglaUF()));
+            }
+
+            if (t.getEndereco()!= null) {
+                query.append(String.format(" AND endereco = '%s' ", t.getEndereco()));
+            }
+
+        }
+
+        return query.toString();
+    }
 
 }

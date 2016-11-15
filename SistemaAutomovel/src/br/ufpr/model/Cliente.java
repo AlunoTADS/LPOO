@@ -19,12 +19,13 @@ public class Cliente {
     private UnidadeFederativa rgUF;
     private String endereco;
 
-    public Cliente(Integer idCliente, String nome, String sobrenome, String cpf, String rg, String endereco) {
+    public Cliente(Integer idCliente, String nome, String sobrenome, String cpf, String rg, UnidadeFederativa rgUF, String endereco) {
         this.idCliente = idCliente;
         this.nome = nome;
-        this.sobrenome = nome;
+        this.sobrenome = sobrenome;
         this.cpf = cpf;
         this.rg = rg;
+        this.rgUF = rgUF;
         this.endereco = endereco;
     }
 
