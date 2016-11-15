@@ -34,26 +34,31 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroupTipo = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
         jmi_duplicarveiculo = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmi_VoltarTelaPrincipal = new javax.swing.JMenuItem();
+        jmi_sair_do_sistema = new javax.swing.JMenuItem();
         jMenu14 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jMenu_novo = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
-        jbtn_alterar = new javax.swing.JMenu();
+        jMenu_alterar = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
+        jMenu_gravar = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
-        jMenu8 = new javax.swing.JMenu();
+        jMenu_buscar = new javax.swing.JMenu();
         jMenu9 = new javax.swing.JMenu();
-        jMenu10 = new javax.swing.JMenu();
+        jMenu_cancelar = new javax.swing.JMenu();
         jMenu11 = new javax.swing.JMenu();
         jMenu12 = new javax.swing.JMenu();
-        jMenu15 = new javax.swing.JMenu();
+        jMenu_excluir = new javax.swing.JMenu();
 
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         setClosable(true);
@@ -61,6 +66,54 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Gerenciamento de Veículos");
         setPreferredSize(new java.awt.Dimension(991, 676));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        buttonGroupTipo.add(jCheckBox1);
+        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCheckBox1.setText("Automóvel");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroupTipo.add(jCheckBox2);
+        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCheckBox2.setText("Motocicleta");
+
+        buttonGroupTipo.add(jCheckBox3);
+        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jCheckBox3.setText("Van");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox3)
+                    .addComponent(jCheckBox2)
+                    .addComponent(jCheckBox1))
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jCheckBox1, jCheckBox2, jCheckBox3});
+
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBox3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jCheckBox1, jCheckBox2, jCheckBox3});
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
@@ -81,75 +134,85 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         jMenu13.add(jmi_duplicarveiculo);
         jMenu13.add(jSeparator1);
 
-        jMenuItem2.setText("Voltar para tela principal");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jmi_VoltarTelaPrincipal.setText("Voltar para tela principal");
+        jmi_VoltarTelaPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jmi_VoltarTelaPrincipalActionPerformed(evt);
             }
         });
-        jMenu13.add(jMenuItem2);
+        jMenu13.add(jmi_VoltarTelaPrincipal);
 
-        jMenuItem3.setText("Sair do sistema");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jmi_sair_do_sistema.setText("Sair do sistema");
+        jmi_sair_do_sistema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jmi_sair_do_sistemaActionPerformed(evt);
             }
         });
-        jMenu13.add(jMenuItem3);
+        jMenu13.add(jmi_sair_do_sistema);
 
         jMenuBar1.add(jMenu13);
 
         jMenu14.setText("     ");
         jMenuBar1.add(jMenu14);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/criar25.png"))); // NOI18N
-        jMenu2.setText("NOVO (F2)");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenu_novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/criar25.png"))); // NOI18N
+        jMenu_novo.setText("NOVO (F2)");
+        jMenu_novo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
+                jMenu_novoMouseClicked(evt);
             }
         });
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+        jMenu_novo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
+                jMenu_novoActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenu_novo);
 
         jMenu3.setText("     ");
         jMenu3.setEnabled(false);
         jMenuBar1.add(jMenu3);
 
-        jbtn_alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/edit-icon.png"))); // NOI18N
-        jbtn_alterar.setText("ALTERAR (F3)");
-        jbtn_alterar.setEnabled(false);
-        jMenuBar1.add(jbtn_alterar);
+        jMenu_alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/edit-icon.png"))); // NOI18N
+        jMenu_alterar.setText("ALTERAR (F3)");
+        jMenu_alterar.setEnabled(false);
+        jMenu_alterar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu_alterarMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu_alterar);
 
         jMenu5.setText("     ");
         jMenu5.setEnabled(false);
         jMenuBar1.add(jMenu5);
 
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/salvar.png"))); // NOI18N
-        jMenu6.setText("GRAVAR (F4)");
-        jMenu6.setEnabled(false);
-        jMenuBar1.add(jMenu6);
+        jMenu_gravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/salvar.png"))); // NOI18N
+        jMenu_gravar.setText("GRAVAR (F4)");
+        jMenu_gravar.setEnabled(false);
+        jMenuBar1.add(jMenu_gravar);
 
         jMenu7.setText("     ");
         jMenu7.setEnabled(false);
         jMenuBar1.add(jMenu7);
 
-        jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/atualizar.png"))); // NOI18N
-        jMenu8.setText("BUSCAR (F5)");
-        jMenuBar1.add(jMenu8);
+        jMenu_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/atualizar.png"))); // NOI18N
+        jMenu_buscar.setText("BUSCAR (F5)");
+        jMenu_buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu_buscarMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu_buscar);
 
         jMenu9.setText("     ");
         jMenu9.setEnabled(false);
         jMenuBar1.add(jMenu9);
 
-        jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/Cancelar25.png"))); // NOI18N
-        jMenu10.setText("CANCELAR (F6)");
-        jMenu10.setEnabled(false);
-        jMenuBar1.add(jMenu10);
+        jMenu_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/Cancelar25.png"))); // NOI18N
+        jMenu_cancelar.setText("CANCELAR (F6)");
+        jMenu_cancelar.setEnabled(false);
+        jMenuBar1.add(jMenu_cancelar);
 
         jMenu11.setText("     ");
         jMenuBar1.add(jMenu11);
@@ -157,10 +220,10 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         jMenu12.setPreferredSize(new java.awt.Dimension(100, 19));
         jMenuBar1.add(jMenu12);
 
-        jMenu15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/excluir25.png"))); // NOI18N
-        jMenu15.setText("EXCLUIR (F12)");
-        jMenu15.setEnabled(false);
-        jMenuBar1.add(jMenu15);
+        jMenu_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/excluir25.png"))); // NOI18N
+        jMenu_excluir.setText("EXCLUIR (F12)");
+        jMenu_excluir.setEnabled(false);
+        jMenuBar1.add(jMenu_excluir);
 
         setJMenuBar(jMenuBar1);
 
@@ -168,11 +231,17 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 985, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(770, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 588, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(418, Short.MAX_VALUE))
         );
 
         pack();
@@ -182,50 +251,78 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu13ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jmi_VoltarTelaPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_VoltarTelaPrincipalActionPerformed
         this.dispose();
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jmi_VoltarTelaPrincipalActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jmi_sair_do_sistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_sair_do_sistemaActionPerformed
 
         System.exit(0);
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jmi_sair_do_sistemaActionPerformed
 
-    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+    private void jMenu_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_novoActionPerformed
     
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu2ActionPerformed
+    }//GEN-LAST:event_jMenu_novoActionPerformed
 
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-           jbtn_alterar.setEnabled(true);
+    private void jMenu_novoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_novoMouseClicked
+           jMenu_alterar.setEnabled(true);
            jmi_duplicarveiculo.setEnabled(true);
-    }//GEN-LAST:event_jMenu2MouseClicked
+           jMenu_cancelar.setEnabled(true);
+           jMenu_gravar.setEnabled(true);
+           jMenu_excluir.setEnabled(true);
+    }//GEN-LAST:event_jMenu_novoMouseClicked
+
+    private void jMenu_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_buscarMouseClicked
+           jMenu_alterar.setEnabled(true);
+           jmi_duplicarveiculo.setEnabled(true);
+           jMenu_cancelar.setEnabled(true);
+           jMenu_gravar.setEnabled(true);
+           jMenu_excluir.setEnabled(true);    // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu_buscarMouseClicked
+
+    private void jMenu_alterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_alterarMouseClicked
+           jMenu_alterar.setEnabled(true);
+           jmi_duplicarveiculo.setEnabled(true);
+           jMenu_cancelar.setEnabled(true);
+           jMenu_gravar.setEnabled(true);
+           jMenu_excluir.setEnabled(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu_alterarMouseClicked
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroupTipo;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu14;
-    private javax.swing.JMenu jMenu15;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenu jMenu_alterar;
+    private javax.swing.JMenu jMenu_buscar;
+    private javax.swing.JMenu jMenu_cancelar;
+    private javax.swing.JMenu jMenu_excluir;
+    private javax.swing.JMenu jMenu_gravar;
+    private javax.swing.JMenu jMenu_novo;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JMenu jbtn_alterar;
+    private javax.swing.JMenuItem jmi_VoltarTelaPrincipal;
     private javax.swing.JMenuItem jmi_duplicarveiculo;
+    private javax.swing.JMenuItem jmi_sair_do_sistema;
     // End of variables declaration//GEN-END:variables
 }
