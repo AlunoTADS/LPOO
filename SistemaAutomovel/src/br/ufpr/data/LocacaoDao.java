@@ -3,7 +3,6 @@ package br.ufpr.data;
 import br.ufpr.model.Cliente;
 import br.ufpr.model.Locacao;
 import java.sql.Date;
-import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,10 +31,10 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
         stmt.setInt(++idx, locacao.getDias());
         stmt.setInt(++idx, locacao.getCliente().getIdCliente());
 
+        stmt.execute();
+
         try {
             stmt.execute();
-        } catch (Exception e) {
-            throw e;
         } finally {
             close();
         }
@@ -61,8 +60,6 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
 
         try {
             stmt.execute();
-        } catch (Exception e) {
-            throw e;
         } finally {
             close();
         }
@@ -84,8 +81,6 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
 
         try {
             stmt.execute();
-        } catch (Exception e) {
-            throw e;
         } finally {
             close();
         }
@@ -102,7 +97,7 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
         stmt = con.prepareStatement(sql);
 
         try {
-            stmt.execute();
+            rs = stmt.executeQuery();
         } catch (Exception e) {
             throw e;
         } finally {
@@ -121,7 +116,7 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
         if (locacao.getIdVeiculo() != null) {
             sql.append(String.format(" AND idveiculo = %d ", locacao.getIdVeiculo()));
         }
-
+        
         if (locacao.getCliente() != null && locacao.getCliente().getIdCliente() != null) {
             sql.append(String.format(" AND idcliente = %d ", locacao.getCliente().getIdCliente()));
         }
@@ -129,7 +124,7 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
         if (locacao.getDias() != null) {
             sql.append(String.format(" AND dias = %d ", locacao.getIdVeiculo()));
         }
-
+        
         if (locacao.getDataInicio() != null) {
             sql.append(String.format(" AND datainicio = '%s' ", new SimpleDateFormat("yyyy-MM-dd").format(locacao.getDataInicio())));
         }
@@ -137,7 +132,7 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
         if (locacao.getValor() != null) {
             sql.append(String.format(" AND valor = %f ", locacao.getValor()));
         }
-
+        
         stmt = con.prepareStatement(sql.toString());
 
         List<Locacao> list = new LinkedList<>();
@@ -148,13 +143,8 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
             throw e;
         } finally {
             close();
-        }
+        }       
         return list;
-    }
-
-    @Override
-    public Locacao resultSetToEntity(Locacao t, ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

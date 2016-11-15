@@ -5,7 +5,6 @@
  */
 package br.ufpr.view.cliente;
 
-import br.ufpr.data.ClienteDao;
 import br.ufpr.model.Cliente;
 
 /**
@@ -13,14 +12,13 @@ import br.ufpr.model.Cliente;
  * @author edenm
  */
 public class jif_clientes extends javax.swing.JInternalFrame {
-    protected ClienteDao clienteDAO;
 
     /**
      * Creates new form jifClientes
      */
     public jif_clientes() {
         initComponents();
-        simpleReflectTable1.setClass(Cliente.class);
+        //simpleReflectTable1.setClass(Cliente.class);
     }
 
     /**
@@ -47,7 +45,6 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jtf_CPF = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        simpleReflectTable1 = new br.ufpr.view.util.SimpleReflectTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jm_menuprincipalclientes = new javax.swing.JMenu();
@@ -149,7 +146,6 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("CPF");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 186, -1, -1));
-        getContentPane().add(simpleReflectTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 920, 170));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
 
@@ -228,11 +224,6 @@ public class jif_clientes extends javax.swing.JInternalFrame {
 
         jb_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/atualizar.png"))); // NOI18N
         jb_buscar.setText("BUSCAR (F5)");
-        jb_buscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jb_buscarMouseClicked(evt);
-            }
-        });
         jMenuBar1.add(jb_buscar);
 
         jMenu11.setText("     ");
@@ -296,10 +287,6 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_novoActionPerformed
 
-    private void jb_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_buscarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_buscarMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -336,6 +323,5 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtf_codigo;
     private javax.swing.JTextField jtf_endereco;
     private javax.swing.JTextField jtf_nome;
-    private br.ufpr.view.util.SimpleReflectTable simpleReflectTable1;
     // End of variables declaration//GEN-END:variables
 }
