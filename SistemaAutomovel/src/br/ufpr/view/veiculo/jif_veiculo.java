@@ -62,6 +62,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         setTitle("Gerenciamento de Veículos");
         setPreferredSize(new java.awt.Dimension(991, 676));
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
 
         jMenu1.setText("     ");
@@ -103,6 +104,11 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/criar25.png"))); // NOI18N
         jMenu2.setText("NOVO (F2)");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu2ActionPerformed(evt);
@@ -125,6 +131,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
 
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/salvar.png"))); // NOI18N
         jMenu6.setText("GRAVAR (F4)");
+        jMenu6.setEnabled(false);
         jMenuBar1.add(jMenu6);
 
         jMenu7.setText("     ");
@@ -141,6 +148,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
 
         jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/Cancelar25.png"))); // NOI18N
         jMenu10.setText("CANCELAR (F6)");
+        jMenu10.setEnabled(false);
         jMenuBar1.add(jMenu10);
 
         jMenu11.setText("     ");
@@ -151,6 +159,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
 
         jMenu15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/excluir25.png"))); // NOI18N
         jMenu15.setText("EXCLUIR (F12)");
+        jMenu15.setEnabled(false);
         jMenuBar1.add(jMenu15);
 
         setJMenuBar(jMenuBar1);
@@ -159,7 +168,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 989, Short.MAX_VALUE)
+            .addGap(0, 985, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,10 +195,15 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-        jbtn_alterar.setEnabled(true);
+    
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+           jbtn_alterar.setEnabled(true);
+           jmi_duplicarveiculo.setEnabled(true);
+    }//GEN-LAST:event_jMenu2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

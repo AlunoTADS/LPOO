@@ -268,7 +268,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jm_sairdosistemaActionPerformed
 
     private void jb_pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_pesquisarActionPerformed
-        testar.setEnabled(true);
+        //testar.setEnabled(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_pesquisarActionPerformed
@@ -282,7 +282,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jm_menuprincipalclientesActionPerformed
 
     private void jb_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_novoActionPerformed
-        testar.setEnabled(true);
+        //testar.setEnabled(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_novoActionPerformed
