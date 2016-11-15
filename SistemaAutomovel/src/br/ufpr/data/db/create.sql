@@ -1,18 +1,18 @@
 --select 'DROP TABLE ' || name || ';' from sqlite_master where type = 'table';
-DROP TABLE Sequence;
-DROP TABLE UnidadeFederativa;
-DROP TABLE Cliente;
-DROP TABLE Estado;
-DROP TABLE Marca;
-DROP TABLE Categoria;
-DROP TABLE Veiculo;
-DROP TABLE Locacao;
-DROP TABLE ModeloMotocicleta;
-DROP TABLE Motocicleta;
-DROP TABLE ModeloVan;
-DROP TABLE Van;
-DROP TABLE ModeloAutomovel;
-DROP TABLE Automovel;
+DROP TABLE Sequence CASCADE;
+DROP TABLE UnidadeFederativa CASCADE;
+DROP TABLE Cliente CASCADE;
+DROP TABLE Estado CASCADE;
+DROP TABLE Marca CASCADE;
+DROP TABLE Categoria CASCADE;
+DROP TABLE Veiculo CASCADE;
+DROP TABLE Locacao CASCADE;
+DROP TABLE ModeloMotocicleta CASCADE;
+DROP TABLE Motocicleta CASCADE;
+DROP TABLE ModeloVan CASCADE;
+DROP TABLE Van CASCADE;
+DROP TABLE ModeloAutomovel CASCADE;
+DROP TABLE Automovel CASCADE;
 
 CREATE TABLE Sequence (
     idSequence VARCHAR(64) PRIMARY KEY,
@@ -77,7 +77,7 @@ CREATE TABLE Locacao (
 	valor NUMERIC NOT NULL,
 	CONSTRAINT Locacao_pk PRIMARY KEY (idVeiculo),
 	FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente),
-	FOREIGN KEY (idVeiculo) REFERENCES Estado (idVeiculo)
+	FOREIGN KEY (idVeiculo) REFERENCES Veiculo (idVeiculo)
 );
 
 CREATE TABLE ModeloMotocicleta (
@@ -123,4 +123,5 @@ CREATE TABLE Automovel (
 );
 
 INSERT INTO Sequence (idSequence)
-SELECT lower('seq_id'||name) FROM sqlite_master WHERE type = 'table';
+--SELECT lower('seq_id'||name) FROM sqlite_master WHERE type = 'table';
+SELECT 'seq_'||lower(tablename)||'dao' FROM pg_catalog.pg_tables WHERE schemaname = 'public';

@@ -1,5 +1,6 @@
 package br.ufpr.data;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 /**
@@ -18,4 +19,5 @@ public interface DaoI<T> {
     
     public List<T> listar(T t) throws Exception;
 
+    public T resultSetToEntity(T t, ResultSet rs) throws Exception;
 }

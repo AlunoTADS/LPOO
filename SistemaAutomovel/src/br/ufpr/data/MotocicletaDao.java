@@ -7,6 +7,7 @@ import br.ufpr.model.Marca;
 import br.ufpr.model.ModeloMotocicleta;
 import br.ufpr.model.Motocicleta;
 import br.ufpr.model.Veiculo;
+import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,14 +32,14 @@ public class MotocicletaDao extends VeiculoDao implements DaoI<Veiculo> {
         int idx = 0;
         stmt.setInt(++idx, motocicleta.getIdVeiculo());
         stmt.setInt(++idx, motocicleta.getModelo().getIdModeloMotocicleta());
-        stmt.execute();
 
         try {
             stmt.execute();
+        } catch (Exception e) {
+            throw e;
         } finally {
             close();
         }
-
     }
 
     public void editar(Motocicleta motocicleta) throws Exception {
@@ -59,6 +60,8 @@ public class MotocicletaDao extends VeiculoDao implements DaoI<Veiculo> {
 
         try {
             stmt.execute();
+        } catch (Exception e) {
+            throw e;
         } finally {
             close();
         }
@@ -81,6 +84,8 @@ public class MotocicletaDao extends VeiculoDao implements DaoI<Veiculo> {
         try {
             stmt.execute();
             super.excluir(motocicleta);
+        } catch (Exception e) {
+            throw e;
         } finally {
             close();
         }
@@ -176,6 +181,11 @@ public class MotocicletaDao extends VeiculoDao implements DaoI<Veiculo> {
             close();
         }
         return list;
+    }
+
+    @Override
+    public Veiculo resultSetToEntity(Veiculo t, ResultSet rs) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

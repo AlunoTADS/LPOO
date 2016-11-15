@@ -8,6 +8,7 @@ import br.ufpr.model.Marca;
 import br.ufpr.model.Motocicleta;
 import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,5 +135,10 @@ public class VeiculoDao extends Dao implements DaoI<Veiculo> {
         }
         
         return query.toString();
+    }
+
+    @Override
+    public Veiculo resultSetToEntity(Veiculo t, ResultSet rs) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
