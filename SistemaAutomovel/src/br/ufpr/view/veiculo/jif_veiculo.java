@@ -23,15 +23,6 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
      */
     public jif_veiculo() {
         initComponents();
-        SimpleReflectTableModel simpleReflectTableModel = veiculoTable1.getSimpleReflectTableModel();
-        simpleReflectTableModel.setDataList(Arrays.asList(
-            new Veiculo(HEIGHT, Marca.HONDA, Estado.DISPONIVEL, null, Categoria.POPULAR, 50.00, "XXXX-0000", ABORT) {
-            @Override
-            public double getValorDiariaLocacao() {
-                return 0;
-            }
-        }
-    ));
     }
 
     /**
@@ -43,7 +34,6 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        veiculoTable1 = new br.ufpr.view.veiculo.VeiculoTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
@@ -169,17 +159,11 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(veiculoTable1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(461, Short.MAX_VALUE))
+            .addGap(0, 989, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(veiculoTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(414, Short.MAX_VALUE))
+            .addGap(0, 588, Short.MAX_VALUE)
         );
 
         pack();
@@ -229,6 +213,5 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu jbtn_alterar;
     private javax.swing.JMenuItem jmi_duplicarveiculo;
-    private br.ufpr.view.veiculo.VeiculoTable veiculoTable1;
     // End of variables declaration//GEN-END:variables
 }

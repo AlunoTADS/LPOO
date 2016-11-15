@@ -5,6 +5,8 @@
  */
 package br.ufpr.view.cliente;
 
+import br.ufpr.model.Cliente;
+
 /**
  *
  * @author edenm
@@ -16,6 +18,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
      */
     public jif_clientes() {
         initComponents();
+        //simpleReflectTable1.setClass(Cliente.class);
     }
 
     /**
@@ -42,8 +45,8 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jtf_CPF = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        clienteTable1 = new br.ufpr.view.cliente.ClienteTable();
         testar = new javax.swing.JButton();
+        simpleReflectTable1 = new br.ufpr.view.util.SimpleReflectTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jm_menuprincipalclientes = new javax.swing.JMenu();
@@ -128,6 +131,17 @@ public class jif_clientes extends javax.swing.JInternalFrame {
 
         testar.setText("jButton1");
         testar.setEnabled(false);
+
+        javax.swing.GroupLayout simpleReflectTable1Layout = new javax.swing.GroupLayout(simpleReflectTable1);
+        simpleReflectTable1.setLayout(simpleReflectTable1Layout);
+        simpleReflectTable1Layout.setHorizontalGroup(
+            simpleReflectTable1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        simpleReflectTable1Layout.setVerticalGroup(
+            simpleReflectTable1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 162, Short.MAX_VALUE)
+        );
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
 
@@ -231,21 +245,18 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel2)
+                        .addGap(285, 285, 285)
+                        .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(clienteTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 916, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel2)
-                                .addGap(285, 285, 285)
-                                .addComponent(jLabel3))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jtf_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -267,7 +278,8 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jcb_UF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4)
-                                    .addComponent(jb_pesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(jb_pesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(simpleReflectTable1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(29, 29, 29))
             .addGroup(layout.createSequentialGroup()
                 .addGap(108, 108, 108)
@@ -304,14 +316,14 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jtf_CPF, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                     .addComponent(jtf_RG))
-                .addGap(27, 27, 27)
-                .addComponent(clienteTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(18, 18, 18)
+                .addComponent(simpleReflectTable1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152)
                 .addComponent(testar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 981, 670);
+        setBounds(0, 0, 981, 566);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jm_duplicarregistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_duplicarregistroActionPerformed
@@ -358,7 +370,6 @@ public class jif_clientes extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private br.ufpr.view.cliente.ClienteTable clienteTable1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -393,6 +404,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtf_codigo;
     private javax.swing.JTextField jtf_endereco;
     private javax.swing.JTextField jtf_nome;
+    private br.ufpr.view.util.SimpleReflectTable simpleReflectTable1;
     private javax.swing.JButton testar;
     // End of variables declaration//GEN-END:variables
 }

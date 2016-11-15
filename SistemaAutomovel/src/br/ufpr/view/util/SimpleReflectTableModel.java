@@ -15,7 +15,7 @@ public class SimpleReflectTableModel extends AbstractTableModel {
 
     private static final long serialVersionUID = 7367545292158107310L;
 
-    protected Map<Integer, Column> columns = new TreeMap<>();
+    private Map<Integer, Column> columns = new TreeMap<>();
     protected Map<Integer, Method> methods = new TreeMap<>();
     protected List dataList = new ArrayList();
 
@@ -30,7 +30,7 @@ public class SimpleReflectTableModel extends AbstractTableModel {
     }
     
     protected Column getColumn(int columnIndex) {
-        return columns.get(columnIndex);
+        return getColumns().get(columnIndex);
     } 
 
     protected Method getMethod(int columnIndex) {
@@ -54,7 +54,7 @@ public class SimpleReflectTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return columns.size();
+        return getColumns().size();
     }
 
     @Override
@@ -74,6 +74,13 @@ public class SimpleReflectTableModel extends AbstractTableModel {
     @Override
     public String getColumnName(int columnIndex) {
         return getColumn(columnIndex).label();
+    }
+
+    /**
+     * @return the columns
+     */
+    public Map<Integer, Column> getColumns() {
+        return columns;
     }
 
 }
