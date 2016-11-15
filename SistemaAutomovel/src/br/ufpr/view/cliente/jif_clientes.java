@@ -45,8 +45,6 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jtf_CPF = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        testar = new javax.swing.JButton();
-        simpleReflectTable1 = new br.ufpr.view.util.SimpleReflectTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jm_menuprincipalclientes = new javax.swing.JMenu();
@@ -68,13 +66,20 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jb_excluir = new javax.swing.JMenu();
 
         setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Gerenciamento de Clientes");
+        setAutoscrolls(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtf_codigo.setBackground(new java.awt.Color(240, 235, 240));
         jtf_codigo.setPreferredSize(new java.awt.Dimension(59, 35));
+        getContentPane().add(jtf_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 51, -1, 40));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Código");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 33, -1, -1));
 
         jtf_nome.setBackground(new java.awt.Color(240, 235, 240));
         jtf_nome.addActionListener(new java.awt.event.ActionListener() {
@@ -82,9 +87,11 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                 jtf_nomeActionPerformed(evt);
             }
         });
+        getContentPane().add(jtf_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 51, 311, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Nome");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 33, -1, -1));
 
         jtf_Sobrenome.setBackground(new java.awt.Color(240, 235, 240));
         jtf_Sobrenome.addActionListener(new java.awt.event.ActionListener() {
@@ -92,17 +99,22 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                 jtf_SobrenomeActionPerformed(evt);
             }
         });
+        getContentPane().add(jtf_Sobrenome, new org.netbeans.lib.awtextra.AbsoluteConstraints(424, 51, 448, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Sobrenome");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(424, 33, -1, -1));
 
         jcb_UF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jcb_UF, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 128, -1, 40));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setText("UF");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 107, -1, -1));
 
         jtf_endereco.setBackground(new java.awt.Color(240, 235, 240));
         jtf_endereco.setPreferredSize(new java.awt.Dimension(59, 35));
+        getContentPane().add(jtf_endereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 128, 842, 40));
 
         jb_pesquisar.setText("...");
         jb_pesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -110,14 +122,18 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                 jb_pesquisarActionPerformed(evt);
             }
         });
+        getContentPane().add(jb_pesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 51, 56, 40));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Endereço");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 107, -1, -1));
 
         jtf_RG.setBackground(new java.awt.Color(240, 235, 240));
+        getContentPane().add(jtf_RG, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 207, 190, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("RG");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 186, -1, -1));
 
         jtf_CPF.setBackground(new java.awt.Color(240, 235, 240));
         jtf_CPF.addActionListener(new java.awt.event.ActionListener() {
@@ -125,23 +141,11 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                 jtf_CPFActionPerformed(evt);
             }
         });
+        getContentPane().add(jtf_CPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 207, 178, 40));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("CPF");
-
-        testar.setText("jButton1");
-        testar.setEnabled(false);
-
-        javax.swing.GroupLayout simpleReflectTable1Layout = new javax.swing.GroupLayout(simpleReflectTable1);
-        simpleReflectTable1.setLayout(simpleReflectTable1Layout);
-        simpleReflectTable1Layout.setHorizontalGroup(
-            simpleReflectTable1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        simpleReflectTable1Layout.setVerticalGroup(
-            simpleReflectTable1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 162, Short.MAX_VALUE)
-        );
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 186, -1, -1));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
 
@@ -239,91 +243,6 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jMenuBar1.add(jb_excluir);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel2)
-                        .addGap(285, 285, 285)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jtf_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jtf_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jtf_Sobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jtf_endereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jtf_RG, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel6))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jtf_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jcb_UF, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jb_pesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(simpleReflectTable1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(29, 29, 29))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(testar, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtf_codigo, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jb_pesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtf_Sobrenome, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jtf_nome))
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtf_endereco, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcb_UF, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtf_CPF, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jtf_RG))
-                .addGap(18, 18, 18)
-                .addComponent(simpleReflectTable1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(152, 152, 152)
-                .addComponent(testar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        setBounds(0, 0, 981, 566);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jm_duplicarregistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_duplicarregistroActionPerformed
@@ -404,7 +323,5 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtf_codigo;
     private javax.swing.JTextField jtf_endereco;
     private javax.swing.JTextField jtf_nome;
-    private br.ufpr.view.util.SimpleReflectTable simpleReflectTable1;
-    private javax.swing.JButton testar;
     // End of variables declaration//GEN-END:variables
 }
