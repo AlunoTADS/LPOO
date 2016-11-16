@@ -53,6 +53,7 @@ public class principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Locadora de Veículos");
+        setExtendedState(MAXIMIZED_BOTH);
 
         jdp_Principal.setBackground(new java.awt.Color(109, 132, 180));
         jdp_Principal.setLayout(new java.awt.GridBagLayout());

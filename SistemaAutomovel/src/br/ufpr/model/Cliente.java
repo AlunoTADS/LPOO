@@ -33,6 +33,9 @@ public class Cliente {
         this.idCliente = idCliente;
     }
 
+    public Cliente() {
+    }
+
     @Column(label = "Cód", position = 0)
     public Integer getIdCliente() {
         return this.idCliente;

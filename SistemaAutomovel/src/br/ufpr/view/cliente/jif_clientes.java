@@ -1,11 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufpr.view.cliente;
 
+import br.ufpr.data.ClienteDao;
 import br.ufpr.model.Cliente;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,12 +11,47 @@ import br.ufpr.model.Cliente;
  */
 public class jif_clientes extends javax.swing.JInternalFrame {
 
+    private ClienteDao clienteDao = new ClienteDao();
+    private Cliente cliente = new Cliente();
+
     /**
      * Creates new form jifClientes
      */
     public jif_clientes() {
         initComponents();
         simpleReflectTable1.setClass(Cliente.class);
+        refreshTable();
+    }
+
+    
+    private void refreshView() {
+        refreshTable();
+        refreshForm();
+    }
+    
+    private void refreshForm() {
+
+    }
+        
+    private void refreshTable() {
+        try {
+            simpleReflectTable1.getSimpleReflectTableModel()
+                    .setDataList(clienteDao.listar(null));
+        } catch (Exception ex) {
+            Logger.getLogger(jif_clientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void save() {
+        try {
+            if (cliente.getIdCliente() != null) {
+                clienteDao.editar(cliente);
+            } else {
+                clienteDao.inserir(cliente);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(jif_clientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -30,22 +63,22 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtf_codigo = new javax.swing.JTextField();
+        jtf_idCliente = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jtf_nome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jtf_Sobrenome = new javax.swing.JTextField();
+        jtf_sobrenome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jcb_UF = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
         jtf_endereco = new javax.swing.JTextField();
         jb_pesquisar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jtf_RG = new javax.swing.JTextField();
+        jtf_rg = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jtf_CPF = new javax.swing.JTextField();
+        jtf_cpf = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         simpleReflectTable1 = new br.ufpr.view.util.SimpleReflectTable();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jm_menuprincipalclientes = new javax.swing.JMenu();
@@ -72,16 +105,15 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Gerenciamento de Clientes");
         setAutoscrolls(true);
-        setPreferredSize(new java.awt.Dimension(970, 500));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jtf_codigo.setBackground(new java.awt.Color(240, 235, 240));
-        jtf_codigo.setPreferredSize(new java.awt.Dimension(59, 35));
-        getContentPane().add(jtf_codigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 51, -1, 40));
+        jtf_idCliente.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_idCliente.setPreferredSize(new java.awt.Dimension(59, 35));
+        getContentPane().add(jtf_idCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 40));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Código");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 33, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         jtf_nome.setBackground(new java.awt.Color(240, 235, 240));
         jtf_nome.addActionListener(new java.awt.event.ActionListener() {
@@ -89,34 +121,35 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                 jtf_nomeActionPerformed(evt);
             }
         });
-        getContentPane().add(jtf_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 51, 311, 40));
+        getContentPane().add(jtf_nome, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 300, 40));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Nome");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 33, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
-        jtf_Sobrenome.setBackground(new java.awt.Color(240, 235, 240));
-        jtf_Sobrenome.addActionListener(new java.awt.event.ActionListener() {
+        jtf_sobrenome.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_sobrenome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtf_SobrenomeActionPerformed(evt);
+                jtf_sobrenomeActionPerformed(evt);
             }
         });
-        getContentPane().add(jtf_Sobrenome, new org.netbeans.lib.awtextra.AbsoluteConstraints(424, 51, 448, 40));
+        getContentPane().add(jtf_sobrenome, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, 448, 40));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Sobrenome");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(424, 33, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, -1, -1));
 
         jcb_UF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jcb_UF, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 128, -1, 40));
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setText("UF");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 107, -1, -1));
+        getContentPane().add(jcb_UF, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, 60, 40));
 
         jtf_endereco.setBackground(new java.awt.Color(240, 235, 240));
         jtf_endereco.setPreferredSize(new java.awt.Dimension(59, 35));
-        getContentPane().add(jtf_endereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 128, 842, 40));
+        jtf_endereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_enderecoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jtf_endereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 842, 40));
 
         jb_pesquisar.setText("...");
         jb_pesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -128,27 +161,35 @@ public class jif_clientes extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Endereço");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 107, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
-        jtf_RG.setBackground(new java.awt.Color(240, 235, 240));
-        getContentPane().add(jtf_RG, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 207, 190, 40));
+        jtf_rg.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_rg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_rgActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jtf_rg, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 200, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("RG");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 186, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
-        jtf_CPF.setBackground(new java.awt.Color(240, 235, 240));
-        jtf_CPF.addActionListener(new java.awt.event.ActionListener() {
+        jtf_cpf.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_cpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtf_CPFActionPerformed(evt);
+                jtf_cpfActionPerformed(evt);
             }
         });
-        getContentPane().add(jtf_CPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 207, 178, 40));
+        getContentPane().add(jtf_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 200, 40));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("CPF");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(238, 186, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, -1, -1));
+
+        simpleReflectTable1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         getContentPane().add(simpleReflectTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 920, 190));
+        getContentPane().add(filler3, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 300, -1, -1));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
 
@@ -261,9 +302,9 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_nomeActionPerformed
 
-    private void jtf_SobrenomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_SobrenomeActionPerformed
+    private void jtf_sobrenomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_sobrenomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_SobrenomeActionPerformed
+    }//GEN-LAST:event_jtf_sobrenomeActionPerformed
 
     private void jm_sairdosistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_sairdosistemaActionPerformed
         System.exit(0);
@@ -276,9 +317,9 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_pesquisarActionPerformed
 
-    private void jtf_CPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_CPFActionPerformed
+    private void jtf_cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_cpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_CPFActionPerformed
+    }//GEN-LAST:event_jtf_cpfActionPerformed
 
     private void jm_menuprincipalclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_menuprincipalclientesActionPerformed
         // TODO add your handling code here:
@@ -290,42 +331,50 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_novoActionPerformed
 
+    private void jtf_enderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_enderecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_enderecoActionPerformed
+
+    private void jtf_rgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_rgActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtf_rgActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu11;
-    private javax.swing.JMenu jMenu13;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu9;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JMenu jb_alterar;
-    private javax.swing.JMenu jb_buscar;
-    private javax.swing.JMenu jb_cancelar;
-    private javax.swing.JMenu jb_excluir;
-    private javax.swing.JMenu jb_gravar;
-    private javax.swing.JMenu jb_novo;
-    private javax.swing.JButton jb_pesquisar;
+    javax.swing.Box.Filler filler3;
+    javax.swing.JLabel jLabel1;
+    javax.swing.JLabel jLabel2;
+    javax.swing.JLabel jLabel3;
+    javax.swing.JLabel jLabel5;
+    javax.swing.JLabel jLabel6;
+    javax.swing.JLabel jLabel7;
+    javax.swing.JMenu jMenu1;
+    javax.swing.JMenu jMenu11;
+    javax.swing.JMenu jMenu13;
+    javax.swing.JMenu jMenu3;
+    javax.swing.JMenu jMenu7;
+    javax.swing.JMenu jMenu9;
+    javax.swing.JMenuBar jMenuBar1;
+    javax.swing.JPopupMenu.Separator jSeparator1;
+    javax.swing.JMenu jb_alterar;
+    javax.swing.JMenu jb_buscar;
+    javax.swing.JMenu jb_cancelar;
+    javax.swing.JMenu jb_excluir;
+    javax.swing.JMenu jb_gravar;
+    javax.swing.JMenu jb_novo;
+    javax.swing.JButton jb_pesquisar;
     private javax.swing.JComboBox<String> jcb_UF;
-    private javax.swing.JMenuItem jm_duplicarregistro;
-    private javax.swing.JMenu jm_espaco3;
-    private javax.swing.JMenu jm_menuprincipalclientes;
-    private javax.swing.JMenuItem jm_sairdosistema;
-    private javax.swing.JMenuItem jm_voltatelaprincipal;
-    private javax.swing.JTextField jtf_CPF;
-    private javax.swing.JTextField jtf_RG;
-    private javax.swing.JTextField jtf_Sobrenome;
-    private javax.swing.JTextField jtf_codigo;
-    private javax.swing.JTextField jtf_endereco;
-    private javax.swing.JTextField jtf_nome;
-    private br.ufpr.view.util.SimpleReflectTable simpleReflectTable1;
+    javax.swing.JMenuItem jm_duplicarregistro;
+    javax.swing.JMenu jm_espaco3;
+    javax.swing.JMenu jm_menuprincipalclientes;
+    javax.swing.JMenuItem jm_sairdosistema;
+    javax.swing.JMenuItem jm_voltatelaprincipal;
+    javax.swing.JTextField jtf_cpf;
+    javax.swing.JTextField jtf_endereco;
+    javax.swing.JTextField jtf_idCliente;
+    javax.swing.JTextField jtf_nome;
+    javax.swing.JTextField jtf_rg;
+    javax.swing.JTextField jtf_sobrenome;
+    br.ufpr.view.util.SimpleReflectTable simpleReflectTable1;
     // End of variables declaration//GEN-END:variables
 }
