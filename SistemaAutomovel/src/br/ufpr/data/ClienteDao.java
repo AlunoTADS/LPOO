@@ -2,7 +2,6 @@ package br.ufpr.data;
 
 import br.ufpr.model.Cliente;
 import br.ufpr.model.UnidadeFederativa;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,7 +108,7 @@ public class ClienteDao extends Dao<Cliente> implements DaoI<Cliente> {
         stmt = con.prepareStatement(this.montarQuery(t));
         rs = stmt.executeQuery();
         while (rs.next()) {
-            Cliente a = new Cliente(rs.getInt("idcliente"), rs.getString("nome"), rs.getString("sobrenome"), rs.getString("cpf"), rs.getString("rg"), UnidadeFederativa.fromValue(rs.getString("rguf")), rs.getString("endereco"));
+            Cliente a = new Cliente(rs.getInt("idcliente"), rs.getString("nome"), rs.getString("sobrenome"), rs.getString("cpf"), rs.getString("rg"), UnidadeFederativa.fromValue(rs.getString("rgsiglauf")), rs.getString("endereco"));
             resultado.add(a);
         }
 
@@ -151,9 +150,7 @@ public class ClienteDao extends Dao<Cliente> implements DaoI<Cliente> {
             if (t.getEndereco()!= null) {
                 query.append(String.format(" AND endereco = '%s' ", t.getEndereco()));
             }
-
         }
-
         return query.toString();
     }
 

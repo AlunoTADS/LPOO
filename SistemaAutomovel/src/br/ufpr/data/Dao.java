@@ -18,12 +18,14 @@ public abstract class Dao<T> {
     ResultSet rs;
     CallableStatement call;
 
-    private final String URL = "jdbc:sqlite:src/br/ufpr/data/db/database.db";
+//    private final String URL = "jdbc:sqlite:src/br/ufpr/data/db/database.db";
+    private final String URL = "jdbc:postgresql://localhost:5432/lpoo";
 
     public void open() throws Exception {
         close();
         if (con == null || con.isClosed()) {
-            con = DriverManager.getConnection(URL);
+            //con = DriverManager.getConnection(URL);
+            con = DriverManager.getConnection(URL, "postgres", "j!bdo2012");
         }
     }
 

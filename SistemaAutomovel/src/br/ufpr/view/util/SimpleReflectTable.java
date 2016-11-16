@@ -54,7 +54,7 @@ public class SimpleReflectTable extends JPanel {
     /**
      * @return the table
      */
-    private JTable getTable() {
+    public JTable getTable() {
         return table;
     }
 }
