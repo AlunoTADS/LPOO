@@ -2,6 +2,7 @@ package br.ufpr.view;
 
 import br.ufpr.view.veiculo.jif_veiculo;
 import br.ufpr.view.cliente.jif_clientes;
+import br.ufpr.view.locacao.jif_locar;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -134,6 +135,9 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmi_CadastroVeiculosActionPerformed
 
     private void jmi_LocacaoLocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_LocacaoLocarActionPerformed
+        jif_locar obj = new jif_locar();
+        jdp_Principal.add(obj);
+        obj.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jmi_LocacaoLocarActionPerformed
 
