@@ -2,6 +2,7 @@ package br.ufpr.view;
 
 import br.ufpr.view.veiculo.jif_veiculo;
 import br.ufpr.view.cliente.jif_clientes;
+import br.ufpr.view.devolucao.jif_devolver;
 import br.ufpr.view.locacao.jif_locar;
 
 /*
@@ -102,6 +103,11 @@ public class principal extends javax.swing.JFrame {
 
         jmi_LocacaoLocar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         jmi_LocacaoLocar.setText("Locar");
+        jmi_LocacaoLocar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jmi_LocacaoLocarMouseClicked(evt);
+            }
+        });
         jmi_LocacaoLocar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmi_LocacaoLocarActionPerformed(evt);
@@ -142,6 +148,10 @@ public class principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmi_LocacaoLocarActionPerformed
 
     private void jmi_LocacaoDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_LocacaoDevolverActionPerformed
+        jif_devolver obj = new jif_devolver();
+        jdp_Principal.add(obj);
+        obj.setVisible(true);
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jmi_LocacaoDevolverActionPerformed
 
@@ -158,6 +168,10 @@ public class principal extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jmi_CadastroClientesActionPerformed
+
+    private void jmi_LocacaoLocarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmi_LocacaoLocarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmi_LocacaoLocarMouseClicked
 
     /**
      * @param args the command line arguments

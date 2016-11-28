@@ -109,6 +109,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         simpleReflectTable1 = new br.ufpr.view.util.SimpleReflectTable();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jm_menuprincipalclientes = new javax.swing.JMenu();
@@ -139,6 +140,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
 
         jtf_idCliente.setEditable(false);
         jtf_idCliente.setBackground(new java.awt.Color(204, 204, 204));
+        jtf_idCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtf_idCliente.setPreferredSize(new java.awt.Dimension(59, 35));
         getContentPane().add(jtf_idCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, 40));
 
@@ -147,6 +149,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         jtf_nome.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_nome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtf_nome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_nomeActionPerformed(evt);
@@ -159,6 +162,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
         jtf_sobrenome.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_sobrenome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtf_sobrenome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_sobrenomeActionPerformed(evt);
@@ -170,10 +174,12 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         jLabel3.setText("Sobrenome");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, -1, -1));
 
+        jcb_rgSiglaUf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jcb_rgSiglaUf.setModel(new DefaultComboBoxModel(UnidadeFederativa.values()));
-        getContentPane().add(jcb_rgSiglaUf, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 210, 110, 40));
+        getContentPane().add(jcb_rgSiglaUf, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 110, 40));
 
         jtf_endereco.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_endereco.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtf_endereco.setPreferredSize(new java.awt.Dimension(59, 35));
         jtf_endereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,32 +193,38 @@ public class jif_clientes extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jtf_rg.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_rg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtf_rg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_rgActionPerformed(evt);
             }
         });
-        getContentPane().add(jtf_rg, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 250, 40));
+        getContentPane().add(jtf_rg, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 190, 40));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("RG");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, -1, -1));
 
         jtf_cpf.setBackground(new java.awt.Color(240, 235, 240));
+        jtf_cpf.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jtf_cpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_cpfActionPerformed(evt);
             }
         });
-        getContentPane().add(jtf_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 200, 40));
+        getContentPane().add(jtf_cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 200, 40));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel7.setText("CPF");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, -1, -1));
 
         simpleReflectTable1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         getContentPane().add(simpleReflectTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 920, 190));
         getContentPane().add(filler3, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 300, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("UF");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
 
@@ -364,6 +376,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     javax.swing.JLabel jLabel1;
     javax.swing.JLabel jLabel2;
     javax.swing.JLabel jLabel3;
+    javax.swing.JLabel jLabel4;
     javax.swing.JLabel jLabel5;
     javax.swing.JLabel jLabel6;
     javax.swing.JLabel jLabel7;
