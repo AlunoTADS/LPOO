@@ -5,12 +5,19 @@
  */
 package br.ufpr.view.veiculoComprar;
 
+import br.ufpr.model.Automovel;
 import br.ufpr.model.Categoria;
 import br.ufpr.model.Estado;
 import br.ufpr.model.Marca;
+import br.ufpr.model.ModeloAutomovel;
+import br.ufpr.model.ModeloMotocicleta;
+import br.ufpr.model.ModeloVan;
+import br.ufpr.model.Motocicleta;
+import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
 import br.ufpr.view.util.SimpleReflectTableModel;
 import java.util.Arrays;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -18,11 +25,15 @@ import java.util.Arrays;
  */
 public class jif_veiculo extends javax.swing.JInternalFrame {
 
+    private Veiculo veiculo;
+    private br.ufpr.view.util.SimpleReflectTable simpleReflectTable1;
+    
     /**
      * Creates new form jif_veiculo
      */
     public jif_veiculo() {
         initComponents();
+        this.marcaCompra.setModel(new DefaultComboBoxModel(Marca.values()));
     }
 
     /**
@@ -36,20 +47,20 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
 
         buttonGroupTipo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        automovelCompra = new javax.swing.JCheckBox();
+        motocicletaCompra = new javax.swing.JCheckBox();
+        vanCompra = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
-        jftPlaca = new javax.swing.JFormattedTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        placaCompra = new javax.swing.JFormattedTextField();
+        anoCompra = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        marcaCompra = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        modeloCompra = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        valorCompra = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
+        valorDiariaCompra = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -81,35 +92,45 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
-        buttonGroupTipo.add(jCheckBox1);
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCheckBox1.setText("Automóvel");
-        jCheckBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonGroupTipo.add(automovelCompra);
+        automovelCompra.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        automovelCompra.setText("Automóvel");
+        automovelCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCheckBox1MouseClicked(evt);
+                automovelCompraMouseClicked(evt);
             }
         });
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        automovelCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                automovelCompraActionPerformed(evt);
             }
         });
 
-        buttonGroupTipo.add(jCheckBox2);
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCheckBox2.setText("Motocicleta");
-        jCheckBox2.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonGroupTipo.add(motocicletaCompra);
+        motocicletaCompra.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        motocicletaCompra.setText("Motocicleta");
+        motocicletaCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCheckBox2MouseClicked(evt);
+                motocicletaCompraMouseClicked(evt);
+            }
+        });
+        motocicletaCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                motocicletaCompraActionPerformed(evt);
             }
         });
 
-        buttonGroupTipo.add(jCheckBox3);
-        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCheckBox3.setText("Van");
-        jCheckBox3.addMouseListener(new java.awt.event.MouseAdapter() {
+        buttonGroupTipo.add(vanCompra);
+        vanCompra.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        vanCompra.setText("Van");
+        vanCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jCheckBox3MouseClicked(evt);
+                vanCompraMouseClicked(evt);
+            }
+        });
+        vanCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vanCompraActionPerformed(evt);
             }
         });
 
@@ -119,66 +140,71 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jCheckBox1)
+                .addComponent(automovelCompra)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox2)
+                .addComponent(motocicletaCompra)
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(vanCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jCheckBox1, jCheckBox2});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {automovelCompra, motocicletaCompra});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3))
+                    .addComponent(automovelCompra)
+                    .addComponent(motocicletaCompra)
+                    .addComponent(vanCompra))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jCheckBox1, jCheckBox2, jCheckBox3});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {automovelCompra, motocicletaCompra, vanCompra});
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Placa");
 
-        jftPlaca.setBackground(new java.awt.Color(240, 240, 240));
-        jftPlaca.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        placaCompra.setBackground(new java.awt.Color(240, 240, 240));
+        placaCompra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        placaCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                placaCompraActionPerformed(evt);
+            }
+        });
 
-        jFormattedTextField1.setBackground(new java.awt.Color(240, 240, 240));
-        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        anoCompra.setBackground(new java.awt.Color(240, 240, 240));
+        anoCompra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Ano");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        marcaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        marcaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                marcaCompraActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Marca");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        modeloCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Modelo");
 
-        jFormattedTextField2.setBackground(new java.awt.Color(240, 240, 240));
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        valorCompra.setBackground(new java.awt.Color(240, 240, 240));
+        valorCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Valor Compra");
 
-        jFormattedTextField3.setEnabled(false);
-        jFormattedTextField3.addActionListener(new java.awt.event.ActionListener() {
+        valorDiariaCompra.setEnabled(false);
+        valorDiariaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField3ActionPerformed(evt);
+                valorDiariaCompraActionPerformed(evt);
             }
         });
 
@@ -287,7 +313,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         jMenu11.setText("     ");
         jMenuBar1.add(jMenu11);
 
-        jMenu12.setPreferredSize(new java.awt.Dimension(100, 19));
+        jMenu12.setPreferredSize(new java.awt.Dimension(50, 19));
         jMenuBar1.add(jMenu12);
 
         jMenu_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/excluir25.png"))); // NOI18N
@@ -302,38 +328,37 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(marcaCompra, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3))
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jftPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1))
-                            .addGap(68, 68, 68)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2)))
-                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(placaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(68, 68, 68)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(anoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addComponent(modeloCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jFormattedTextField2)
+                        .addComponent(valorCompra)
                         .addComponent(jLabel5)
-                        .addComponent(jFormattedTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                        .addComponent(valorDiariaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -344,10 +369,10 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel5))
                                 .addGap(1, 1, 1)
-                                .addComponent(jftPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(placaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)))
+                                .addComponent(valorCompra, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(anoCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(4, 4, 4)))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -356,15 +381,15 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(jComboBox1))
-                .addContainerGap(379, Short.MAX_VALUE))
+                    .addComponent(valorDiariaCompra)
+                    .addComponent(modeloCompra)
+                    .addComponent(marcaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
 
-        pack();
+        setBounds(0, 0, 956, 386);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu13ActionPerformed
@@ -413,41 +438,49 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
            jMenu_excluir.setEnabled(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenu_alterarMouseClicked
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    private void automovelCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automovelCompraActionPerformed
+        this.veiculo = new Automovel();
+        this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloAutomovel.values()));
+    }//GEN-LAST:event_automovelCompraActionPerformed
 
-    private void jCheckBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox1MouseClicked
+    private void automovelCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_automovelCompraMouseClicked
     jMenu_cancelar.setEnabled(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1MouseClicked
+    }//GEN-LAST:event_automovelCompraMouseClicked
 
-    private void jCheckBox2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox2MouseClicked
+    private void motocicletaCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_motocicletaCompraMouseClicked
     jMenu_cancelar.setEnabled(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2MouseClicked
+    }//GEN-LAST:event_motocicletaCompraMouseClicked
 
-    private void jCheckBox3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCheckBox3MouseClicked
+    private void vanCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vanCompraMouseClicked
     jMenu_cancelar.setEnabled(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox3MouseClicked
+    }//GEN-LAST:event_vanCompraMouseClicked
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void marcaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaCompraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_marcaCompraActionPerformed
 
-    private void jFormattedTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField3ActionPerformed
+    private void valorDiariaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorDiariaCompraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField3ActionPerformed
+    }//GEN-LAST:event_valorDiariaCompraActionPerformed
 
+    private void placaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placaCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_placaCompraActionPerformed
+
+    private void motocicletaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motocicletaCompraActionPerformed
+        this.veiculo = new Motocicleta();
+        this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloMotocicleta.values()));
+    }//GEN-LAST:event_motocicletaCompraActionPerformed
+
+    private void vanCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vanCompraActionPerformed
+        this.veiculo = new Van();
+        this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloVan.values()));
+    }//GEN-LAST:event_vanCompraActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField anoCompra;
+    private javax.swing.JCheckBox automovelCompra;
     private javax.swing.ButtonGroup buttonGroupTipo;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -472,9 +505,15 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jMenu_novo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JFormattedTextField jftPlaca;
     private javax.swing.JMenuItem jmi_VoltarTelaPrincipal;
     private javax.swing.JMenuItem jmi_duplicarveiculo;
     private javax.swing.JMenuItem jmi_sair_do_sistema;
+    private javax.swing.JComboBox<String> marcaCompra;
+    private javax.swing.JComboBox<String> modeloCompra;
+    private javax.swing.JCheckBox motocicletaCompra;
+    private javax.swing.JFormattedTextField placaCompra;
+    private javax.swing.JFormattedTextField valorCompra;
+    private javax.swing.JFormattedTextField valorDiariaCompra;
+    private javax.swing.JCheckBox vanCompra;
     // End of variables declaration//GEN-END:variables
 }

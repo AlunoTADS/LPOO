@@ -79,6 +79,9 @@ public abstract class Veiculo implements VeiculoI {
         this.placa = placa;
         this.ano = ano;
     }
+    
+    public Veiculo() {
+    }
 
     @Override
     public void locar(int dias, Calendar dataInicio, Cliente cliente) {

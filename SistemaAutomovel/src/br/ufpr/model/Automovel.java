@@ -12,6 +12,9 @@ public class Automovel extends Veiculo {
         super(null, marca, estado, locacao, categoria, valorCompra, placa, ano);
         this.modelo = modelo;
     }
+    
+    public Automovel() {
+    }
 
     public ModeloAutomovel getModelo() {
         return modelo;

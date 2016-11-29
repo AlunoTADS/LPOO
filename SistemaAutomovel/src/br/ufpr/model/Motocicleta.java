@@ -13,6 +13,9 @@ public class Motocicleta extends Veiculo {
         this.modelo = modelo; 
     }
     
+    public Motocicleta() {
+    }
+    
     public ModeloMotocicleta getModelo(){
         return modelo;
     }
