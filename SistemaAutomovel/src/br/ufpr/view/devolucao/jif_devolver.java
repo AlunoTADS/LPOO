@@ -73,6 +73,7 @@ public class jif_devolver extends javax.swing.JInternalFrame {
         setClosable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Devolver Veículo");
         setPreferredSize(new java.awt.Dimension(907, 622));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N

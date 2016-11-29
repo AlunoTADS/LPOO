@@ -1,9 +1,10 @@
 package br.ufpr.view;
 
-import br.ufpr.view.veiculo.jif_veiculo;
+import br.ufpr.view.veiculoVender.jif_veiculoVender;
 import br.ufpr.view.cliente.jif_clientes;
 import br.ufpr.view.devolucao.jif_devolver;
 import br.ufpr.view.locacao.jif_locar;
+import br.ufpr.view.veiculoComprar.jif_veiculo;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -41,8 +42,13 @@ public class principal extends javax.swing.JFrame {
         menucadastro = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jmi_CadastroClientes = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        jmi_CadastroVeiculosComprar = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jmi_CadastroVeiculos = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         MenuLocacao = new javax.swing.JMenu();
         jmi_LocacaoLocar = new javax.swing.JMenuItem();
@@ -82,16 +88,37 @@ public class principal extends javax.swing.JFrame {
             }
         });
         menucadastro.add(jmi_CadastroClientes);
-        menucadastro.add(jSeparator2);
+        menucadastro.add(jSeparator5);
 
-        jmi_CadastroVeiculos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
-        jmi_CadastroVeiculos.setText("Veículos");
-        jmi_CadastroVeiculos.addActionListener(new java.awt.event.ActionListener() {
+        jmi_CadastroVeiculosComprar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        jmi_CadastroVeiculosComprar.setText("Comprar Veículos");
+        jmi_CadastroVeiculosComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmi_CadastroVeiculosActionPerformed(evt);
+                jmi_CadastroVeiculosComprarActionPerformed(evt);
             }
         });
-        menucadastro.add(jmi_CadastroVeiculos);
+        menucadastro.add(jmi_CadastroVeiculosComprar);
+        menucadastro.add(jSeparator2);
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+        jMenuItem1.setText("Vender Veículo");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menucadastro.add(jMenuItem1);
+        menucadastro.add(jSeparator4);
+        menucadastro.add(jSeparator6);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Sair");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        menucadastro.add(jMenuItem2);
 
         MenuBarPrincipal.add(menucadastro);
 
@@ -132,14 +159,6 @@ public class principal extends javax.swing.JFrame {
         setBounds(0, 0, 1348, 763);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmi_CadastroVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_CadastroVeiculosActionPerformed
-        jif_veiculo obj = new jif_veiculo();
-        jdp_Principal.add(obj);
-        obj.setVisible(true);
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmi_CadastroVeiculosActionPerformed
-
     private void jmi_LocacaoLocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_LocacaoLocarActionPerformed
         jif_locar obj = new jif_locar();
         jdp_Principal.add(obj);
@@ -172,6 +191,26 @@ public class principal extends javax.swing.JFrame {
     private void jmi_LocacaoLocarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jmi_LocacaoLocarMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jmi_LocacaoLocarMouseClicked
+
+    private void jmi_CadastroVeiculosComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_CadastroVeiculosComprarActionPerformed
+        jif_veiculo obj = new jif_veiculo();
+        jdp_Principal.add(obj);
+        obj.setVisible(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmi_CadastroVeiculosComprarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        jif_veiculoVender obj = new jif_veiculoVender();
+        jdp_Principal.add(obj);
+        obj.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+         System.exit(0);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,12 +253,17 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JDesktopPane jdp_Principal;
     private javax.swing.JMenuItem jmi_CadastroClientes;
-    private javax.swing.JMenuItem jmi_CadastroVeiculos;
+    private javax.swing.JMenuItem jmi_CadastroVeiculosComprar;
     private javax.swing.JMenuItem jmi_LocacaoDevolver;
     private javax.swing.JMenuItem jmi_LocacaoLocar;
     private javax.swing.JMenu menucadastro;
