@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufpr.view.devolucao;
+package br.ufpr.view.veiculo.devolucao;
 
 /**
  *
  * @author edenm
  */
-public class jif_devolver extends javax.swing.JInternalFrame {
+public class JIFDevolver extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form jif_devolver
      */
-    public jif_devolver() {
+    public JIFDevolver() {
         initComponents();
     }
 

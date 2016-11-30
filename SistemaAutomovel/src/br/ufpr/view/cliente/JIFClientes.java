@@ -13,7 +13,7 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author edenm
  */
-public class jif_clientes extends javax.swing.JInternalFrame {
+public class JIFClientes extends javax.swing.JInternalFrame {
 
     private ClienteDao clienteDao = new ClienteDao();
     private Cliente cliente = new Cliente();
@@ -21,7 +21,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
     /**
      * Creates new form jifClientes
      */
-    public jif_clientes() {
+    public JIFClientes() {
         initComponents();
         simpleReflectTable1.setClass(Cliente.class);
         simpleReflectTable1
@@ -81,7 +81,7 @@ public class jif_clientes extends javax.swing.JInternalFrame {
                 clienteDao.inserir(cliente);
             }
         } catch (Exception ex) {
-            Logger.getLogger(jif_clientes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JIFClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

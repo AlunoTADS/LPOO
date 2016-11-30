@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufpr.view.veiculoVender;
+package br.ufpr.view.veiculo.venda;
 
 import br.ufpr.model.Categoria;
 import br.ufpr.model.Estado;
@@ -16,12 +16,12 @@ import java.util.Arrays;
  *
  * @author edenm
  */
-public class jif_veiculoVender extends javax.swing.JInternalFrame {
+public class JIFVeiculoVender extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form jif_veiculo
      */
-    public jif_veiculoVender() {
+    public JIFVeiculoVender() {
         initComponents();
     }
 
@@ -140,7 +140,7 @@ public class jif_veiculoVender extends javax.swing.JInternalFrame {
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbTipoAutomovelVenda, cbTipoMotoVenda, cbTipoVanVenda});
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(62, 55, 353, 63);
+        jPanel1.setBounds(62, 55, 353, 0);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Placa");

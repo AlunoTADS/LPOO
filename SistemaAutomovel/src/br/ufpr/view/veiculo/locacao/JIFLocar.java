@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufpr.view.locacao;
+package br.ufpr.view.veiculo.locacao;
 
 /**
  *
  * @author edenm
  */
-public class jif_locar extends javax.swing.JInternalFrame {
+public class JIFLocar extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Locar
      */
-    public jif_locar() {
+    public JIFLocar() {
         initComponents();
     }
 

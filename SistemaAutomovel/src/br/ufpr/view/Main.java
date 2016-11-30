@@ -1,16 +1,15 @@
 package br.ufpr.view;
 
-import br.ufpr.view.veiculoVender.jif_veiculoVender;
-import br.ufpr.view.cliente.jif_clientes;
-import br.ufpr.view.devolucao.jif_devolver;
-import br.ufpr.view.locacao.jif_locar;
-import br.ufpr.view.veiculoComprar.jif_veiculo;
+import br.ufpr.view.veiculo.venda.JIFVeiculoVender;
+import br.ufpr.view.cliente.JIFClientes;
+import br.ufpr.view.veiculo.devolucao.JIFDevolver;
+import br.ufpr.view.veiculo.locacao.JIFLocar;
+import br.ufpr.view.veiculo.compra.JIFVeiculo;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
 
 
 /**
@@ -160,14 +159,14 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmi_LocacaoLocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_LocacaoLocarActionPerformed
-        jif_locar obj = new jif_locar();
+        JIFLocar obj = new JIFLocar();
         jdp_Principal.add(obj);
         obj.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jmi_LocacaoLocarActionPerformed
 
     private void jmi_LocacaoDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_LocacaoDevolverActionPerformed
-        jif_devolver obj = new jif_devolver();
+        JIFDevolver obj = new JIFDevolver();
         jdp_Principal.add(obj);
         obj.setVisible(true);
         
@@ -181,7 +180,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_menucadastroActionPerformed
 
     private void jmi_CadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_CadastroClientesActionPerformed
-        jif_clientes obj = new jif_clientes();
+        JIFClientes obj = new JIFClientes();
         jdp_Principal.add(obj);
         obj.setVisible(true);
 
@@ -193,7 +192,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jmi_LocacaoLocarMouseClicked
 
     private void jmi_CadastroVeiculosComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_CadastroVeiculosComprarActionPerformed
-        jif_veiculo obj = new jif_veiculo();
+        JIFVeiculo obj = new JIFVeiculo();
         jdp_Principal.add(obj);
         obj.setVisible(true);
 
@@ -201,7 +200,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jmi_CadastroVeiculosComprarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        jif_veiculoVender obj = new jif_veiculoVender();
+        JIFVeiculoVender obj = new JIFVeiculoVender();
         jdp_Principal.add(obj);
         obj.setVisible(true);
         // TODO add your handling code here:

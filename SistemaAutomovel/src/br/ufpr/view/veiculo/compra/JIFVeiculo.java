@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufpr.view.veiculoComprar;
+package br.ufpr.view.veiculo.compra;
 
 import br.ufpr.model.Automovel;
 import br.ufpr.model.Categoria;
@@ -24,7 +24,7 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author edenm
  */
-public class jif_veiculo extends javax.swing.JInternalFrame {
+public class JIFVeiculo extends javax.swing.JInternalFrame {
 
     private Veiculo veiculo;
     private br.ufpr.view.util.SimpleReflectTable simpleReflectTable1;
@@ -32,7 +32,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     /**
      * Creates new form jif_veiculo
      */
-    public jif_veiculo() {
+    public JIFVeiculo() {
         initComponents();
         this.marcaCompra.setModel(new DefaultComboBoxModel(Marca.values()));
         this.categoriaCompra.setModel(new DefaultComboBoxModel(Categoria.values()));
