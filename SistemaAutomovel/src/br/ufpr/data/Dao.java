@@ -1,5 +1,6 @@
 package br.ufpr.data;
 
+import br.ufpr.data.db.ConnectionFactory;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,7 +26,7 @@ public abstract class Dao<T> {
         close();
         if (con == null || con.isClosed()) {
             //con = DriverManager.getConnection(URL);
-            con = DriverManager.getConnection(URL, "postgres", "j!bdo2012");
+            con = ConnectionFactory.getConnection();
         }
     }
 

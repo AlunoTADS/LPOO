@@ -6,12 +6,6 @@ import br.ufpr.view.veiculo.devolucao.JIFDevolver;
 import br.ufpr.view.veiculo.locacao.JIFLocar;
 import br.ufpr.view.veiculo.compra.JIFVeiculo;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
-
-
 /**
  *
  * @author edenm
