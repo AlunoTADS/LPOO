@@ -101,6 +101,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Compra de Veículos");
+        setMinimumSize(new java.awt.Dimension(991, 676));
         setPreferredSize(new java.awt.Dimension(991, 676));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
@@ -421,12 +422,12 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(categoriaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
 
-        setBounds(0, 0, 924, 332);
+        setBounds(0, 0, 924, 405);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu13ActionPerformed

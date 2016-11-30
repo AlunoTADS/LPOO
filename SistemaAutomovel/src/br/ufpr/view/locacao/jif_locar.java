@@ -77,6 +77,9 @@ public class jif_locar extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Locar Veiculo");
+        setMinimumSize(new java.awt.Dimension(907, 622));
+        setName(""); // NOI18N
+        setRequestFocusEnabled(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Veículo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 

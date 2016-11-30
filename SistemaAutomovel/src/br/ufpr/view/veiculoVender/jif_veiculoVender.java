@@ -72,6 +72,7 @@ public class jif_veiculoVender extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Venda de Veículos");
+        setMinimumSize(new java.awt.Dimension(991, 676));
         setPreferredSize(new java.awt.Dimension(991, 676));
         getContentPane().setLayout(null);
 
@@ -120,7 +121,7 @@ public class jif_veiculoVender extends javax.swing.JInternalFrame {
                 .addComponent(cbTipoMotoVenda)
                 .addGap(18, 18, 18)
                 .addComponent(cbTipoVanVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbTipoAutomovelVenda, cbTipoMotoVenda});
