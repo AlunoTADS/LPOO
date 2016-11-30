@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  *
  * @author Lucas
  */
-public /*abstract*/ class Veiculo implements VeiculoI {
+public abstract class Veiculo implements VeiculoI {
 
     private Integer idVeiculo;
     protected Marca marca;

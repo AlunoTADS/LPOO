@@ -6,12 +6,17 @@
 package br.ufpr.view.veiculo.venda;
 
 import br.ufpr.data.VeiculoDao;
+import br.ufpr.model.Automovel;
 import br.ufpr.model.Categoria;
 import br.ufpr.model.Estado;
 import br.ufpr.model.Marca;
+import br.ufpr.model.Motocicleta;
+import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
 import br.ufpr.view.util.SimpleReflectTableModel;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -22,54 +27,56 @@ import javax.swing.event.ListSelectionListener;
 public class JIFVender extends javax.swing.JInternalFrame {
     
     private VeiculoDao veiculoDao = new VeiculoDao();
-    private Veiculo veiculo = new Veiculo();
-
+    private Veiculo veiculo = new Automovel();
     /**
      * Creates new form jif_veiculo
      */
     public JIFVender() {
         initComponents();
-         simpleReflectTable1.setClass(Veiculo.class);
-        simpleReflectTable1
-                .getTable()
-                .getSelectionModel()
-                .addListSelectionListener(new ListSelectionListener() {
+         table.setClass(Veiculo.class);
+        table.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
                     @Override
                     public void valueChanged(ListSelectionEvent e) {
                         try {
-                            veiculo = (Veiculo) simpleReflectTable1
+                            veiculo = (Veiculo) table
                                     .getSimpleReflectTableModel()
                                     .getDataList()
-                                    .get(simpleReflectTable1
+                                    .get(table
                                             .getTable()
                                             .getSelectedRow());
-                            refreshForm();
+                           // refreshForm();
                         } catch (Exception ex) {
                         }
                     }
                 });
-        refreshView();
+        //refreshTable(null);
     }
     
-    refreshView(){
+   /* private void refreshView(){
         refreshTable();
         refreshForm();
-    }
+    }*/
     
-    refreshForm(){
-        if (veiculo == null){
-            
+   /* private void refreshForm(){
+        if (automovel == null){
+            veiculo = new Veiculo();
         }
-    }
+        
+    }*/
     
      private void refreshTable() {
         try {
-            simpleReflectTable1.getSimpleReflectTableModel()
-                    .setDataList(veiculoDao.listar(null));
+            List l = veiculoDao.listar(veiculo);
+            table.getSimpleReflectTableModel().setDataList(l);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
+     
+     private void setaTipoAutomovel() {
+         veiculo = new Automovel();
+         refreshTable();
+     }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,7 +102,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jftfValorVenda = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        simpleReflectTable1 = new br.ufpr.view.util.SimpleReflectTable();
+        table = new br.ufpr.view.util.SimpleReflectTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
@@ -168,7 +175,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
                 .addComponent(cbTipoMotoVenda)
                 .addGap(18, 18, 18)
                 .addComponent(cbTipoVanVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbTipoAutomovelVenda, cbTipoMotoVenda});
@@ -187,17 +194,22 @@ public class JIFVender extends javax.swing.JInternalFrame {
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbTipoAutomovelVenda, cbTipoMotoVenda, cbTipoVanVenda});
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(62, 55, 353, 63);
+        jPanel1.setBounds(60, 60, 310, 63);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Placa");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(473, 56, 31, 17);
+        jLabel1.setBounds(420, 50, 31, 17);
 
         jftPlacaVenda.setBackground(new java.awt.Color(240, 240, 240));
         jftPlacaVenda.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jftPlacaVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jftPlacaVendaActionPerformed(evt);
+            }
+        });
         getContentPane().add(jftPlacaVenda);
-        jftPlacaVenda.setBounds(473, 74, 129, 40);
+        jftPlacaVenda.setBounds(420, 70, 129, 40);
 
         jftfAnoVenda.setBackground(new java.awt.Color(240, 240, 240));
         jftfAnoVenda.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -241,8 +253,8 @@ public class JIFVender extends javax.swing.JInternalFrame {
         jLabel5.setText("Valor Venda");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(812, 56, 72, 17);
-        getContentPane().add(simpleReflectTable1);
-        simpleReflectTable1.setBounds(100, 270, 870, 140);
+        getContentPane().add(table);
+        table.setBounds(100, 270, 870, 140);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
@@ -366,7 +378,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenu_alterarMouseClicked
 
     private void cbTipoAutomovelVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAutomovelVendaActionPerformed
-        // TODO add your handling code here:
+       setaTipoAutomovel();
     }//GEN-LAST:event_cbTipoAutomovelVendaActionPerformed
 
     private void cbTipoAutomovelVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoAutomovelVendaMouseClicked
@@ -384,6 +396,10 @@ public class JIFVender extends javax.swing.JInternalFrame {
     private void cbMarcaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMarcaVendaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbMarcaVendaActionPerformed
+
+    private void jftPlacaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jftPlacaVendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jftPlacaVendaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -419,6 +435,6 @@ public class JIFVender extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField jftfValorVenda;
     private javax.swing.JMenuItem jmi_VoltarTelaPrincipal;
     private javax.swing.JMenuItem jmi_sair_do_sistema;
-    private br.ufpr.view.util.SimpleReflectTable simpleReflectTable1;
+    private br.ufpr.view.util.SimpleReflectTable table;
     // End of variables declaration//GEN-END:variables
 }
