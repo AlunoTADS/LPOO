@@ -1,6 +1,6 @@
 package br.ufpr.view;
 
-import br.ufpr.view.veiculo.venda.JIFVeiculoVender;
+import br.ufpr.view.veiculo.venda.JIFVender;
 import br.ufpr.view.cliente.JIFClientes;
 import br.ufpr.view.veiculo.devolucao.JIFDevolver;
 import br.ufpr.view.veiculo.locacao.JIFLocar;
@@ -200,7 +200,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jmi_CadastroVeiculosComprarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        JIFVeiculoVender obj = new JIFVeiculoVender();
+        JIFVender obj = new JIFVender();
         jdp_Principal.add(obj);
         obj.setVisible(true);
         // TODO add your handling code here:

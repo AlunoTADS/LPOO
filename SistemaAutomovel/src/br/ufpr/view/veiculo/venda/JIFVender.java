@@ -16,12 +16,12 @@ import java.util.Arrays;
  *
  * @author edenm
  */
-public class JIFVeiculoVender extends javax.swing.JInternalFrame {
+public class JIFVender extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form jif_veiculo
      */
-    public JIFVeiculoVender() {
+    public JIFVender() {
         initComponents();
     }
 
