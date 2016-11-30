@@ -46,6 +46,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         } else if (this.vanCompra.isSelected()) {
             this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloVan.values()));
         }
+        this.valorDiariaCompra.setText(this.veiculo.getValorDiariaLocacao()+"");
     }
 
     /**
@@ -513,7 +514,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_vanCompraActionPerformed
 
     private void categoriaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaCompraActionPerformed
-        this.valorDiariaCompra.setText(this.veiculo.getValorDiariaLocacao()+"");
+        this.refreshForm();
     }//GEN-LAST:event_categoriaCompraActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
