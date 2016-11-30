@@ -128,7 +128,7 @@ public class principal extends javax.swing.JFrame {
 
         MenuLocacao.setText("LOCAÇÃO");
 
-        jmi_LocacaoLocar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+        jmi_LocacaoLocar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         jmi_LocacaoLocar.setText("Locar");
         jmi_LocacaoLocar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -143,7 +143,7 @@ public class principal extends javax.swing.JFrame {
         MenuLocacao.add(jmi_LocacaoLocar);
         MenuLocacao.add(jSeparator3);
 
-        jmi_LocacaoDevolver.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        jmi_LocacaoDevolver.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
         jmi_LocacaoDevolver.setText("Devolver");
         jmi_LocacaoDevolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
