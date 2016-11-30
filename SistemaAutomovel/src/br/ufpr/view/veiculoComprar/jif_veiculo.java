@@ -17,6 +17,7 @@ import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
 import br.ufpr.view.util.SimpleReflectTableModel;
 import java.util.Arrays;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -34,6 +35,17 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     public jif_veiculo() {
         initComponents();
         this.marcaCompra.setModel(new DefaultComboBoxModel(Marca.values()));
+        this.categoriaCompra.setModel(new DefaultComboBoxModel(Categoria.values()));
+    }
+    
+    public void refreshForm() {
+        if (this.automovelCompra.isSelected()) {
+            this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloAutomovel.values()));
+        } else if (this.motocicletaCompra.isSelected()) {
+            this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloMotocicleta.values()));
+        } else if (this.vanCompra.isSelected()) {
+            this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloVan.values()));
+        }
     }
 
     /**
@@ -62,7 +74,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         valorDiariaCompra = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        categoriaCompra = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -212,7 +224,12 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Valor da Diária");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        categoriaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        categoriaCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoriaCompraActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Categoria");
@@ -365,7 +382,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
                                 .addComponent(valorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(18, 18, 18)
                             .addComponent(valorDiariaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(categoriaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
@@ -403,7 +420,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(categoriaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -459,8 +476,7 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenu_alterarMouseClicked
 
     private void automovelCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automovelCompraActionPerformed
-        this.veiculo = new Automovel();
-        this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloAutomovel.values()));
+        this.refreshForm();        
     }//GEN-LAST:event_automovelCompraActionPerformed
 
     private void automovelCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_automovelCompraMouseClicked
@@ -488,20 +504,22 @@ public class jif_veiculo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_placaCompraActionPerformed
 
     private void motocicletaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_motocicletaCompraActionPerformed
-        this.veiculo = new Motocicleta();
-        this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloMotocicleta.values()));
+        this.refreshForm();
     }//GEN-LAST:event_motocicletaCompraActionPerformed
 
     private void vanCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vanCompraActionPerformed
-        this.veiculo = new Van();
-        this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloVan.values()));
+        this.refreshForm();
     }//GEN-LAST:event_vanCompraActionPerformed
+
+    private void categoriaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaCompraActionPerformed
+        this.valorDiariaCompra.setText(this.veiculo.getValorDiariaLocacao()+"");
+    }//GEN-LAST:event_categoriaCompraActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField anoCompra;
     private javax.swing.JCheckBox automovelCompra;
     private javax.swing.ButtonGroup buttonGroupTipo;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> categoriaCompra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
