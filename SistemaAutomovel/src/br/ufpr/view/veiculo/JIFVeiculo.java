@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufpr.view.veiculo.compra;
+package br.ufpr.view.veiculo;
 
 import br.ufpr.data.VeiculoDao;
 import br.ufpr.model.Automovel;
@@ -16,14 +16,19 @@ import br.ufpr.model.ModeloVan;
 import br.ufpr.model.Motocicleta;
 import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
-import br.ufpr.view.util.SimpleReflectTableModel;
+import br.ufpr.view.util.ComponentUtil;
+import java.awt.Component;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -33,21 +38,32 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
 
     private Veiculo veiculo;
     private br.ufpr.view.util.SimpleReflectTable simpleReflectTable1;
+    private List<Component> camposDisable, camposEnable;
     
     /**
      * Creates new form jif_veiculo
      */
     public JIFVeiculo() {
         initComponents();
+        
+        camposDisable = Arrays.asList(automovelCompra, motocicletaCompra, vanCompra, placaCompra, anoCompra, valorCompra, estadoCompra, marcaCompra, modeloCompra, categoriaCompra);
+        camposEnable = Arrays.asList(automovelCompra, motocicletaCompra, vanCompra, placaCompra, anoCompra, valorCompra);
+        
+        disableForm();
+        enableForm();
+        
         this.marcaCompra.setModel(new DefaultComboBoxModel(Marca.values()));
         this.categoriaCompra.setModel(new DefaultComboBoxModel(Categoria.values()));
         this.estadoCompra.setModel(new DefaultComboBoxModel(Estado.values()));
+        
         try {
-            MaskFormatter maskMoney = new MaskFormatter("R$ ###.###,##");
+            DecimalFormat dFormat = new DecimalFormat("#,###,###.00");
+            NumberFormatter formatter = new NumberFormatter(dFormat);
+            formatter.setFormat(dFormat);
+            formatter.setAllowsInvalid(false);
             MaskFormatter maskPlaca = new MaskFormatter("UUU-####");
-            maskMoney.setPlaceholderCharacter('_');
             maskPlaca.setPlaceholderCharacter('_');
-            maskMoney.install(valorCompra);
+            this.valorCompra.setFormatterFactory(new DefaultFormatterFactory(formatter));
             maskPlaca.install(placaCompra);
         } catch (ParseException ex) {
             Logger.getLogger(JIFVeiculo.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,9 +90,10 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         Marca marca = (Marca) this.marcaCompra.getSelectedItem();
         Estado estado = (Estado) this.estadoCompra.getSelectedItem();
         Categoria categoria = (Categoria) this.categoriaCompra.getSelectedItem();
-        Double valorCompra = new Double(this.valorCompra.getText().replace(".", "").replace(",", ".").replace("R$ ", "").replace("_", ""));
+        Double valorCompra = new Double(this.valorCompra.getText().replace(".", "").replace(",", "."));
         String placa = this.placaCompra.getText();
-        int ano = new Integer(this.anoCompra.getText());
+        Integer ano = new Integer(this.anoCompra.getText());
+        
         if (this.automovelCompra.isSelected()) {
             ModeloAutomovel modelo = (ModeloAutomovel) this.modeloCompra.getSelectedItem();
             this.veiculo = new Automovel(modelo, marca, estado, null, categoria, valorCompra, placa, ano);
@@ -87,10 +104,25 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
             ModeloVan modelo = (ModeloVan) this.modeloCompra.getSelectedItem();
             this.veiculo = new Van(modelo, marca, estado, null, categoria, valorCompra, placa, ano);
         }
+        
         try {
             veiculoDao.inserir(this.veiculo);
+            JOptionPane.showMessageDialog(null, "Veículo comprado com sucesso.");
+            disableForm();            
         } catch (Exception ex) {
             Logger.getLogger(JIFVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void enableForm() {
+        for (Component c : camposEnable) {
+            ComponentUtil.enable(c);
+        }
+    }
+
+    private void disableForm() {
+        for (Component c : camposDisable) {
+            ComponentUtil.disable(c);
         }
     }
 
@@ -240,7 +272,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Ano");
 
-        marcaCompra.setEnabled(false);
+        marcaCompra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         marcaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 marcaCompraActionPerformed(evt);
@@ -250,18 +282,18 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Marca");
 
-        modeloCompra.setEnabled(false);
+        modeloCompra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Modelo");
 
         valorCompra.setBackground(new java.awt.Color(240, 240, 240));
-        valorCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
+        valorCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Valor Compra");
+        jLabel5.setText("Valor Compra (R$)");
 
-        estadoCompra.setEnabled(false);
+        estadoCompra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         estadoCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 estadoCompraActionPerformed(evt);
@@ -274,7 +306,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Estado");
 
-        categoriaCompra.setEnabled(false);
+        categoriaCompra.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         categoriaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoriaCompraActionPerformed(evt);
@@ -372,6 +404,11 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
 
         jMenu_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/Cancelar25.png"))); // NOI18N
         jMenu_cancelar.setText("CANCELAR (F6)");
+        jMenu_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu_cancelarMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu_cancelar);
 
         jMenu12.setPreferredSize(new java.awt.Dimension(50, 19));
@@ -458,7 +495,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
                             .addComponent(modeloCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(categoriaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel7))
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -492,6 +529,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
            jmi_duplicarveiculo.setEnabled(true);
            jMenu_cancelar.setEnabled(true);
            jMenu_gravar.setEnabled(true);
+           this.enableForm();
     }//GEN-LAST:event_jMenu_novoMouseClicked
 
     private void automovelCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automovelCompraActionPerformed
@@ -537,6 +575,12 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
     private void jMenu_gravarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_gravarMouseClicked
         save();
     }//GEN-LAST:event_jMenu_gravarMouseClicked
+
+    private void jMenu_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_cancelarMouseClicked
+        this.disableForm();
+        this.placaCompra.setText("");
+        this.anoCompra.setText("");
+    }//GEN-LAST:event_jMenu_cancelarMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField anoCompra;

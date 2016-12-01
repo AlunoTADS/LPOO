@@ -3,13 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufpr.view.veiculo.venda;
+package br.ufpr.view.veiculo;
 
 import br.ufpr.data.VeiculoDao;
 import br.ufpr.model.Automovel;
 import br.ufpr.model.Categoria;
+import br.ufpr.model.Estado;
 import br.ufpr.model.Marca;
+import br.ufpr.model.ModeloAutomovel;
+import br.ufpr.model.ModeloMotocicleta;
+import br.ufpr.model.ModeloVan;
+import br.ufpr.model.Motocicleta;
+import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
@@ -30,9 +37,9 @@ public class JIFVender extends javax.swing.JInternalFrame {
     public JIFVender() {
         initComponents();
         this.marcaVenda.setModel(new DefaultComboBoxModel(Marca.values()));
-        //this.modeloVenda.setModel(new DefaultComboBoxModel(Modelo.values()));
+        this.modeloVenda.setModel(new DefaultComboBoxModel(ModeloAutomovel.values()));
         this.categoriaVenda.setModel(new DefaultComboBoxModel(Categoria.values()));
-        
+
         table.setClass(Veiculo.class);
         table.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -53,28 +60,33 @@ public class JIFVender extends javax.swing.JInternalFrame {
         refreshTable();
     }
 
-
     private void refreshForm() {
-        
 
     }
 
     private void refreshTable() {
+        List<Veiculo> veiculos = new ArrayList<>();
         try {
-            table.setClass(Automovel.class);
-            List veiculos = veiculoDao.listar(new Automovel());
-            
+            if (cbTipoAutomovelVenda.isSelected()) {
+                table.setClass(Automovel.class);
+                veiculos = veiculoDao.listar(new Automovel((ModeloAutomovel) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, null));
+            } else if (cbTipoMotoVenda.isSelected()) {
+                table.setClass(Motocicleta.class);
+                veiculos = veiculoDao.listar(new Motocicleta((ModeloMotocicleta) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, null));
+            } else if (cbTipoVanVenda.isSelected()) {
+                table.setClass(Van.class);
+                veiculos = veiculoDao.listar(new Van((ModeloVan) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, null));
+            }
             table.getTableModel().setDataList(veiculos);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (Exception e) {
+            e.getMessage();
         }
     }
 
-    private void setaTipoAutomovel() {
+    /* private void setaTipoAutomovel() {
         veiculo = new Automovel();
         refreshTable();
-    }
-
+    }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -189,7 +201,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbTipoAutomovelVenda, cbTipoMotoVenda, cbTipoVanVenda});
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(50, 30, 310, 63);
+        jPanel1.setBounds(50, 30, 310, 0);
 
         marcaVenda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         marcaVenda.addActionListener(new java.awt.event.ActionListener() {
@@ -375,7 +387,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbTipoMotoVendaMouseClicked
 
     private void cbTipoAutomovelVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAutomovelVendaActionPerformed
-        setaTipoAutomovel();
+        //setaTipoAutomovel();
     }//GEN-LAST:event_cbTipoAutomovelVendaActionPerformed
 
     private void cbTipoAutomovelVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoAutomovelVendaMouseClicked
@@ -398,7 +410,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenu_alterarMouseClicked
 
     private void filtrarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrarVendaActionPerformed
-       this.refreshTable();
+        this.refreshTable();
     }//GEN-LAST:event_filtrarVendaActionPerformed
 
 

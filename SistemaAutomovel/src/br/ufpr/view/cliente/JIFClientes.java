@@ -74,7 +74,6 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         jcb_rgSiglaUf.setSelectedItem(cliente.getRgUF());
         jtf_cpf.setText(cliente.getCpf() == null ? "" : cliente.getCpf());
         jtf_endereco.setText(cliente.getEndereco() == null ? "" : cliente.getEndereco());
-
     }
 
     private void refreshTable() {
