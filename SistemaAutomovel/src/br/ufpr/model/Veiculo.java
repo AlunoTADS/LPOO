@@ -101,6 +101,7 @@ public abstract class Veiculo implements VeiculoI {
     }
 
     @Override
+     @Column(label = "Preço p/ Venda", position = 3)
     public double getValorParaVenda() {
         @SuppressWarnings("LocalVariableHidesMemberVariable")
         double valorCompra = this.getValorCompra() == null ? 0.00 : this.getValorCompra();
@@ -112,13 +113,14 @@ public abstract class Veiculo implements VeiculoI {
         return valorVenda;
     }
 
-    @Column(label = "Estado", position = 0)
+    //@Column(label = "Estado", position = 0)
     @Override
     public Estado getEstado() {
         return this.estado;
     }
 
     @Override
+     @Column(label = "Marca", position = 1)
     public Marca getMarca() {
         return this.marca;
     }
@@ -134,12 +136,13 @@ public abstract class Veiculo implements VeiculoI {
     }
 
     @Override
-    @Column(label = "Placa", position = 1)
+    @Column(label = "Placa", position = 0)
     public String getPlaca() {
         return this.placa;
     }
 
     @Override
+     @Column(label = "Ano", position = 2)
     public int getAno() {
         return this.ano;
     }
@@ -154,7 +157,7 @@ public abstract class Veiculo implements VeiculoI {
     /**
      * @return o valorCompra
      */
-    @Column(label = "Valor Compra", position = 1, format = "%.2f")
+    //@Column(label = "Valor Compra", position = 1, format = "%.2f")
     public Double getValorCompra() {
         return this.valorCompra;
     }
