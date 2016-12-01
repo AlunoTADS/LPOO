@@ -7,18 +7,7 @@ package br.ufpr.view.veiculo.venda;
 
 import br.ufpr.data.VeiculoDao;
 import br.ufpr.model.Automovel;
-import br.ufpr.model.Categoria;
-import br.ufpr.model.Estado;
-import br.ufpr.model.Marca;
-import br.ufpr.model.ModeloAutomovel;
-import br.ufpr.model.ModeloMotocicleta;
-import br.ufpr.model.ModeloVan;
-import br.ufpr.model.Motocicleta;
-import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
-import br.ufpr.view.util.SimpleReflectTableModel;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -28,46 +17,46 @@ import javax.swing.event.ListSelectionListener;
  * @author edenm
  */
 public class JIFVender extends javax.swing.JInternalFrame {
-    
+
     private VeiculoDao veiculoDao = new VeiculoDao();
     private Veiculo veiculo = new Automovel();
+
     /**
      * Creates new form jif_veiculo
      */
     public JIFVender() {
         initComponents();
-         table.setClass(Veiculo.class);
         table.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-                    @Override
-                    public void valueChanged(ListSelectionEvent e) {
-                        try {
-                            veiculo = (Veiculo) table
-                                    .getSimpleReflectTableModel()
-                                    .getDataList()
-                                    .get(table
-                                            .getTable()
-                                            .getSelectedRow());
-                           // refreshForm();
-                        } catch (Exception ex) {
-                        }
-                    }
-                });
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                try {
+                    veiculo = (Veiculo) table
+                            .getSimpleReflectTableModel()
+                            .getDataList()
+                            .get(table
+                                    .getTable()
+                                    .getSelectedRow());
+                    // refreshForm();
+                } catch (Exception ex) {
+                }
+            }
+        });
         //refreshTable(null);
     }
-    
-   /* private void refreshView(){
+
+    private void refreshView() {
         refreshTable();
         refreshForm();
-    }*/
-    
-   /* private void refreshForm(){
-        if (automovel == null){
-            veiculo = new Veiculo();
+    }
+
+    private void refreshForm() {
+        if (veiculo == null) {
+//            veiculo = new Veiculo();
         }
-        
-    }*/
-    
-     private void refreshTable() {
+
+    }
+
+    private void refreshTable() {
         try {
             List l = veiculoDao.listar(veiculo);
             table.getSimpleReflectTableModel().setDataList(l);
@@ -75,11 +64,11 @@ public class JIFVender extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
     }
-     
-     private void setaTipoAutomovel() {
-         veiculo = new Automovel();
-         refreshTable();
-     }
+
+    private void setaTipoAutomovel() {
+        veiculo = new Automovel();
+        refreshTable();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -348,20 +337,20 @@ public class JIFVender extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jmi_sair_do_sistemaActionPerformed
 
     private void jMenu_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_buscarMouseClicked
-           jMenu_alterar.setEnabled(true);
-           jMenu_cancelar.setEnabled(true);
-           jMenu_gravar.setEnabled(true);   // TODO add your handling code here:
+        jMenu_alterar.setEnabled(true);
+        jMenu_cancelar.setEnabled(true);
+        jMenu_gravar.setEnabled(true);   // TODO add your handling code here:
     }//GEN-LAST:event_jMenu_buscarMouseClicked
 
     private void jMenu_alterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_alterarMouseClicked
-           jMenu_alterar.setEnabled(true);
-           jMenu_cancelar.setEnabled(true);
-           jMenu_gravar.setEnabled(true);
-                   // TODO add your handling code here:
+        jMenu_alterar.setEnabled(true);
+        jMenu_cancelar.setEnabled(true);
+        jMenu_gravar.setEnabled(true);
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenu_alterarMouseClicked
 
     private void jMenu_gravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_gravarActionPerformed
-           
+
     }//GEN-LAST:event_jMenu_gravarActionPerformed
 
     private void marcaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaVendaActionPerformed
@@ -385,7 +374,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbTipoAutomovelVendaMouseClicked
 
     private void categoriaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaVendaActionPerformed
-        this.refreshForm();
+        refreshForm();
     }//GEN-LAST:event_categoriaVendaActionPerformed
 
 

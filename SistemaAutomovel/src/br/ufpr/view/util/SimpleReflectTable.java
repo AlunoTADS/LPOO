@@ -12,14 +12,14 @@ import java.util.Map;
  *
  * @author Lucas
  */
-public class SimpleReflectTable<T> extends JPanel {
+public class SimpleReflectTable extends JPanel {
 
-    private SimpleReflectTableModel<T> simpleReflectTableModel;
+    private SimpleReflectTableModel tableModel;
     private JTable table;
 
-    public SimpleReflectTable(T obj) {
+    public SimpleReflectTable() {
         super(new GridLayout(1, 0));
-        simpleReflectTableModel = new SimpleReflectTableModel<>(obj);
+        tableModel = new SimpleReflectTableModel();
         table = new JTable(getSimpleReflectTableModel());
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         adjustTableColumns();
@@ -32,19 +32,19 @@ public class SimpleReflectTable<T> extends JPanel {
     }
 
     private void adjustTableColumns() {
-        for (Map.Entry<Integer, Column> entry : simpleReflectTableModel.getColumns().entrySet()) {
-            table.getColumnModel()
-                    .getColumn(entry.getKey())
-                    .setPreferredWidth(entry.getValue().width());
-        }
+//        for (Map.Entry<Integer, Column> entry : tableModel.getColumns().entrySet()) {
+//            table.getColumnModel()
+//                    .getColumn(entry.getKey())
+//                    .setPreferredWidth(entry.getValue().width());
+//        }
         table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
     }
 
     /**
-     * @return the simpleReflectTableModel
+     * @return the tableModel
      */
     public SimpleReflectTableModel getSimpleReflectTableModel() {
-        return simpleReflectTableModel;
+        return tableModel;
     }
 
     /**

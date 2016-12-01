@@ -19,8 +19,10 @@ public class SimpleReflectTableModel<T> extends AbstractTableModel {
     protected Map<Integer, Method> methods = new TreeMap<>();
     protected List<T> dataList = new ArrayList<>();
 
-    public SimpleReflectTableModel(T obj) {
-        Class clazz = obj.getClass();
+    public SimpleReflectTableModel() {
+    }
+
+    public void setClass(Class clazz) {
         for (Method method : clazz.getDeclaredMethods()) {
             if (method.isAnnotationPresent(Column.class)) {
                 Column annotation = method.getAnnotation(Column.class);
@@ -29,7 +31,7 @@ public class SimpleReflectTableModel<T> extends AbstractTableModel {
             }
         }
     }
-
+    
     protected Column getColumn(int columnIndex) {
         return getColumns().get(columnIndex);
     }

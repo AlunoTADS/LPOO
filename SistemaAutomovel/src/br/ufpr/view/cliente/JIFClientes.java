@@ -151,7 +151,7 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jtf_cpf = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        table = new SimpleReflectTable<Cliente>(new Cliente());
+        table = new SimpleReflectTable();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -498,6 +498,6 @@ public class JIFClientes extends javax.swing.JInternalFrame {
     javax.swing.JTextField jtf_nome;
     javax.swing.JTextField jtf_rg;
     javax.swing.JTextField jtf_sobrenome;
-    br.ufpr.view.util.SimpleReflectTable<Cliente> table;
+    br.ufpr.view.util.SimpleReflectTable table;
     // End of variables declaration//GEN-END:variables
 }
