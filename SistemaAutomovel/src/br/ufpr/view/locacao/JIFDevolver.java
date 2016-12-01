@@ -5,7 +5,17 @@
  */
 package br.ufpr.view.locacao;
 
+import br.ufpr.data.VeiculoDao;
+import br.ufpr.model.Automovel;
+import br.ufpr.model.Cliente;
+import br.ufpr.model.Estado;
+import br.ufpr.model.Motocicleta;
+import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -14,12 +24,48 @@ import br.ufpr.model.Veiculo;
 public class JIFDevolver extends javax.swing.JInternalFrame {
     
     private Veiculo veiculo;
+    private VeiculoDao veiculoDao;
 
     /**
      * Creates new form jif_devolver
      */
     public JIFDevolver() {
         initComponents();
+        
+        refreshTable();
+        table.setClass(Veiculo.class);
+        
+        table.getTable()
+                .getSelectionModel()
+                .addListSelectionListener(new ListSelectionListener() {
+                    @Override
+                    public void valueChanged(ListSelectionEvent e) {
+                        try {
+                            veiculo = (Veiculo) table
+                                    .getTableModel()
+                                    .getDataList()
+                                    .get(table.getTable().getSelectedRow());
+//                            refreshForm();
+                        } catch (Exception ex) {
+                        }
+                    }
+                });
+    }
+    
+    private void refreshTable() {        
+        try {
+            List<Veiculo> automoveis = veiculoDao.listar(new Automovel(null, null, Estado.LOCADO, null, null, null, null, null));
+            List<Veiculo> motocicletas = veiculoDao.listar(new Motocicleta(null, null, Estado.LOCADO, null, null, null, null, null));
+            List<Veiculo> vans = veiculoDao.listar(new Van(null, null, Estado.LOCADO, null, null, null, null, null));
+            List<Veiculo> veiculos = new ArrayList<>();
+            veiculos.addAll(automoveis);
+            veiculos.addAll(motocicletas);
+            veiculos.addAll(vans);
+            
+            table.getTableModel().setDataList(veiculos);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
