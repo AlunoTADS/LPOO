@@ -7,8 +7,13 @@ package br.ufpr.view.veiculo.venda;
 
 import br.ufpr.data.VeiculoDao;
 import br.ufpr.model.Automovel;
+import br.ufpr.model.Categoria;
+import br.ufpr.model.Marca;
 import br.ufpr.model.Veiculo;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -26,6 +31,9 @@ public class JIFVender extends javax.swing.JInternalFrame {
      */
     public JIFVender() {
         initComponents();
+        this.marcaVenda.setModel(new DefaultComboBoxModel(Marca.values()));
+        //this.modeloVenda.setModel(new DefaultComboBoxModel(Modelo.values()));
+        this.categoriaVenda.setModel(new DefaultComboBoxModel(Categoria.values()));
         table.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -36,7 +44,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
                             .get(table
                                     .getTable()
                                     .getSelectedRow());
-                    // refreshForm();
+                    refreshForm();
                 } catch (Exception ex) {
                 }
             }
@@ -50,14 +58,13 @@ public class JIFVender extends javax.swing.JInternalFrame {
     }
 
     private void refreshForm() {
-        if (veiculo == null) {
-//            veiculo = new Veiculo();
-        }
+        
 
     }
 
     private void refreshTable() {
         try {
+            Veiculo v = new Automovel();
             List l = veiculoDao.listar(veiculo);
             table.getSimpleReflectTableModel().setDataList(l);
         } catch (Exception ex) {
@@ -91,6 +98,8 @@ public class JIFVender extends javax.swing.JInternalFrame {
         table = new br.ufpr.view.util.SimpleReflectTable();
         categoriaVenda = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        filtrarVenda = new javax.swing.JButton();
+        venda = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
@@ -207,7 +216,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(590, 10, 43, 17);
         getContentPane().add(table);
-        table.setBounds(100, 160, 870, 250);
+        table.setBounds(70, 160, 870, 250);
 
         categoriaVenda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         categoriaVenda.addActionListener(new java.awt.event.ActionListener() {
@@ -222,6 +231,19 @@ public class JIFVender extends javax.swing.JInternalFrame {
         jLabel1.setText("Categoria");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(780, 10, 100, 20);
+
+        filtrarVenda.setText("Filtrar");
+        filtrarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filtrarVendaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(filtrarVenda);
+        filtrarVenda.setBounds(460, 103, 80, 40);
+
+        venda.setText("Vender");
+        getContentPane().add(venda);
+        venda.setBounds(560, 110, 80, 40);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
@@ -342,19 +364,8 @@ public class JIFVender extends javax.swing.JInternalFrame {
         jMenu_gravar.setEnabled(true);   // TODO add your handling code here:
     }//GEN-LAST:event_jMenu_buscarMouseClicked
 
-    private void jMenu_alterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_alterarMouseClicked
-        jMenu_alterar.setEnabled(true);
-        jMenu_cancelar.setEnabled(true);
-        jMenu_gravar.setEnabled(true);
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu_alterarMouseClicked
-
-    private void jMenu_gravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_gravarActionPerformed
-
-    }//GEN-LAST:event_jMenu_gravarActionPerformed
-
     private void marcaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_marcaVendaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_marcaVendaActionPerformed
 
     private void cbTipoVanVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoVanVendaMouseClicked
@@ -377,14 +388,29 @@ public class JIFVender extends javax.swing.JInternalFrame {
         refreshForm();
     }//GEN-LAST:event_categoriaVendaActionPerformed
 
+    private void jMenu_gravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_gravarActionPerformed
+
+    }//GEN-LAST:event_jMenu_gravarActionPerformed
+
+    private void jMenu_alterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_alterarMouseClicked
+        jMenu_alterar.setEnabled(true);
+        jMenu_cancelar.setEnabled(true);
+        jMenu_gravar.setEnabled(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu_alterarMouseClicked
+
+    private void filtrarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrarVendaActionPerformed
+       this.refreshTable();
+    }//GEN-LAST:event_filtrarVendaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupTipo;
-    private javax.swing.JComboBox<String> categoriaCompra;
     private javax.swing.JComboBox<String> categoriaVenda;
     private javax.swing.JCheckBox cbTipoAutomovelVenda;
     private javax.swing.JCheckBox cbTipoMotoVenda;
     private javax.swing.JCheckBox cbTipoVanVenda;
+    private javax.swing.JButton filtrarVenda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -409,5 +435,6 @@ public class JIFVender extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> marcaVenda;
     private javax.swing.JComboBox<String> modeloVenda;
     private br.ufpr.view.util.SimpleReflectTable table;
+    private javax.swing.JButton venda;
     // End of variables declaration//GEN-END:variables
 }
