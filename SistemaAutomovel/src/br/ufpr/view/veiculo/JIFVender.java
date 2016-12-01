@@ -240,6 +240,11 @@ public class JIFVender extends javax.swing.JInternalFrame {
         });
 
         venda.setText("Vender");
+        venda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vendaActionPerformed(evt);
+            }
+        });
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
@@ -383,8 +388,8 @@ public class JIFVender extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(venda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(filtrarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 25, Short.MAX_VALUE))))
+                            .addComponent(filtrarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
 
         setBounds(0, 0, 1135, 495);
@@ -452,6 +457,14 @@ public class JIFVender extends javax.swing.JInternalFrame {
     private void filtrarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtrarVendaActionPerformed
         this.refreshTable();
     }//GEN-LAST:event_filtrarVendaActionPerformed
+
+    private void vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendaActionPerformed
+        int v = table.getTable().getSelectedRow();
+        /*if (cbTipoAutomovelVenda.isSelected()){
+            Veiculo veiculo = new Automovel(, Marca.HONDA, Estado.LOCADO, locacao, Categoria.POPULAR, Double.NaN, title, v)
+        }*/
+        
+    }//GEN-LAST:event_vendaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
