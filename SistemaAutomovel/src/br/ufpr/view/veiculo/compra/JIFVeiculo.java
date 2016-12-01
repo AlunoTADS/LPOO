@@ -5,6 +5,7 @@
  */
 package br.ufpr.view.veiculo.compra;
 
+import br.ufpr.data.VeiculoDao;
 import br.ufpr.model.Automovel;
 import br.ufpr.model.Categoria;
 import br.ufpr.model.Estado;
@@ -38,9 +39,6 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
      */
     public JIFVeiculo() {
         initComponents();
-        this.marcaCompra.setEnabled(true);
-        this.categoriaCompra.setEnabled(true);
-        this.estadoCompra.setEnabled(true);
         this.marcaCompra.setModel(new DefaultComboBoxModel(Marca.values()));
         this.categoriaCompra.setModel(new DefaultComboBoxModel(Categoria.values()));
         this.estadoCompra.setModel(new DefaultComboBoxModel(Estado.values()));
@@ -59,6 +57,9 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
     
     public void refreshForm() {
         this.modeloCompra.setEnabled(true);
+        this.marcaCompra.setEnabled(true);
+        this.categoriaCompra.setEnabled(true);
+        this.estadoCompra.setEnabled(true);
         if (this.automovelCompra.isSelected()) {
             this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloAutomovel.values()));
         } else if (this.motocicletaCompra.isSelected()) {
@@ -69,8 +70,27 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
     }
     
     public void save() {
-        
-        //new Automovel(this.modeloCompra.getSelectedItem(), this.marcaCompra.getSelectedItem(), this.estadoCompra.getSelectedItem(), null, this.categoriaCompra.getSelectedItem(), this.valorCompra, this.placaCompra, this.anoCompra);
+        Marca marca = (Marca) this.marcaCompra.getSelectedItem();
+        Estado estado = (Estado) this.estadoCompra.getSelectedItem();
+        Categoria categoria = (Categoria) this.categoriaCompra.getSelectedItem();
+        Double valorCompra = new Double(this.valorCompra.getText().replace(".", "").replace(",", ".").replace("R$ ", "").replace("_", ""));
+        String placa = this.placaCompra.getText();
+        int ano = new Integer(this.anoCompra.getText());
+        if (this.automovelCompra.isSelected()) {
+            ModeloAutomovel modelo = (ModeloAutomovel) this.modeloCompra.getSelectedItem();
+            this.veiculo = new Automovel(modelo, marca, estado, null, categoria, valorCompra, placa, ano);
+        } else if (this.motocicletaCompra.isSelected()) {
+            ModeloMotocicleta modelo = (ModeloMotocicleta) this.modeloCompra.getSelectedItem();
+            this.veiculo = new Motocicleta(modelo, marca, estado, null, categoria, valorCompra, placa, ano);
+        } else if (this.vanCompra.isSelected()) {
+            ModeloVan modelo = (ModeloVan) this.modeloCompra.getSelectedItem();
+            this.veiculo = new Van(modelo, marca, estado, null, categoria, valorCompra, placa, ano);
+        }
+        try {
+            new VeiculoDao().inserir(this.veiculo);
+        } catch (Exception ex) {
+            Logger.getLogger(JIFVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -219,6 +239,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Ano");
 
+        marcaCompra.setEnabled(false);
         marcaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 marcaCompraActionPerformed(evt);
@@ -239,6 +260,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Valor Compra");
 
+        estadoCompra.setEnabled(false);
         estadoCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 estadoCompraActionPerformed(evt);
@@ -251,6 +273,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Estado");
 
+        categoriaCompra.setEnabled(false);
         categoriaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoriaCompraActionPerformed(evt);
@@ -410,13 +433,12 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(1, 1, 1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addGap(41, 41, 41))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(anoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(placaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(anoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

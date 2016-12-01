@@ -8,7 +8,7 @@ public class Automovel extends Veiculo {
 
     private ModeloAutomovel modelo;
 
-    public Automovel(ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, int ano) {
+    public Automovel(ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
         super(null, marca, estado, locacao, categoria, valorCompra, placa, ano);
         this.modelo = modelo;
     }

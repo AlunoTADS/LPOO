@@ -54,7 +54,7 @@ public abstract class Veiculo implements VeiculoI {
      */
     public Veiculo(Integer idVeiculo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
 
-        if (placa != null && !Pattern.compile("[A-Z]{4,4}-\\d{4,4}").matcher(placa).matches()) {
+        if (placa != null && !Pattern.compile("[A-Z]{3,3}-\\d{4,4}").matcher(placa).matches()) {
             throw new IllegalArgumentException("placa não é um argumento valido");
         }
 
