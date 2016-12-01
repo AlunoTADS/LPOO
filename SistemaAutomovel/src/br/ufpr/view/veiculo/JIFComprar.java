@@ -34,7 +34,7 @@ import javax.swing.text.NumberFormatter;
  *
  * @author edenm
  */
-public class JIFVeiculo extends javax.swing.JInternalFrame {
+public class JIFComprar extends javax.swing.JInternalFrame {
 
     private Veiculo veiculo;
     private br.ufpr.view.util.SimpleReflectTable simpleReflectTable1;
@@ -43,7 +43,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
     /**
      * Creates new form jif_veiculo
      */
-    public JIFVeiculo() {
+    public JIFComprar() {
         initComponents();
         
         camposDisable = Arrays.asList(automovelCompra, motocicletaCompra, vanCompra, placaCompra, anoCompra, valorCompra, estadoCompra, marcaCompra, modeloCompra, categoriaCompra);
@@ -66,7 +66,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
             this.valorCompra.setFormatterFactory(new DefaultFormatterFactory(formatter));
             maskPlaca.install(placaCompra);
         } catch (ParseException ex) {
-            Logger.getLogger(JIFVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JIFComprar.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -110,7 +110,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Veículo comprado com sucesso.");
             disableForm();            
         } catch (Exception ex) {
-            Logger.getLogger(JIFVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JIFComprar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

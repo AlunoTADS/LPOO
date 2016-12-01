@@ -4,7 +4,7 @@ import br.ufpr.view.veiculo.JIFVender;
 import br.ufpr.view.cliente.JIFClientes;
 import br.ufpr.view.locacao.JIFDevolver;
 import br.ufpr.view.locacao.JIFLocar;
-import br.ufpr.view.veiculo.JIFVeiculo;
+import br.ufpr.view.veiculo.JIFComprar;
 
 /**
  *
@@ -186,7 +186,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jmi_LocacaoLocarMouseClicked
 
     private void jmi_CadastroVeiculosComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_CadastroVeiculosComprarActionPerformed
-        JIFVeiculo obj = new JIFVeiculo();
+        JIFComprar obj = new JIFComprar();
         jdp_Principal.add(obj);
         obj.setVisible(true);
 
