@@ -46,6 +46,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
                                     .getSelectedRow());
                     refreshForm();
                 } catch (Exception ex) {
+                    ex.getMessage();
                 }
             }
         });
