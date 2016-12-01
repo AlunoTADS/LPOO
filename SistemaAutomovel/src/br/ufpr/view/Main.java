@@ -4,9 +4,6 @@ import br.ufpr.view.veiculo.JIFVender;
 import br.ufpr.view.cliente.JIFClientes;
 import br.ufpr.view.locacao.JIFDevolver;
 import br.ufpr.view.locacao.JIFLocar;
-import br.ufpr.view.veiculo.compra.JIFVeiculo;
-import br.ufpr.view.veiculo.devolucao.JIFDevolver;
-import br.ufpr.view.veiculo.locacao.JIFLocar;
 import br.ufpr.view.veiculo.JIFVeiculo;
 
 /**
