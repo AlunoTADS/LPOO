@@ -61,7 +61,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
     }
 
     private void refreshForm() {
-
+        modeloVenda.getSelectedItem();
     }
 
     private void refreshTable() {
@@ -69,10 +69,10 @@ public class JIFVender extends javax.swing.JInternalFrame {
         try {
             if (cbTipoAutomovelVenda.isSelected()) {
                 table.setClass(Automovel.class);
-                veiculos = veiculoDao.listar(new Automovel((ModeloAutomovel) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, null));
+                veiculos = veiculoDao.listar(new Automovel((ModeloAutomovel) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, 0));
             } else if (cbTipoMotoVenda.isSelected()) {
                 table.setClass(Motocicleta.class);
-                veiculos = veiculoDao.listar(new Motocicleta((ModeloMotocicleta) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, null));
+                veiculos = veiculoDao.listar(new Motocicleta((ModeloMotocicleta) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, 0));
             } else if (cbTipoVanVenda.isSelected()) {
                 table.setClass(Van.class);
                 veiculos = veiculoDao.listar(new Van((ModeloVan) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, null));
@@ -83,10 +83,18 @@ public class JIFVender extends javax.swing.JInternalFrame {
         }
     }
 
-    /* private void setaTipoAutomovel() {
-        veiculo = new Automovel();
-        refreshTable();
-    }*/
+     private void setaTipoAutomovel() {
+        this.modeloVenda.setModel(new DefaultComboBoxModel(ModeloAutomovel.values()));
+    }
+    
+     private void setaTipoMotocicleta(){
+        this.modeloVenda.setModel(new DefaultComboBoxModel(ModeloMotocicleta.values())); 
+     }
+     
+     private void setaTipoVan(){
+        this.modeloVenda.setModel(new DefaultComboBoxModel(ModeloVan.values()));  
+     }
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -409,15 +417,17 @@ public class JIFVender extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_marcaVendaActionPerformed
 
     private void cbTipoVanVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoVanVendaMouseClicked
+        setaTipoVan();
         jMenu_cancelar.setEnabled(true);        // TODO add your handling code here:
     }//GEN-LAST:event_cbTipoVanVendaMouseClicked
 
     private void cbTipoMotoVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoMotoVendaMouseClicked
+        setaTipoMotocicleta();
         jMenu_cancelar.setEnabled(true);        // TODO add your handling code here:
     }//GEN-LAST:event_cbTipoMotoVendaMouseClicked
 
     private void cbTipoAutomovelVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAutomovelVendaActionPerformed
-        //setaTipoAutomovel();
+        setaTipoAutomovel();
     }//GEN-LAST:event_cbTipoAutomovelVendaActionPerformed
 
     private void cbTipoAutomovelVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoAutomovelVendaMouseClicked
