@@ -110,7 +110,6 @@ public class JIFClientes extends javax.swing.JInternalFrame {
             refreshForm();
             refreshTable();
         } catch (Exception ex) {
-            ex.printStackTrace();
         }
     }
 

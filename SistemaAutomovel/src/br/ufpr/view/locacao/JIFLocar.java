@@ -1,12 +1,14 @@
 package br.ufpr.view.locacao;
 
 import br.ufpr.data.ClienteDao;
+import br.ufpr.data.LocacaoDao;
+import br.ufpr.data.VeiculoDao;
+import br.ufpr.model.Categoria;
 import br.ufpr.model.Cliente;
-import br.ufpr.model.UnidadeFederativa;
-import br.ufpr.view.util.ComponentUtil;
-import java.awt.Component;
-import java.util.Arrays;
-import java.util.List;
+import br.ufpr.model.Locacao;
+import br.ufpr.model.Marca;
+import br.ufpr.model.Veiculo;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -17,131 +19,123 @@ import javax.swing.event.ListSelectionListener;
 public class JIFLocar extends javax.swing.JInternalFrame {
 
     private ClienteDao clienteDao = new ClienteDao();
-    private Cliente cliente = new Cliente();
-    private List<Component> camposEditaveis;
+    private VeiculoDao veiculoDao = new VeiculoDao();
+    private LocacaoDao locacaoDao = new LocacaoDao();
+    private Cliente cliente;
+    private Veiculo veiculo;
+    private Locacao locacao;
 
     /**
      * Creates new form JIFLocar
      */
     public JIFLocar() {
         initComponents();
+
+        refreshFormCliente();
+        refreshTableCliente();
+
+        tableCliente.setClass(Cliente.class);
+
+        tableCliente.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                try {
+                    cliente = (Cliente) tableCliente.getTableModel().getDataList().get(tableCliente.getTable().getSelectedRow());
+                    refreshFormCliente();
+                } catch (Exception ex) {
+                }
+            }
+        });
+
+        tableVeiculo.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                try {
+                    veiculo = (Veiculo) tableVeiculo.getTableModel().getDataList().get(tableVeiculo.getTable().getSelectedRow());
+                    refreshFormCliente();
+                } catch (Exception ex) {
+                }
+            }
+        });
+
     }
-//        camposEditaveis = Arrays.asList(jtf_nome, jtf_sobrenome, jtf_cpf);
-//        disableForm();
-//        refreshForm();
-//        refreshTable();
-//
-//        table1.setClass(Cliente.class);
-//
-//        table1.getTable()
-//                .getSelectionModel()
-//                .addListSelectionListener(new ListSelectionListener() {
-//                    @Override
-//                    public void valueChanged(ListSelectionEvent e) {
-//                        try {
-//                            cliente = (Cliente) table
-//                                    .getTableModel()
-//                                    .getDataList()
-//                                    .get(table.getTable().getSelectedRow());
-//                            refreshForm();
-//                        } catch (Exception ex) {
-//                        }
-//                    }
-//                });
-//    }
-//
-//    private void enableForm() {
-//        for (Component c : camposEditaveis) {
-//            ComponentUtil.enable(c);
-//        }
-//    }
-//
-//    private void disableForm() {
-//        for (Component c : camposEditaveis) {
-//            ComponentUtil.disable(c);
-//        }
-//    }
-//
-//    private void refreshForm() {
-//        if (cliente == null) {
-//            cliente = new Cliente();
-//        }
-//        jtf_idCliente.setText(cliente.getIdCliente() == null ? "" : cliente.getIdCliente().toString());
-//        jtf_nome.setText(cliente.getNome() == null ? "" : cliente.getNome());
-//        jtf_sobrenome.setText(cliente.getSobrenome() == null ? "" : cliente.getSobrenome());
-//        jtf_rg.setText(cliente.getRg() == null ? "" : cliente.getRg());
-//        jcb_rgSiglaUf.setSelectedItem(cliente.getRgUF());
-//        jtf_cpf.setText(cliente.getCpf() == null ? "" : cliente.getCpf());
-//        jtf_endereco.setText(cliente.getEndereco() == null ? "" : cliente.getEndereco());
-//    }
-//
-//    private void refreshTable() {
-//        try {
-//            table.getTableModel()
-//                    .setDataList(clienteDao.listar(null));
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-//
-//    private void alterar() {
-//        enableForm();
-//    }
-//
-//    private void gravar() {
-//
-//        try {
-//            cliente.setNome(jtf_nome.getText());
-//            cliente.setSobrenome(jtf_sobrenome.getText());
-//            cliente.setEndereco(jtf_endereco.getText());
-//            cliente.setRg(jtf_rg.getText());
-//            cliente.setRgUF((UnidadeFederativa) jcb_rgSiglaUf.getSelectedItem());
-//            cliente.setCpf(jtf_cpf.getText());
-//
-//            if (cliente.getIdCliente() != null) {
-//                clienteDao.editar(cliente);
-//            } else {
-//                cliente.setIdCliente(clienteDao.getNextId());
-//                clienteDao.inserir(cliente);
-//            }
-//            cliente = new Cliente();
-//            disableForm();
-//            refreshForm();
-//            refreshTable();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-//
-//    private void incluir() {
-//        cliente = new Cliente();
-//        jtf_nome.requestFocus();
-//        enableForm();
-//        refreshForm();
-//    }
-//
-//    private void buscar() {
-//        refreshTable();
-//    }
-//
-//    private void cancelar() {
-//        cliente = new Cliente();
-//        refreshTable();
-//        refreshForm();
-//        disableForm();
-//    }
-//
-//    private void excluir() {
-//        try {
-//            clienteDao.excluir(cliente);
-//            cliente = new Cliente();
-//            refreshTable();
-//            refreshForm();
-//            disableForm();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
+
+    private void refreshFormCliente() {
+        jtf_nome.setText(cliente != null && cliente.getNome() != null ? cliente.getNome() : "");
+        jtf_sobrenome.setText(cliente != null && cliente.getSobrenome() != null ? cliente.getSobrenome() : "");
+        jtf_cpf.setText(cliente != null && cliente.getCpf() != null ? cliente.getCpf() : "");
+    }
+
+    private void refreshFormVeiculo() {
+        
+    }
+    
+    private void refreshTableCliente() {
+        try {
+            tableCliente.getTableModel().setDataList(clienteDao.listar(null));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void refreshTableVeiculo() {
+        try {
+            tableVeiculo.getTableModel().setDataList(veiculoDao.listar(null));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void gravar() {
+
+        try {
+            cliente.setNome(jtf_nome.getText());
+            cliente.setSobrenome(jtf_sobrenome.getText());
+            cliente.setCpf(jtf_cpf.getText());
+
+            if (cliente.getIdCliente() != null) {
+                clienteDao.editar(cliente);
+            } else {
+                cliente.setIdCliente(clienteDao.getNextId());
+                clienteDao.inserir(cliente);
+            }
+            cliente = new Cliente();
+            refreshFormCliente();
+            refreshTableCliente();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void incluir() {
+        cliente = new Cliente();
+        jtf_nome.requestFocus();
+        refreshFormCliente();
+    }
+
+    private void buscar() {
+        refreshTableCliente();
+        refreshTableVeiculo();
+    }
+
+    private void cancelar() {
+        cliente = null;
+        veiculo = null;
+        refreshTableCliente();
+        refreshTableVeiculo();
+        refreshFormCliente();
+    }
+
+    private void excluir() {
+        try {
+            clienteDao.excluir(cliente);
+            cliente = new Cliente();
+            refreshTableCliente();
+            refreshFormCliente();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -154,14 +148,14 @@ public class JIFLocar extends javax.swing.JInternalFrame {
 
         bgTipo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        jcb_automovel = new javax.swing.JCheckBox();
+        jcb_motocicleta = new javax.swing.JCheckBox();
+        jcb_van = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jsb_marca = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jsb_categoria = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jtf_nome = new javax.swing.JTextField();
@@ -171,7 +165,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jtf_cpf = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jftDataLocacao = new javax.swing.JFormattedTextField();
+        jft_dataLocacao = new javax.swing.JFormattedTextField();
         tableVeiculo = new br.ufpr.view.util.SimpleReflectTable();
         tableCliente = new br.ufpr.view.util.SimpleReflectTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -198,27 +192,22 @@ public class JIFLocar extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Veículo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
-        bgTipo.add(jCheckBox1);
-        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCheckBox1.setText("Automóvel");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
+        bgTipo.add(jcb_automovel);
+        jcb_automovel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jcb_automovel.setText("Automóvel");
 
-        bgTipo.add(jCheckBox2);
-        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCheckBox2.setText("Motocicleta");
+        bgTipo.add(jcb_motocicleta);
+        jcb_motocicleta.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jcb_motocicleta.setText("Motocicleta");
 
-        bgTipo.add(jCheckBox3);
-        jCheckBox3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jCheckBox3.setText("Van");
+        bgTipo.add(jcb_van);
+        jcb_van.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jcb_van.setText("Van");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Tipo");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jsb_marca.setModel(new DefaultComboBoxModel<>(Marca.values()));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Marca");
@@ -226,7 +215,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Categoria");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jsb_categoria.setModel(new DefaultComboBoxModel<>(Categoria.values()));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -237,20 +226,20 @@ public class JIFLocar extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(jCheckBox1)
+                        .addComponent(jcb_automovel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox2)
+                        .addComponent(jcb_motocicleta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox3))
+                        .addComponent(jcb_van))
                     .addComponent(jLabel8))
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jsb_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jsb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -262,11 +251,11 @@ public class JIFLocar extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jcb_automovel)
+                    .addComponent(jcb_motocicleta)
+                    .addComponent(jcb_van)
+                    .addComponent(jsb_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jsb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -275,31 +264,16 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jLabel2.setText("Nome");
 
         jtf_nome.setBackground(new java.awt.Color(240, 235, 240));
-        jtf_nome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtf_nomeActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Sobrenome");
 
         jtf_sobrenome.setBackground(new java.awt.Color(240, 235, 240));
-        jtf_sobrenome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtf_sobrenomeActionPerformed(evt);
-            }
-        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("CPF");
 
         jtf_cpf.setBackground(new java.awt.Color(240, 235, 240));
-        jtf_cpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtf_cpfActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -342,14 +316,10 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Locação");
+        jLabel4.setText("Data");
 
-        jftDataLocacao.setBackground(new java.awt.Color(240, 235, 240));
-        jftDataLocacao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jftDataLocacaoActionPerformed(evt);
-            }
-        });
+        jft_dataLocacao.setBackground(new java.awt.Color(240, 235, 240));
+        jft_dataLocacao.setEnabled(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -358,7 +328,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jftDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jft_dataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -367,7 +337,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jftDataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jft_dataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -423,15 +393,6 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jb_novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/criar25.png"))); // NOI18N
         jb_novo.setText("NOVO (F2)");
         jb_novo.setPreferredSize(new java.awt.Dimension(150, 25));
-        jb_novo.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jb_novoMenuSelected(evt);
-            }
-        });
         jMenuBar1.add(jb_novo);
 
         jb_alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/edit-icon.png"))); // NOI18N
@@ -465,10 +426,9 @@ public class JIFLocar extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(tableVeiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(tableCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(tableCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -488,6 +448,8 @@ public class JIFLocar extends javax.swing.JInternalFrame {
                 .addComponent(tableVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel4.getAccessibleContext().setAccessibleName("Locação");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -510,38 +472,9 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jm_menuprincipalclientesActionPerformed
 
-    private void jb_novoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jb_novoMenuSelected
-        System.out.println("br.ufpr.view.cliente.jif_clientes.jb_novoMenuSelected()");
-    }//GEN-LAST:event_jb_novoMenuSelected
-
-    private void jtf_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_nomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_nomeActionPerformed
-
-    private void jtf_sobrenomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_sobrenomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_sobrenomeActionPerformed
-
-    private void jtf_cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_cpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_cpfActionPerformed
-
-    private void jftDataLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jftDataLocacaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jftDataLocacaoActionPerformed
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTipo;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -561,11 +494,16 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jb_cancelar;
     private javax.swing.JMenu jb_gravar;
     private javax.swing.JMenu jb_novo;
-    private javax.swing.JFormattedTextField jftDataLocacao;
+    private javax.swing.JCheckBox jcb_automovel;
+    private javax.swing.JCheckBox jcb_motocicleta;
+    private javax.swing.JCheckBox jcb_van;
+    private javax.swing.JFormattedTextField jft_dataLocacao;
     private javax.swing.JMenuItem jm_duplicarregistro;
     private javax.swing.JMenu jm_menuprincipalclientes;
     private javax.swing.JMenuItem jm_sairdosistema;
     private javax.swing.JMenuItem jm_voltatelaprincipal;
+    private javax.swing.JComboBox<Categoria> jsb_categoria;
+    private javax.swing.JComboBox<Marca> jsb_marca;
     private javax.swing.JTextField jtf_cpf;
     private javax.swing.JTextField jtf_nome;
     private javax.swing.JTextField jtf_sobrenome;
