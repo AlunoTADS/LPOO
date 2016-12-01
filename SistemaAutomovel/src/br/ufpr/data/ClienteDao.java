@@ -76,7 +76,7 @@ public class ClienteDao extends Dao<Cliente> implements DaoI<Cliente> {
         open();
 
         String sql = new StringBuilder()
-                .append(" DELETE cliente SET ")
+                .append(" DELETE FROM cliente ")
                 .append(" WHERE idcliente = ? ")
                 .toString();
 
@@ -86,7 +86,7 @@ public class ClienteDao extends Dao<Cliente> implements DaoI<Cliente> {
         stmt.setInt(++idx, t.getIdCliente());
 
         try {
-            stmt.execute();
+            stmt.executeUpdate();
         } catch (Exception e) {
             throw e;
         } finally {
@@ -151,6 +151,7 @@ public class ClienteDao extends Dao<Cliente> implements DaoI<Cliente> {
                 query.append(String.format(" AND endereco = '%s' ", t.getEndereco()));
             }
         }
+        query.append(" ORDER BY idcliente ");
         return query.toString();
     }
 
