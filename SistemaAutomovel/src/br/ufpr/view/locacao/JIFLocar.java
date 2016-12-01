@@ -3,11 +3,17 @@ package br.ufpr.view.locacao;
 import br.ufpr.data.ClienteDao;
 import br.ufpr.data.LocacaoDao;
 import br.ufpr.data.VeiculoDao;
+import br.ufpr.model.Automovel;
 import br.ufpr.model.Categoria;
 import br.ufpr.model.Cliente;
+import br.ufpr.model.Estado;
 import br.ufpr.model.Locacao;
 import br.ufpr.model.Marca;
+import br.ufpr.model.Motocicleta;
+import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -35,6 +41,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         refreshTableCliente();
 
         tableCliente.setClass(Cliente.class);
+        tableVeiculo.setClass(Veiculo.class);
 
         tableCliente.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -67,7 +74,23 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     }
 
     private void refreshFormVeiculo() {
-        
+         List<Veiculo> veiculos = new ArrayList<>();
+        try {
+            if (jcb_automovel.isSelected()) {
+                tableVeiculo.setClass(Automovel.class);
+                veiculos = veiculoDao.listar(new Automovel(null, (Marca) jcb_marca.getSelectedItem(), Estado.DISPONIVEL, null, null, null, null, null));
+                //public Automovel(ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
+            } else if (jcb_motocicleta.isSelected()) {
+                tableVeiculo.setClass(Motocicleta.class);
+                veiculos = veiculoDao.listar(new Motocicleta(null, (Marca) jcb_marca.getSelectedItem(), Estado.DISPONIVEL, null, null, null, null, null));
+            } else if (jcb_van.isSelected()) {
+                tableVeiculo.setClass(Van.class);
+                veiculos = veiculoDao.listar(new Van(null, (Marca) jcb_marca.getSelectedItem(), Estado.DISPONIVEL, null, null, null, null, null));
+            }
+            tableVeiculo.getTableModel().setDataList(veiculos);
+        } catch (Exception e) {
+            e.getMessage();
+        }       
     }
     
     private void refreshTableCliente() {
@@ -152,10 +175,10 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jcb_motocicleta = new javax.swing.JCheckBox();
         jcb_van = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
-        jsb_marca = new javax.swing.JComboBox<>();
+        jcb_marca = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jsb_categoria = new javax.swing.JComboBox<>();
+        jcb_categoria = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jtf_nome = new javax.swing.JTextField();
@@ -207,7 +230,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Tipo");
 
-        jsb_marca.setModel(new DefaultComboBoxModel<>(Marca.values()));
+        jcb_marca.setModel(new DefaultComboBoxModel<>(Marca.values()));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Marca");
@@ -215,7 +238,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Categoria");
 
-        jsb_categoria.setModel(new DefaultComboBoxModel<>(Categoria.values()));
+        jcb_categoria.setModel(new DefaultComboBoxModel<>(Categoria.values()));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -234,12 +257,12 @@ public class JIFLocar extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jsb_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcb_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jsb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -254,8 +277,8 @@ public class JIFLocar extends javax.swing.JInternalFrame {
                     .addComponent(jcb_automovel)
                     .addComponent(jcb_motocicleta)
                     .addComponent(jcb_van)
-                    .addComponent(jsb_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jsb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jcb_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcb_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -495,6 +518,8 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jb_gravar;
     private javax.swing.JMenu jb_novo;
     private javax.swing.JCheckBox jcb_automovel;
+    private javax.swing.JComboBox<Categoria> jcb_categoria;
+    private javax.swing.JComboBox<Marca> jcb_marca;
     private javax.swing.JCheckBox jcb_motocicleta;
     private javax.swing.JCheckBox jcb_van;
     private javax.swing.JFormattedTextField jft_dataLocacao;
@@ -502,8 +527,6 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jm_menuprincipalclientes;
     private javax.swing.JMenuItem jm_sairdosistema;
     private javax.swing.JMenuItem jm_voltatelaprincipal;
-    private javax.swing.JComboBox<Categoria> jsb_categoria;
-    private javax.swing.JComboBox<Marca> jsb_marca;
     private javax.swing.JTextField jtf_cpf;
     private javax.swing.JTextField jtf_nome;
     private javax.swing.JTextField jtf_sobrenome;

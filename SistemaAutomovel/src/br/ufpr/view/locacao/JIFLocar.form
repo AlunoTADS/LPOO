@@ -214,13 +214,13 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jsb_marca" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="jcb_marca" min="-2" pref="180" max="-2" attributes="0"/>
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jsb_categoria" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="jcb_categoria" min="-2" pref="180" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -239,8 +239,8 @@
                       <Component id="jcb_automovel" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jcb_motocicleta" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jcb_van" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jsb_marca" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jsb_categoria" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jcb_marca" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="jcb_categoria" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -288,7 +288,7 @@
             <Property name="text" type="java.lang.String" value="Tipo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jsb_marca">
+        <Component class="javax.swing.JComboBox" name="jcb_marca">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new DefaultComboBoxModel&lt;&gt;(Marca.values())" type="code"/>
@@ -315,7 +315,7 @@
             <Property name="text" type="java.lang.String" value="Categoria"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jsb_categoria">
+        <Component class="javax.swing.JComboBox" name="jcb_categoria">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new DefaultComboBoxModel&lt;&gt;(Categoria.values())" type="code"/>
