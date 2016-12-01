@@ -79,7 +79,7 @@ public abstract class Veiculo implements VeiculoI {
         this.placa = placa;
         this.ano = ano;
     }
-    
+
     public Veiculo() {
     }
 
@@ -134,6 +134,7 @@ public abstract class Veiculo implements VeiculoI {
     }
 
     @Override
+    @Column(label = "Placa", position = 1)
     public String getPlaca() {
         return this.placa;
     }

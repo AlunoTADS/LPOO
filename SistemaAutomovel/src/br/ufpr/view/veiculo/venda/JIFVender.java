@@ -10,8 +10,6 @@ import br.ufpr.model.Automovel;
 import br.ufpr.model.Categoria;
 import br.ufpr.model.Marca;
 import br.ufpr.model.Veiculo;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
@@ -34,12 +32,14 @@ public class JIFVender extends javax.swing.JInternalFrame {
         this.marcaVenda.setModel(new DefaultComboBoxModel(Marca.values()));
         //this.modeloVenda.setModel(new DefaultComboBoxModel(Modelo.values()));
         this.categoriaVenda.setModel(new DefaultComboBoxModel(Categoria.values()));
+        
+        table.setClass(Veiculo.class);
         table.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 try {
                     veiculo = (Veiculo) table
-                            .getSimpleReflectTableModel()
+                            .getTableModel()
                             .getDataList()
                             .get(table
                                     .getTable()
@@ -50,13 +50,9 @@ public class JIFVender extends javax.swing.JInternalFrame {
                 }
             }
         });
-        //refreshTable(null);
+        refreshTable();
     }
 
-    private void refreshView() {
-        refreshTable();
-        refreshForm();
-    }
 
     private void refreshForm() {
         
@@ -65,9 +61,10 @@ public class JIFVender extends javax.swing.JInternalFrame {
 
     private void refreshTable() {
         try {
-            Veiculo v = new Automovel();
-            List l = veiculoDao.listar(veiculo);
-            table.getSimpleReflectTableModel().setDataList(l);
+            table.setClass(Automovel.class);
+            List veiculos = veiculoDao.listar(new Automovel());
+            
+            table.getTableModel().setDataList(veiculos);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -244,7 +241,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
 
         venda.setText("Vender");
         getContentPane().add(venda);
-        venda.setBounds(560, 110, 80, 40);
+        venda.setBounds(560, 100, 80, 40);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));

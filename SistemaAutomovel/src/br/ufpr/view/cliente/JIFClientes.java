@@ -79,7 +79,7 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
     private void refreshTable() {
         try {
-            table.getSimpleReflectTableModel()
+            table.getTableModel()
                     .setDataList(clienteDao.listar(null));
         } catch (Exception ex) {
             ex.printStackTrace();

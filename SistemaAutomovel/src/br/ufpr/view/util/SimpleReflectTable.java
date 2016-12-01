@@ -20,11 +20,7 @@ public class SimpleReflectTable extends JPanel {
     public SimpleReflectTable() {
         super(new GridLayout(1, 0));
         tableModel = new SimpleReflectTableModel();
-    }
-
-    public void setClass(Class clazz) {
-        tableModel.setClass(clazz);
-        table = new JTable(getSimpleReflectTableModel());
+        table = new JTable(getTableModel());
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         adjustTableColumns();
 
@@ -34,21 +30,20 @@ public class SimpleReflectTable extends JPanel {
         //Add the scroll pane to this panel.
         add(scrollPane);
     }
-    
+
+    public void setClass(Class clazz) {
+        tableModel.setClass(clazz);
+        table.setModel(getTableModel());
+        adjustTableColumns();
+    }
+
     private void adjustTableColumns() {
-        for (Map.Entry<Integer, Column> entry : tableModel.oquetaconteseno().entrySet()) {
+        for (Map.Entry<Integer, Column> entry : tableModel.getColumns().entrySet()) {
             table.getColumnModel()
                     .getColumn(entry.getKey())
                     .setPreferredWidth(entry.getValue().width());
         }
         table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
-    }
-
-    /**
-     * @return the tableModel
-     */
-    public SimpleReflectTableModel getSimpleReflectTableModel() {
-        return tableModel;
     }
 
     /**
@@ -58,6 +53,9 @@ public class SimpleReflectTable extends JPanel {
         return table;
     }
 
+    /**
+     * @return the tableModel
+     */
     public SimpleReflectTableModel getTableModel() {
         return tableModel;
     }
