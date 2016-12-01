@@ -10,6 +10,9 @@ import br.ufpr.model.Automovel;
 import br.ufpr.model.Categoria;
 import br.ufpr.model.Estado;
 import br.ufpr.model.Marca;
+import br.ufpr.model.ModeloAutomovel;
+import br.ufpr.model.ModeloMotocicleta;
+import br.ufpr.model.ModeloVan;
 import br.ufpr.model.Motocicleta;
 import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
@@ -92,17 +95,13 @@ public class JIFVender extends javax.swing.JInternalFrame {
         cbTipoAutomovelVenda = new javax.swing.JCheckBox();
         cbTipoMotoVenda = new javax.swing.JCheckBox();
         cbTipoVanVenda = new javax.swing.JCheckBox();
-        jLabel1 = new javax.swing.JLabel();
-        jftPlacaVenda = new javax.swing.JFormattedTextField();
-        jftfAnoVenda = new javax.swing.JFormattedTextField();
-        jLabel2 = new javax.swing.JLabel();
         cbMarcaVenda = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         cbModeloVenda = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jftfValorVenda = new javax.swing.JFormattedTextField();
-        jLabel5 = new javax.swing.JLabel();
         table = new br.ufpr.view.util.SimpleReflectTable();
+        categoriaVenda1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
@@ -196,31 +195,6 @@ public class JIFVender extends javax.swing.JInternalFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(60, 60, 310, 63);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Placa");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(420, 50, 31, 17);
-
-        jftPlacaVenda.setBackground(new java.awt.Color(240, 240, 240));
-        jftPlacaVenda.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jftPlacaVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jftPlacaVendaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jftPlacaVenda);
-        jftPlacaVenda.setBounds(420, 70, 129, 40);
-
-        jftfAnoVenda.setBackground(new java.awt.Color(240, 240, 240));
-        jftfAnoVenda.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(jftfAnoVenda);
-        jftfAnoVenda.setBounds(670, 74, 80, 40);
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Ano");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(670, 56, 24, 17);
-
         cbMarcaVenda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbMarcaVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,33 +202,37 @@ public class JIFVender extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(cbMarcaVenda);
-        cbMarcaVenda.setBounds(62, 169, 299, 40);
+        cbMarcaVenda.setBounds(410, 70, 170, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Marca");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(62, 146, 36, 17);
+        jLabel3.setBounds(410, 40, 36, 17);
 
         cbModeloVenda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbModeloVenda);
-        cbModeloVenda.setBounds(419, 169, 277, 40);
+        cbModeloVenda.setBounds(620, 70, 170, 40);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Modelo");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(419, 146, 43, 17);
-
-        jftfValorVenda.setBackground(new java.awt.Color(240, 240, 240));
-        jftfValorVenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
-        getContentPane().add(jftfValorVenda);
-        jftfValorVenda.setBounds(812, 74, 177, 40);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Valor Venda");
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(812, 56, 72, 17);
+        jLabel4.setBounds(620, 40, 43, 17);
         getContentPane().add(table);
         table.setBounds(100, 270, 870, 140);
+
+        categoriaVenda1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        categoriaVenda1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoriaVenda1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(categoriaVenda1);
+        categoriaVenda1.setBounds(820, 70, 190, 40);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Categoria");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(820, 40, 100, 20);
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
@@ -322,6 +300,11 @@ public class JIFVender extends javax.swing.JInternalFrame {
         jMenu_gravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/salvar.png"))); // NOI18N
         jMenu_gravar.setText("GRAVAR (F4)");
         jMenu_gravar.setEnabled(false);
+        jMenu_gravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu_gravarActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu_gravar);
 
         jMenu7.setText("     ");
@@ -377,43 +360,47 @@ public class JIFVender extends javax.swing.JInternalFrame {
                    // TODO add your handling code here:
     }//GEN-LAST:event_jMenu_alterarMouseClicked
 
-    private void cbTipoAutomovelVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAutomovelVendaActionPerformed
-       setaTipoAutomovel();
-    }//GEN-LAST:event_cbTipoAutomovelVendaActionPerformed
-
-    private void cbTipoAutomovelVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoAutomovelVendaMouseClicked
-    jMenu_cancelar.setEnabled(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_cbTipoAutomovelVendaMouseClicked
-
-    private void cbTipoMotoVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoMotoVendaMouseClicked
-    jMenu_cancelar.setEnabled(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_cbTipoMotoVendaMouseClicked
-
-    private void cbTipoVanVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoVanVendaMouseClicked
-    jMenu_cancelar.setEnabled(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_cbTipoVanVendaMouseClicked
+    private void jMenu_gravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu_gravarActionPerformed
+           
+    }//GEN-LAST:event_jMenu_gravarActionPerformed
 
     private void cbMarcaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMarcaVendaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbMarcaVendaActionPerformed
 
-    private void jftPlacaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jftPlacaVendaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jftPlacaVendaActionPerformed
+    private void cbTipoVanVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoVanVendaMouseClicked
+        jMenu_cancelar.setEnabled(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoVanVendaMouseClicked
+
+    private void cbTipoMotoVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoMotoVendaMouseClicked
+        jMenu_cancelar.setEnabled(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoMotoVendaMouseClicked
+
+    private void cbTipoAutomovelVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoAutomovelVendaActionPerformed
+        setaTipoAutomovel();
+    }//GEN-LAST:event_cbTipoAutomovelVendaActionPerformed
+
+    private void cbTipoAutomovelVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbTipoAutomovelVendaMouseClicked
+        jMenu_cancelar.setEnabled(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipoAutomovelVendaMouseClicked
+
+    private void categoriaVenda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaVenda1ActionPerformed
+        this.refreshForm();
+    }//GEN-LAST:event_categoriaVenda1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupTipo;
+    private javax.swing.JComboBox<String> categoriaCompra;
+    private javax.swing.JComboBox<String> categoriaVenda1;
     private javax.swing.JComboBox<String> cbMarcaVenda;
     private javax.swing.JComboBox<String> cbModeloVenda;
     private javax.swing.JCheckBox cbTipoAutomovelVenda;
     private javax.swing.JCheckBox cbTipoMotoVenda;
     private javax.swing.JCheckBox cbTipoVanVenda;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
@@ -430,9 +417,6 @@ public class JIFVender extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jMenu_gravar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JFormattedTextField jftPlacaVenda;
-    private javax.swing.JFormattedTextField jftfAnoVenda;
-    private javax.swing.JFormattedTextField jftfValorVenda;
     private javax.swing.JMenuItem jmi_VoltarTelaPrincipal;
     private javax.swing.JMenuItem jmi_sair_do_sistema;
     private br.ufpr.view.util.SimpleReflectTable table;
