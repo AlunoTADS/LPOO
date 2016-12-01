@@ -3,8 +3,11 @@ package br.ufpr.view.cliente;
 import br.ufpr.data.ClienteDao;
 import br.ufpr.model.Cliente;
 import br.ufpr.model.UnidadeFederativa;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import br.ufpr.view.util.ComponentUtil;
+import br.ufpr.view.util.SimpleReflectTable;
+import java.awt.Component;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -17,26 +20,27 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
     private ClienteDao clienteDao = new ClienteDao();
     private Cliente cliente = new Cliente();
+    private List<Component> camposEditaveis;
 
     /**
      * Creates new form jifClientes
      */
     public JIFClientes() {
         initComponents();
-        simpleReflectTable1.setClass(Cliente.class);
-        simpleReflectTable1
-                .getTable()
+
+        camposEditaveis = Arrays.asList(jtf_nome, jtf_sobrenome, jtf_endereco, jtf_rg, jcb_rgSiglaUf, jtf_cpf);
+        disableForm();
+
+        table.getTable()
                 .getSelectionModel()
                 .addListSelectionListener(new ListSelectionListener() {
                     @Override
                     public void valueChanged(ListSelectionEvent e) {
                         try {
-                            cliente = (Cliente) simpleReflectTable1
+                            cliente = (Cliente) table
                                     .getSimpleReflectTableModel()
                                     .getDataList()
-                                    .get(simpleReflectTable1
-                                            .getTable()
-                                            .getSelectedRow());
+                                    .get(table.getTable().getSelectedRow());
                             refreshForm();
                         } catch (Exception ex) {
                         }
@@ -50,6 +54,18 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         refreshForm();
     }
 
+    private void enableForm() {
+        for (Component c : camposEditaveis) {
+            ComponentUtil.enable(c);
+        }
+    }
+
+    private void disableForm() {
+        for (Component c : camposEditaveis) {
+            ComponentUtil.disable(c);
+        }
+    }
+
     private void refreshForm() {
         if (cliente == null) {
             cliente = new Cliente();
@@ -57,23 +73,23 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         jtf_idCliente.setText(cliente.getIdCliente() == null ? "" : cliente.getIdCliente().toString());
         jtf_nome.setText(cliente.getNome() == null ? "" : cliente.getNome());
         jtf_sobrenome.setText(cliente.getSobrenome() == null ? "" : cliente.getSobrenome());
-        jtf_rg.setText(cliente.getRg()== null ? "" : cliente.getRg());
+        jtf_rg.setText(cliente.getRg() == null ? "" : cliente.getRg());
         jcb_rgSiglaUf.setSelectedItem(cliente.getRgUF());
-        jtf_cpf.setText(cliente.getCpf()== null ? "" : cliente.getCpf());
-        jtf_endereco.setText(cliente.getEndereco()== null ? "" : cliente.getEndereco());
+        jtf_cpf.setText(cliente.getCpf() == null ? "" : cliente.getCpf());
+        jtf_endereco.setText(cliente.getEndereco() == null ? "" : cliente.getEndereco());
 
     }
 
     private void refreshTable() {
         try {
-            simpleReflectTable1.getSimpleReflectTableModel()
+            table.getSimpleReflectTableModel()
                     .setDataList(clienteDao.listar(null));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private void save() {
+    private void gravar() {
         try {
             if (cliente.getIdCliente() != null) {
                 clienteDao.editar(cliente);
@@ -81,7 +97,35 @@ public class JIFClientes extends javax.swing.JInternalFrame {
                 clienteDao.inserir(cliente);
             }
         } catch (Exception ex) {
-            Logger.getLogger(JIFClientes.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
+    }
+
+    private void incluir() {
+        cliente = new Cliente();
+        jtf_nome.requestFocus();
+        enableForm();
+        refreshForm();
+    }
+
+    private void buscar() {
+        refreshTable();
+    }
+
+    private void cancelar() {
+        cliente = new Cliente();
+        refreshForm();
+        disableForm();
+    }
+
+    private void excluir() {
+        try {
+            clienteDao.excluir(cliente);
+            cliente = new Cliente();
+            refreshView();
+            disableForm();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -107,7 +151,7 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jtf_cpf = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        simpleReflectTable1 = new br.ufpr.view.util.SimpleReflectTable();
+        table = new SimpleReflectTable<Cliente>(new Cliente());
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -118,7 +162,7 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         jm_voltatelaprincipal = new javax.swing.JMenuItem();
         jm_sairdosistema = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jb_novo = new javax.swing.JMenu();
+        jb_incluir = new javax.swing.JMenu();
         jm_espaco3 = new javax.swing.JMenu();
         jb_alterar = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
@@ -218,8 +262,8 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         jLabel7.setText("CPF");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, -1, -1));
 
-        simpleReflectTable1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        getContentPane().add(simpleReflectTable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 920, 190));
+        table.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        getContentPane().add(table, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 920, 190));
         getContentPane().add(filler3, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 300, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -271,18 +315,18 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         jMenu3.setEnabled(false);
         jMenuBar1.add(jMenu3);
 
-        jb_novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/criar25.png"))); // NOI18N
-        jb_novo.setText("NOVO (F2)");
-        jb_novo.addMenuListener(new javax.swing.event.MenuListener() {
+        jb_incluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/criar25.png"))); // NOI18N
+        jb_incluir.setText("NOVO (F2)");
+        jb_incluir.addMenuListener(new javax.swing.event.MenuListener() {
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
             }
             public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jb_novoMenuSelected(evt);
+                jb_incluirMenuSelected(evt);
             }
         });
-        jMenuBar1.add(jb_novo);
+        jMenuBar1.add(jb_incluir);
 
         jm_espaco3.setText("     ");
         jm_espaco3.setEnabled(false);
@@ -299,6 +343,15 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
         jb_gravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/salvar.png"))); // NOI18N
         jb_gravar.setText("GRAVAR (F4)");
+        jb_gravar.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jb_gravarMenuSelected(evt);
+            }
+        });
         jMenuBar1.add(jb_gravar);
 
         jMenu9.setText("     ");
@@ -307,6 +360,15 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
         jb_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/atualizar.png"))); // NOI18N
         jb_buscar.setText("BUSCAR (F5)");
+        jb_buscar.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jb_buscarMenuSelected(evt);
+            }
+        });
         jMenuBar1.add(jb_buscar);
 
         jMenu11.setText("     ");
@@ -315,6 +377,15 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
         jb_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/Cancelar25.png"))); // NOI18N
         jb_cancelar.setText("CANCELAR (F6)");
+        jb_cancelar.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jb_cancelarMenuSelected(evt);
+            }
+        });
         jMenuBar1.add(jb_cancelar);
 
         jMenu13.setText("                                       ");
@@ -323,6 +394,11 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
         jb_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/excluir25.png"))); // NOI18N
         jb_excluir.setText("EXCLUIR (F12)");
+        jb_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_excluirActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jb_excluir);
 
         setJMenuBar(jMenuBar1);
@@ -366,9 +442,25 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_rgActionPerformed
 
-    private void jb_novoMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jb_novoMenuSelected
-        System.out.println("br.ufpr.view.cliente.jif_clientes.jb_novoMenuSelected()");
-    }//GEN-LAST:event_jb_novoMenuSelected
+    private void jb_incluirMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jb_incluirMenuSelected
+        incluir();
+    }//GEN-LAST:event_jb_incluirMenuSelected
+
+    private void jb_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_excluirActionPerformed
+        excluir();
+    }//GEN-LAST:event_jb_excluirActionPerformed
+
+    private void jb_gravarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jb_gravarMenuSelected
+        gravar();
+    }//GEN-LAST:event_jb_gravarMenuSelected
+
+    private void jb_buscarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jb_buscarMenuSelected
+        buscar();
+    }//GEN-LAST:event_jb_buscarMenuSelected
+
+    private void jb_cancelarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jb_cancelarMenuSelected
+        cancelar();
+    }//GEN-LAST:event_jb_cancelarMenuSelected
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -393,7 +485,7 @@ public class JIFClientes extends javax.swing.JInternalFrame {
     javax.swing.JMenu jb_cancelar;
     javax.swing.JMenu jb_excluir;
     javax.swing.JMenu jb_gravar;
-    javax.swing.JMenu jb_novo;
+    javax.swing.JMenu jb_incluir;
     javax.swing.JComboBox<UnidadeFederativa> jcb_rgSiglaUf;
     javax.swing.JMenuItem jm_duplicarregistro;
     javax.swing.JMenu jm_espaco3;
@@ -406,6 +498,6 @@ public class JIFClientes extends javax.swing.JInternalFrame {
     javax.swing.JTextField jtf_nome;
     javax.swing.JTextField jtf_rg;
     javax.swing.JTextField jtf_sobrenome;
-    br.ufpr.view.util.SimpleReflectTable simpleReflectTable1;
+    br.ufpr.view.util.SimpleReflectTable<Cliente> table;
     // End of variables declaration//GEN-END:variables
 }

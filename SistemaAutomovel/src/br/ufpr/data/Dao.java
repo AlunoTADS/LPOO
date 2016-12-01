@@ -3,7 +3,6 @@ package br.ufpr.data;
 import br.ufpr.data.db.ConnectionFactory;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -18,9 +17,6 @@ public abstract class Dao<T> {
     PreparedStatement stmt;
     ResultSet rs;
     CallableStatement call;
-
-//    private final String URL = "jdbc:sqlite:src/br/ufpr/data/db/database.db";
-    private final String URL = "jdbc:postgresql://localhost:5432/lpoo";
 
     public void open() throws Exception {
         close();
