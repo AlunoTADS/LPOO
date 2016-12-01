@@ -19,17 +19,34 @@ public class VeiculoDao extends Dao implements DaoI<Veiculo> {
 
     @Override
     public void inserir(Veiculo veiculo) throws Exception {
+        Integer id = this.getNextId();
         open();
         
         stmt = con.prepareStatement("INSERT INTO veiculo VALUES(?, ?, ?, ?, ?, ?, ?)");
         int idx = 0;
-        stmt.setInt(++idx, veiculo.getIdVeiculo());
+        stmt.setInt(++idx, id);
         stmt.setInt(++idx, veiculo.getMarca().getIdMarca());
         stmt.setInt(++idx, veiculo.getEstado().getIdEstado());
         stmt.setInt(++idx, veiculo.getCategoria().getIdCategoria());
         stmt.setDouble(++idx, veiculo.getValorCompra());
         stmt.setString(++idx, veiculo.getPlaca());
         stmt.setInt(++idx, veiculo.getAno());
+        stmt.execute();
+        
+        idx = 0;
+        if (veiculo instanceof Automovel) {
+            stmt = con.prepareStatement("INSERT INTO automovel VALUES(?, ?)");
+            stmt.setInt(++idx, veiculo.getIdVeiculo());
+            stmt.setInt(++idx, ((Automovel) veiculo).getModelo().getIdModeloAutomovel());
+        } else if (veiculo instanceof Motocicleta) {
+            stmt = con.prepareStatement("INSERT INTO motocicleta VALUES (?, ?)");
+            stmt.setInt(++idx, veiculo.getIdVeiculo());
+            stmt.setInt(++idx, ((Motocicleta) veiculo).getModelo().getIdModeloMotocicleta());
+        } else if (veiculo instanceof Van) {
+            stmt = con.prepareStatement("INSERT INTO van VALUES(?, ?)");
+            stmt.setInt(++idx, veiculo.getIdVeiculo());
+            stmt.setInt(++idx, ((Van) veiculo).getModelo().getIdModeloVan());
+        }
         stmt.execute();
         
         close();
@@ -50,6 +67,22 @@ public class VeiculoDao extends Dao implements DaoI<Veiculo> {
         stmt.setInt(++idx, veiculo.getIdVeiculo());
         stmt.execute();
         
+        idx = 0;
+        if (veiculo instanceof Automovel) {
+            stmt = con.prepareStatement("UPDATE automovel SET idmodeloautomovel = ? WHERE idveiculo = ?");
+            stmt.setInt(++idx, ((Automovel) veiculo).getModelo().getIdModeloAutomovel());
+            stmt.setInt(++idx, veiculo.getIdVeiculo());
+        } else if (veiculo instanceof Motocicleta) {
+            stmt = con.prepareStatement("UPDATE motocicleta SET idmodelomotocicleta = ? WHERE idveiculo = ?)");
+            stmt.setInt(++idx, ((Motocicleta) veiculo).getModelo().getIdModeloMotocicleta());
+            stmt.setInt(++idx, veiculo.getIdVeiculo());
+        } else if (veiculo instanceof Van) {
+            stmt = con.prepareStatement("UPDATE van SET idmodelovan = ? WHERE idveiculo = ?)");
+            stmt.setInt(++idx, ((Van) veiculo).getModelo().getIdModeloVan());
+            stmt.setInt(++idx, veiculo.getIdVeiculo());
+        }
+        stmt.execute();
+        
         close();
     }
 
@@ -57,8 +90,21 @@ public class VeiculoDao extends Dao implements DaoI<Veiculo> {
     public void excluir(Veiculo veiculo) throws Exception {
         open();
         
-        stmt = con.prepareStatement("DELETE FROM veiculo WHERE idveiculo = ?");
         int idx = 0;
+        if (veiculo instanceof Automovel) {
+            stmt = con.prepareStatement("DELETE FROM automovel WHERE idveiculo = ?");
+            stmt.setInt(++idx, veiculo.getIdVeiculo());
+        } else if (veiculo instanceof Motocicleta) {
+            stmt = con.prepareStatement("DELETE FROM motocicleta WHERE idveiculo = ?");
+            stmt.setInt(++idx, veiculo.getIdVeiculo());
+        } else if (veiculo instanceof Van) {
+            stmt = con.prepareStatement("DELETE FROM van WHERE idveiculo = ?");
+            stmt.setInt(++idx, veiculo.getIdVeiculo());
+        }
+        stmt.execute();
+        
+        stmt = con.prepareStatement("DELETE FROM veiculo WHERE idveiculo = ?");
+        idx = 0;
         stmt.setInt(++idx, veiculo.getIdVeiculo());
         stmt.execute();
         

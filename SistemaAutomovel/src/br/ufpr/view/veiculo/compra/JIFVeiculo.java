@@ -70,6 +70,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
     }
     
     public void save() {
+        VeiculoDao veiculoDao = new VeiculoDao();
         Marca marca = (Marca) this.marcaCompra.getSelectedItem();
         Estado estado = (Estado) this.estadoCompra.getSelectedItem();
         Categoria categoria = (Categoria) this.categoriaCompra.getSelectedItem();
@@ -87,7 +88,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
             this.veiculo = new Van(modelo, marca, estado, null, categoria, valorCompra, placa, ano);
         }
         try {
-            new VeiculoDao().inserir(this.veiculo);
+            veiculoDao.inserir(this.veiculo);
         } catch (Exception ex) {
             Logger.getLogger(JIFVeiculo.class.getName()).log(Level.SEVERE, null, ex);
         }
