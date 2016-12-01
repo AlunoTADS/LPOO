@@ -45,7 +45,7 @@ public abstract class Dao<T> {
 
     public Integer getNextId() throws Exception {
         open();
-        String sql = "SELECT valor FROM Sequence WHERE id = ?";
+        String sql = "SELECT valor FROM Sequence WHERE idsequence = ?";
         String seqName = String.format("seq_%s", this.getClass().getSimpleName().toLowerCase());
         stmt = con.prepareStatement(sql);
         stmt.setString(1, seqName);
@@ -53,7 +53,7 @@ public abstract class Dao<T> {
         Integer id = null;
         if (rs.next()) {
             id = rs.getInt("valor");
-            sql = "UPDATE Sequence set valor = ? WHERE id = ?";
+            sql = "UPDATE Sequence set valor = ? WHERE idsequence = ?";
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, id + 1);
             stmt.setString(2, seqName);

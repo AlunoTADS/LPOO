@@ -7,6 +7,6 @@ import java.awt.Color;
  * @author Lucas
  */
 public class Colors {
-    public static final Color COMPONENT_DISABLED = new Color(204, 204, 204);
-    public static final Color COMPONENT_ENABLED = new Color(240, 235, 240);
+    public static final Color COMPONENT_DISABLED = Color.DARK_GRAY;
+    public static final Color COMPONENT_ENABLED = Color.WHITE;
 }

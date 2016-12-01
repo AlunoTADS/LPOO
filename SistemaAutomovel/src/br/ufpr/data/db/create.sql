@@ -125,7 +125,15 @@ CREATE TABLE Automovel (
 INSERT INTO Sequence (idSequence)
 --SELECT 'seq_'||lower(name)||'dao' FROM sqlite_master WHERE type = 'table';
 SELECT 'seq_'||lower(tablename)||'dao' FROM pg_catalog.pg_tables WHERE schemaname = 'public';
-
+--gera reorder sequences...
+/*SELECT 
+    'UPDATE Sequence SET valor = (SELECT MAX(id'||lower(tablename)
+    ||' FROM '||lower(tablename)
+    ||' WHERE idsequence = ''seq_'||lower(tablename)||'dao'''
+FROM 
+    pg_catalog.pg_tables 
+WHERE schemaname = 'public';
+*/
 INSERT INTO unidadefederativa (siglauf, descricao) VALUES ('AC', 'Acre');
 INSERT INTO unidadefederativa (siglauf, descricao) VALUES ('AL', 'Alagoas');
 INSERT INTO unidadefederativa (siglauf, descricao) VALUES ('AP', 'Amapá');
@@ -204,3 +212,7 @@ insert into cliente (idcliente, nome, sobrenome, cpf, rg, rgsiglauf, endereco) v
 insert into cliente (idcliente, nome, sobrenome, cpf, rg, rgsiglauf, endereco) values (48, 'Gloria', 'Kim', '501.892.903-02', '75.542.733-2', 'AL', '7 Lotheville Junction');
 insert into cliente (idcliente, nome, sobrenome, cpf, rg, rgsiglauf, endereco) values (49, 'Kevin', 'Sanchez', '824.195.086-79', '34.541.442-9', 'RS', '53 Lillian Point');
 insert into cliente (idcliente, nome, sobrenome, cpf, rg, rgsiglauf, endereco) values (50, 'Willie', 'Garrett', '883.204.722-41', '38.521.297-7', 'SC', '3 Glacier Hill Parkway');
+
+
+UPDATE Sequence SET valor = (SELECT MAX(idcliente) + 1 FROM cliente) WHERE idsequence = 'seq_clientedao';
+UPDATE Sequence SET valor = (SELECT MAX(idveiculo) + 1 FROM veiculo) WHERE idsequence = 'seq_veiculodao';

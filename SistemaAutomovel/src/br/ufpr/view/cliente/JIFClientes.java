@@ -4,7 +4,6 @@ import br.ufpr.data.ClienteDao;
 import br.ufpr.model.Cliente;
 import br.ufpr.model.UnidadeFederativa;
 import br.ufpr.view.util.ComponentUtil;
-import br.ufpr.view.util.SimpleReflectTable;
 import java.awt.Component;
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +29,10 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
         camposEditaveis = Arrays.asList(jtf_nome, jtf_sobrenome, jtf_endereco, jtf_rg, jcb_rgSiglaUf, jtf_cpf);
         disableForm();
+        refreshForm();
+        refreshTable();
+
+        table.setClass(Cliente.class);
 
         table.getTable()
                 .getSelectionModel()
@@ -38,7 +41,7 @@ public class JIFClientes extends javax.swing.JInternalFrame {
                     public void valueChanged(ListSelectionEvent e) {
                         try {
                             cliente = (Cliente) table
-                                    .getSimpleReflectTableModel()
+                                    .getTableModel()
                                     .getDataList()
                                     .get(table.getTable().getSelectedRow());
                             refreshForm();
@@ -46,12 +49,6 @@ public class JIFClientes extends javax.swing.JInternalFrame {
                         }
                     }
                 });
-        refreshView();
-    }
-
-    private void refreshView() {
-        refreshTable();
-        refreshForm();
     }
 
     private void enableForm() {
@@ -89,13 +86,30 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         }
     }
 
+    private void alterar() {
+        enableForm();
+    }
+
     private void gravar() {
+
         try {
+            cliente.setNome(jtf_nome.getText());
+            cliente.setSobrenome(jtf_sobrenome.getText());
+            cliente.setEndereco(jtf_endereco.getText());
+            cliente.setRg(jtf_rg.getText());
+            cliente.setRgUF((UnidadeFederativa) jcb_rgSiglaUf.getSelectedItem());
+            cliente.setCpf(jtf_cpf.getText());
+
             if (cliente.getIdCliente() != null) {
                 clienteDao.editar(cliente);
             } else {
+                cliente.setIdCliente(clienteDao.getNextId());
                 clienteDao.inserir(cliente);
             }
+            cliente = new Cliente();
+            disableForm();
+            refreshForm();
+            refreshTable();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -114,6 +128,7 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
     private void cancelar() {
         cliente = new Cliente();
+        refreshTable();
         refreshForm();
         disableForm();
     }
@@ -122,7 +137,8 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         try {
             clienteDao.excluir(cliente);
             cliente = new Cliente();
-            refreshView();
+            refreshTable();
+            refreshForm();
             disableForm();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -151,7 +167,7 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jtf_cpf = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        table = new SimpleReflectTable();
+        table = new br.ufpr.view.util.SimpleReflectTable();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -317,13 +333,9 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
         jb_incluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/criar25.png"))); // NOI18N
         jb_incluir.setText("NOVO (F2)");
-        jb_incluir.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jb_incluirMenuSelected(evt);
+        jb_incluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_incluirMouseClicked(evt);
             }
         });
         jMenuBar1.add(jb_incluir);
@@ -334,7 +346,11 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
         jb_alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/edit-icon.png"))); // NOI18N
         jb_alterar.setText("ALTERAR (F3)");
-        jb_alterar.setEnabled(false);
+        jb_alterar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_alterarMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jb_alterar);
 
         jMenu7.setText("     ");
@@ -343,13 +359,9 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
         jb_gravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/salvar.png"))); // NOI18N
         jb_gravar.setText("GRAVAR (F4)");
-        jb_gravar.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jb_gravarMenuSelected(evt);
+        jb_gravar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_gravarMouseClicked(evt);
             }
         });
         jMenuBar1.add(jb_gravar);
@@ -360,13 +372,9 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
         jb_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/atualizar.png"))); // NOI18N
         jb_buscar.setText("BUSCAR (F5)");
-        jb_buscar.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jb_buscarMenuSelected(evt);
+        jb_buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_buscarMouseClicked(evt);
             }
         });
         jMenuBar1.add(jb_buscar);
@@ -377,13 +385,9 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
         jb_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/Cancelar25.png"))); // NOI18N
         jb_cancelar.setText("CANCELAR (F6)");
-        jb_cancelar.addMenuListener(new javax.swing.event.MenuListener() {
-            public void menuCanceled(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                jb_cancelarMenuSelected(evt);
+        jb_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_cancelarMouseClicked(evt);
             }
         });
         jMenuBar1.add(jb_cancelar);
@@ -394,6 +398,11 @@ public class JIFClientes extends javax.swing.JInternalFrame {
 
         jb_excluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/excluir25.png"))); // NOI18N
         jb_excluir.setText("EXCLUIR (F12)");
+        jb_excluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_excluirMouseClicked(evt);
+            }
+        });
         jb_excluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_excluirActionPerformed(evt);
@@ -442,25 +451,33 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_rgActionPerformed
 
-    private void jb_incluirMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jb_incluirMenuSelected
-        incluir();
-    }//GEN-LAST:event_jb_incluirMenuSelected
-
     private void jb_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_excluirActionPerformed
         excluir();
     }//GEN-LAST:event_jb_excluirActionPerformed
 
-    private void jb_gravarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jb_gravarMenuSelected
-        gravar();
-    }//GEN-LAST:event_jb_gravarMenuSelected
+    private void jb_incluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_incluirMouseClicked
+        incluir(); // TODO add your handling code here:
+    }//GEN-LAST:event_jb_incluirMouseClicked
 
-    private void jb_buscarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jb_buscarMenuSelected
-        buscar();
-    }//GEN-LAST:event_jb_buscarMenuSelected
+    private void jb_alterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_alterarMouseClicked
+        alterar();// TODO add your handling code here:
+    }//GEN-LAST:event_jb_alterarMouseClicked
 
-    private void jb_cancelarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jb_cancelarMenuSelected
-        cancelar();
-    }//GEN-LAST:event_jb_cancelarMenuSelected
+    private void jb_gravarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_gravarMouseClicked
+        gravar();        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_gravarMouseClicked
+
+    private void jb_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_buscarMouseClicked
+        buscar();        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_buscarMouseClicked
+
+    private void jb_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_cancelarMouseClicked
+        cancelar();        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_cancelarMouseClicked
+
+    private void jb_excluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_excluirMouseClicked
+        excluir();        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_excluirMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
