@@ -36,15 +36,15 @@ public class VeiculoDao extends Dao implements DaoI<Veiculo> {
         idx = 0;
         if (veiculo instanceof Automovel) {
             stmt = con.prepareStatement("INSERT INTO automovel VALUES(?, ?)");
-            stmt.setInt(++idx, veiculo.getIdVeiculo());
+            stmt.setInt(++idx, id);
             stmt.setInt(++idx, ((Automovel) veiculo).getModelo().getIdModeloAutomovel());
         } else if (veiculo instanceof Motocicleta) {
             stmt = con.prepareStatement("INSERT INTO motocicleta VALUES (?, ?)");
-            stmt.setInt(++idx, veiculo.getIdVeiculo());
+            stmt.setInt(++idx, id);
             stmt.setInt(++idx, ((Motocicleta) veiculo).getModelo().getIdModeloMotocicleta());
         } else if (veiculo instanceof Van) {
             stmt = con.prepareStatement("INSERT INTO van VALUES(?, ?)");
-            stmt.setInt(++idx, veiculo.getIdVeiculo());
+            stmt.setInt(++idx, id);
             stmt.setInt(++idx, ((Van) veiculo).getModelo().getIdModeloVan());
         }
         stmt.execute();
