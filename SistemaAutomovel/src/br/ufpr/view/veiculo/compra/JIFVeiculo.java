@@ -16,9 +16,13 @@ import br.ufpr.model.Motocicleta;
 import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
 import br.ufpr.view.util.SimpleReflectTableModel;
+import java.text.ParseException;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -34,11 +38,27 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
      */
     public JIFVeiculo() {
         initComponents();
+        this.marcaCompra.setEnabled(true);
+        this.categoriaCompra.setEnabled(true);
+        this.estadoCompra.setEnabled(true);
         this.marcaCompra.setModel(new DefaultComboBoxModel(Marca.values()));
         this.categoriaCompra.setModel(new DefaultComboBoxModel(Categoria.values()));
+        this.estadoCompra.setModel(new DefaultComboBoxModel(Estado.values()));
+        try {
+            MaskFormatter maskMoney = new MaskFormatter("R$ ###.###,##");
+            MaskFormatter maskPlaca = new MaskFormatter("UUU-####");
+            maskMoney.setPlaceholderCharacter('_');
+            maskPlaca.setPlaceholderCharacter('_');
+            maskMoney.install(valorCompra);
+            maskPlaca.install(placaCompra);
+        } catch (ParseException ex) {
+            Logger.getLogger(JIFVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     public void refreshForm() {
+        this.modeloCompra.setEnabled(true);
         if (this.automovelCompra.isSelected()) {
             this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloAutomovel.values()));
         } else if (this.motocicletaCompra.isSelected()) {
@@ -46,7 +66,11 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         } else if (this.vanCompra.isSelected()) {
             this.modeloCompra.setModel(new DefaultComboBoxModel(ModeloVan.values()));
         }
-        this.valorDiariaCompra.setText(this.veiculo.getValorDiariaLocacao()+"");
+    }
+    
+    public void save() {
+        
+        //new Automovel(this.modeloCompra.getSelectedItem(), this.marcaCompra.getSelectedItem(), this.estadoCompra.getSelectedItem(), null, this.categoriaCompra.getSelectedItem(), this.valorCompra, this.placaCompra, this.anoCompra);
     }
 
     /**
@@ -73,10 +97,10 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         valorCompra = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        valorDiariaCompra = new javax.swing.JFormattedTextField();
-        jLabel6 = new javax.swing.JLabel();
-        categoriaCompra = new javax.swing.JComboBox<>();
+        estadoCompra = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        categoriaCompra = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
@@ -195,7 +219,6 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Ano");
 
-        marcaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         marcaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 marcaCompraActionPerformed(evt);
@@ -205,7 +228,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Marca");
 
-        modeloCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        modeloCompra.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Modelo");
@@ -216,25 +239,23 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Valor Compra");
 
-        valorDiariaCompra.setEnabled(false);
-        valorDiariaCompra.addActionListener(new java.awt.event.ActionListener() {
+        estadoCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                valorDiariaCompraActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Valor da Diária");
-
-        categoriaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        categoriaCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoriaCompraActionPerformed(evt);
+                estadoCompraActionPerformed(evt);
             }
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Categoria");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Estado");
+
+        categoriaCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoriaCompraActionPerformed(evt);
+            }
+        });
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
@@ -297,11 +318,6 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         jMenu_alterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/edit-icon.png"))); // NOI18N
         jMenu_alterar.setText("ALTERAR (F3)");
         jMenu_alterar.setEnabled(false);
-        jMenu_alterar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu_alterarMouseClicked(evt);
-            }
-        });
         jMenuBar1.add(jMenu_alterar);
 
         jMenu5.setText("     ");
@@ -310,7 +326,11 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
 
         jMenu_gravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/salvar.png"))); // NOI18N
         jMenu_gravar.setText("GRAVAR (F4)");
-        jMenu_gravar.setEnabled(false);
+        jMenu_gravar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu_gravarMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu_gravar);
 
         jMenu7.setText("     ");
@@ -319,11 +339,7 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
 
         jMenu_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/atualizar.png"))); // NOI18N
         jMenu_buscar.setText("BUSCAR (F5)");
-        jMenu_buscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu_buscarMouseClicked(evt);
-            }
-        });
+        jMenu_buscar.setEnabled(false);
         jMenuBar1.add(jMenu_buscar);
 
         jMenu9.setText("     ");
@@ -332,7 +348,6 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
 
         jMenu_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/Cancelar25.png"))); // NOI18N
         jMenu_cancelar.setText("CANCELAR (F6)");
-        jMenu_cancelar.setEnabled(false);
         jMenuBar1.add(jMenu_cancelar);
 
         jMenu12.setPreferredSize(new java.awt.Dimension(50, 19));
@@ -373,20 +388,18 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(modeloCompra, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addGap(39, 39, 39))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(valorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addComponent(valorDiariaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(categoriaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(valorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(estadoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel7)
+                    .addComponent(categoriaCompra, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,13 +416,14 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
                     .addComponent(anoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(41, 41, 41))
+                        .addGap(38, 38, 38))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(valorDiariaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(valorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(valorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(estadoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -418,17 +432,15 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(marcaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(modeloCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(categoriaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(101, Short.MAX_VALUE))
+                            .addComponent(modeloCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(categoriaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel7))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
 
-        setBounds(0, 0, 924, 405);
+        setBounds(0, 0, 935, 569);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu13ActionPerformed
@@ -454,28 +466,10 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jMenu_novoActionPerformed
 
     private void jMenu_novoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_novoMouseClicked
-           jMenu_alterar.setEnabled(true);
            jmi_duplicarveiculo.setEnabled(true);
            jMenu_cancelar.setEnabled(true);
            jMenu_gravar.setEnabled(true);
-           jMenu_excluir.setEnabled(true);
     }//GEN-LAST:event_jMenu_novoMouseClicked
-
-    private void jMenu_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_buscarMouseClicked
-           jMenu_alterar.setEnabled(true);
-           jmi_duplicarveiculo.setEnabled(true);
-           jMenu_cancelar.setEnabled(true);
-           jMenu_gravar.setEnabled(true);
-           jMenu_excluir.setEnabled(true);    // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu_buscarMouseClicked
-
-    private void jMenu_alterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_alterarMouseClicked
-           jMenu_alterar.setEnabled(true);
-           jmi_duplicarveiculo.setEnabled(true);
-           jMenu_cancelar.setEnabled(true);
-           jMenu_gravar.setEnabled(true);
-           jMenu_excluir.setEnabled(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu_alterarMouseClicked
 
     private void automovelCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automovelCompraActionPerformed
         this.refreshForm();        
@@ -497,10 +491,6 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_marcaCompraActionPerformed
 
-    private void valorDiariaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorDiariaCompraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_valorDiariaCompraActionPerformed
-
     private void placaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placaCompraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_placaCompraActionPerformed
@@ -513,22 +503,31 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
         this.refreshForm();
     }//GEN-LAST:event_vanCompraActionPerformed
 
-    private void categoriaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaCompraActionPerformed
+    private void estadoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoCompraActionPerformed
         this.refreshForm();
+    }//GEN-LAST:event_estadoCompraActionPerformed
+
+    private void categoriaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaCompraActionPerformed
+        // TODO add your handling code here:
     }//GEN-LAST:event_categoriaCompraActionPerformed
+
+    private void jMenu_gravarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu_gravarMouseClicked
+        save();
+    }//GEN-LAST:event_jMenu_gravarMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField anoCompra;
     private javax.swing.JCheckBox automovelCompra;
     private javax.swing.ButtonGroup buttonGroupTipo;
     private javax.swing.JComboBox<String> categoriaCompra;
+    private javax.swing.JComboBox<String> estadoCompra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
@@ -554,7 +553,6 @@ public class JIFVeiculo extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox motocicletaCompra;
     private javax.swing.JFormattedTextField placaCompra;
     private javax.swing.JFormattedTextField valorCompra;
-    private javax.swing.JFormattedTextField valorDiariaCompra;
     private javax.swing.JCheckBox vanCompra;
     // End of variables declaration//GEN-END:variables
 }

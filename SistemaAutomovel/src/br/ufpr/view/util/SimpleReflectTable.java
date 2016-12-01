@@ -12,18 +12,14 @@ import java.util.Map;
  *
  * @author Lucas
  */
-public class SimpleReflectTable extends JPanel {
+public class SimpleReflectTable<T> extends JPanel {
 
-    private SimpleReflectTableModel simpleReflectTableModel;
+    private SimpleReflectTableModel<T> simpleReflectTableModel;
     private JTable table;
 
-    public SimpleReflectTable() {
+    public SimpleReflectTable(T obj) {
         super(new GridLayout(1, 0));
-    }
-
-    public void setClass(Class clazz) {
-        simpleReflectTableModel = new SimpleReflectTableModel(clazz);
-
+        simpleReflectTableModel = new SimpleReflectTableModel<>(obj);
         table = new JTable(getSimpleReflectTableModel());
         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         adjustTableColumns();

@@ -60,7 +60,7 @@
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jb_novo">
+        <Menu class="javax.swing.JMenu" name="jb_incluir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/br/ufpr/view/imagens/criar25.png"/>
@@ -68,7 +68,7 @@
             <Property name="text" type="java.lang.String" value="NOVO (F2)"/>
           </Properties>
           <Events>
-            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="jb_novoMenuSelected"/>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="jb_incluirMenuSelected"/>
           </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jm_espaco3">
@@ -99,6 +99,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="GRAVAR (F4)"/>
           </Properties>
+          <Events>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="jb_gravarMenuSelected"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu9">
           <Properties>
@@ -113,6 +116,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="BUSCAR (F5)"/>
           </Properties>
+          <Events>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="jb_buscarMenuSelected"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu11">
           <Properties>
@@ -127,6 +133,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="CANCELAR (F6)"/>
           </Properties>
+          <Events>
+            <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener" parameters="javax.swing.event.MenuEvent" handler="jb_cancelarMenuSelected"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu13">
           <Properties>
@@ -141,6 +150,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="EXCLUIR (F12)"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_excluirActionPerformed"/>
+          </Events>
         </Menu>
       </SubComponents>
     </Menu>
@@ -384,7 +396,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Container class="br.ufpr.view.util.SimpleReflectTable" name="simpleReflectTable1">
+    <Container class="br.ufpr.view.util.SimpleReflectTable" name="table">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
@@ -392,6 +404,10 @@
           </Border>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new SimpleReflectTable&lt;Cliente&gt;(new Cliente())"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Cliente&gt;"/>
+      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="30" y="270" width="920" height="190"/>
