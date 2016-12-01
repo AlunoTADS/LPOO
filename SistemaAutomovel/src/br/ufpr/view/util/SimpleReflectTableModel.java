@@ -11,15 +11,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
-public class SimpleReflectTableModel<T> extends AbstractTableModel {
+public class SimpleReflectTableModel extends AbstractTableModel {
 
     private static final long serialVersionUID = 7367545292158107310L;
 
-    private Map<Integer, Column> columns = new TreeMap<>();
-    protected Map<Integer, Method> methods = new TreeMap<>();
-    protected List<T> dataList = new ArrayList<>();
+    private Map<Integer, Column> columns;
+    protected Map<Integer, Method> methods;
+    protected List dataList;
 
     public SimpleReflectTableModel() {
+        columns = new TreeMap<>();
+        methods = new TreeMap<>();
+        dataList = new ArrayList<>();
     }
 
     public void setClass(Class clazz) {
@@ -31,21 +34,21 @@ public class SimpleReflectTableModel<T> extends AbstractTableModel {
             }
         }
     }
-    
+
     protected Column getColumn(int columnIndex) {
-        return getColumns().get(columnIndex);
+        return oquetaconteseno().get(columnIndex);
     }
 
     protected Method getMethod(int columnIndex) {
         return methods.get(columnIndex);
     }
 
-    public void setDataList(List<T> dataList) {
+    public void setDataList(List dataList) {
         this.dataList = dataList;
         fireTableDataChanged();
     }
 
-    public List<T> getDataList() {
+    public List getDataList() {
         return dataList;
     }
 
@@ -56,7 +59,7 @@ public class SimpleReflectTableModel<T> extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return getColumns().size();
+        return oquetaconteseno().size();
     }
 
     @Override
@@ -77,7 +80,7 @@ public class SimpleReflectTableModel<T> extends AbstractTableModel {
     /**
      * @return the columns
      */
-    public Map<Integer, Column> getColumns() {
+    public Map<Integer, Column> oquetaconteseno() {
         return columns;
     }
 

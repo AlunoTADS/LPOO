@@ -31,6 +31,9 @@ public class JIFClientes extends javax.swing.JInternalFrame {
         camposEditaveis = Arrays.asList(jtf_nome, jtf_sobrenome, jtf_endereco, jtf_rg, jcb_rgSiglaUf, jtf_cpf);
         disableForm();
 
+        table.setClass(Cliente.class);
+//        table.adjustTableColumns();
+
         table.getTable()
                 .getSelectionModel()
                 .addListSelectionListener(new ListSelectionListener() {
