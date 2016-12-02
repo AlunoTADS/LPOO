@@ -5,6 +5,9 @@
  */
 package br.ufpr.view.veiculo;
 
+import br.ufpr.data.AutomovelDao;
+import br.ufpr.data.MotocicletaDao;
+import br.ufpr.data.VanDao;
 import br.ufpr.data.VeiculoDao;
 import br.ufpr.model.Automovel;
 import br.ufpr.model.Categoria;
@@ -21,6 +24,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -31,6 +35,9 @@ import javax.swing.event.ListSelectionListener;
 public class JIFVender extends javax.swing.JInternalFrame {
 
     private VeiculoDao veiculoDao = new VeiculoDao();
+    private AutomovelDao automovelDao = new AutomovelDao();
+    private MotocicletaDao motocicletaDao = new MotocicletaDao();
+    private VanDao vanDao = new VanDao();
     private Veiculo veiculo = new Automovel();
 
     /**
@@ -67,21 +74,21 @@ public class JIFVender extends javax.swing.JInternalFrame {
     }
 
     private void refreshTable() {
-        List<Veiculo> veiculos = new ArrayList<>();
+          List<? extends Veiculo> veiculos = new ArrayList<>();
         try {
             if (cbTipoAutomovelVenda.isSelected()) {
                 table.setClass(Automovel.class);
-                veiculos = veiculoDao.listar(new Automovel(null,(ModeloAutomovel) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, 0));
+                veiculos = automovelDao.listar(new Automovel(null, (ModeloAutomovel) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, null));
             } else if (cbTipoMotoVenda.isSelected()) {
                 table.setClass(Motocicleta.class);
-                veiculos = veiculoDao.listar(new Motocicleta(null,(ModeloMotocicleta) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, 0));
+                veiculos = motocicletaDao.listar(new Motocicleta(null, (ModeloMotocicleta) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, null));
             } else if (cbTipoVanVenda.isSelected()) {
                 table.setClass(Van.class);
-                veiculos = veiculoDao.listar(new Van(null,(ModeloVan) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, null));
+                veiculos = vanDao.listar(new Van(null, (ModeloVan) modeloVenda.getSelectedItem(),(Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, null));
             }
             table.getTableModel().setDataList(veiculos);
         } catch (Exception e) {
-            e.getMessage();
+            e.printStackTrace();
         }
     }
 
@@ -350,32 +357,34 @@ public class JIFVender extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(marcaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(modeloVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(venda, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(filtrarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(categoriaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(6, 6, 6)
-                .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 870, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(marcaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(modeloVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(venda, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(filtrarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(categoriaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(table, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -391,11 +400,14 @@ public class JIFVender extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(venda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(filtrarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 17, Short.MAX_VALUE))
+                            .addComponent(filtrarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 26, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 1135, 495);
+        setBounds(0, 0, 983, 495);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu13ActionPerformed
@@ -465,6 +477,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
         veiculo.vender();
         try {
             veiculoDao.editar(veiculo);
+             JOptionPane.showMessageDialog(null, "Veículo vendido com sucesso.");
         } catch (Exception ex) {
             Logger.getLogger(JIFVender.class.getName()).log(Level.SEVERE, null, ex);
         }
