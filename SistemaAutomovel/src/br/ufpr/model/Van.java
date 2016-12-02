@@ -13,8 +13,8 @@ public class Van extends Veiculo {
 
     private ModeloVan modelo;
 
-    public Van(ModeloVan modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano) {
-        super(null, marca, estado, locacao, categoria, valorDeCompra, placa, ano);
+    public Van(Integer idVeiculo, ModeloVan modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorDeCompra, String placa, Integer ano) {
+        super(idVeiculo, marca, estado, locacao, categoria, valorDeCompra, placa, ano);
         this.modelo = modelo;
     }
     

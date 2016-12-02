@@ -71,13 +71,13 @@ public class JIFVender extends javax.swing.JInternalFrame {
         try {
             if (cbTipoAutomovelVenda.isSelected()) {
                 table.setClass(Automovel.class);
-                veiculos = veiculoDao.listar(new Automovel((ModeloAutomovel) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, 0));
+                veiculos = veiculoDao.listar(new Automovel(null,(ModeloAutomovel) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, 0));
             } else if (cbTipoMotoVenda.isSelected()) {
                 table.setClass(Motocicleta.class);
-                veiculos = veiculoDao.listar(new Motocicleta((ModeloMotocicleta) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, 0));
+                veiculos = veiculoDao.listar(new Motocicleta(null,(ModeloMotocicleta) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, 0));
             } else if (cbTipoVanVenda.isSelected()) {
                 table.setClass(Van.class);
-                veiculos = veiculoDao.listar(new Van((ModeloVan) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, null));
+                veiculos = veiculoDao.listar(new Van(null,(ModeloVan) modeloVenda.getSelectedItem(), (Marca) marcaVenda.getSelectedItem(), Estado.DISPONIVEL, null, (Categoria) categoriaVenda.getSelectedItem(), null, null, null));
             }
             table.getTableModel().setDataList(veiculos);
         } catch (Exception e) {

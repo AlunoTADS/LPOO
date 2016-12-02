@@ -8,8 +8,8 @@ public class Motocicleta extends Veiculo {
     
     private ModeloMotocicleta modelo;
     
-    public Motocicleta (ModeloMotocicleta modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano){
-        super(null, marca, estado, locacao, categoria, valorCompra, placa, ano);
+    public Motocicleta (Integer idVeiculo,ModeloMotocicleta modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano){
+        super(idVeiculo, marca, estado, locacao, categoria, valorCompra, placa, ano);
         this.modelo = modelo; 
     }
     

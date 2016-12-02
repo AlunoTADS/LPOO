@@ -66,6 +66,7 @@ public class AutomovelDao extends VeiculoDao implements DaoI<Veiculo> {
         stmt = con.prepareStatement(this.montarQuery(automovel));
         rs = stmt.executeQuery();
         while (rs.next()) {
+            Integer idVeiculo = rs.getInt("id");
             ModeloAutomovel modeloAutomovel = ModeloAutomovel.fromValue(rs.getInt("idmodeloautomovel"));
             Marca marca = Marca.fromValue(rs.getInt("idmarca"));
             Estado estado = Estado.fromValue(rs.getInt("idestado"));
@@ -78,7 +79,7 @@ public class AutomovelDao extends VeiculoDao implements DaoI<Veiculo> {
                 locacao = new Locacao(rs.getInt("idveiculo"));
                 //locacao = new LocacaoDao.buscar(locacao);
             }
-            Automovel a = new Automovel(modeloAutomovel, marca, estado, locacao, categoria, valorCompra, placa, ano);
+            Automovel a = new Automovel(idVeiculo, modeloAutomovel, marca, estado, locacao, categoria, valorCompra, placa, ano);
             resultado.add(a);
         }
         
