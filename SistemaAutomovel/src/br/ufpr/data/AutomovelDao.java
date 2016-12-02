@@ -66,7 +66,7 @@ public class AutomovelDao extends VeiculoDao implements DaoI<Veiculo> {
         stmt = con.prepareStatement(this.montarQuery(automovel));
         rs = stmt.executeQuery();
         while (rs.next()) {
-            Integer idVeiculo = rs.getInt("id");
+            Integer idVeiculo = rs.getInt("idveiculo");
             ModeloAutomovel modeloAutomovel = ModeloAutomovel.fromValue(rs.getInt("idmodeloautomovel"));
             Marca marca = Marca.fromValue(rs.getInt("idmarca"));
             Estado estado = Estado.fromValue(rs.getInt("idestado"));

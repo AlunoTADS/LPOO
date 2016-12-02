@@ -139,11 +139,11 @@ public class VeiculoDao extends Dao implements DaoI<Veiculo> {
             }
             Veiculo v = null;
             if (veiculo instanceof Automovel) {
-                v = new Automovel(null, marca, estado, locacao, categoria, valorCompra, placa, ano);
+                v = new Automovel(null, null, marca, estado, locacao, categoria, valorCompra, placa, ano);
             } else if (veiculo instanceof Motocicleta) {
-                v = new Motocicleta(null, marca, estado, locacao, categoria, valorCompra, placa, ano);
+                v = new Motocicleta(null, null, marca, estado, locacao, categoria, valorCompra, placa, ano);
             } else if (veiculo instanceof Van) {
-                v = new Van(null, marca, estado, locacao, categoria, valorCompra, placa, ano);
+                v = new Van(null, null, marca, estado, locacao, categoria, valorCompra, placa, ano);
             }
             resultado.add(v);
         }

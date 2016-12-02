@@ -92,14 +92,14 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         try {
             if (jcb_automovel.isSelected()) {
                 tableVeiculo.setClass(Automovel.class);
-                veiculos = automovelDao.listar(new Automovel(null, (Marca) jcb_marca.getSelectedItem(), Estado.DISPONIVEL, null, null, null, null, null));
+                veiculos = automovelDao.listar(new Automovel(null, null, null, Estado.DISPONIVEL, null, null, null, null, null));
                 //public Automovel(ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
             } else if (jcb_motocicleta.isSelected()) {
                 tableVeiculo.setClass(Motocicleta.class);
-                veiculos = motocicletaDao.listar(new Motocicleta(null, (Marca) jcb_marca.getSelectedItem(), Estado.DISPONIVEL, null, null, null, null, null));
+                veiculos = motocicletaDao.listar(new Motocicleta(null, null, null, Estado.DISPONIVEL, null, null, null, null, null));
             } else if (jcb_van.isSelected()) {
                 tableVeiculo.setClass(Van.class);
-                veiculos = vanDao.listar(new Van(null, (Marca) jcb_marca.getSelectedItem(), Estado.DISPONIVEL, null, null, null, null, null));
+                veiculos = vanDao.listar(new Van(null, null, null, Estado.DISPONIVEL, null, null, null, null, null));
             }
             tableVeiculo.getTableModel().setDataList(veiculos);
         } catch (Exception e) {

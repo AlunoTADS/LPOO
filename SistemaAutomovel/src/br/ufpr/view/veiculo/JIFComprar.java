@@ -96,13 +96,13 @@ public class JIFComprar extends javax.swing.JInternalFrame {
         
         if (this.automovelCompra.isSelected()) {
             ModeloAutomovel modelo = (ModeloAutomovel) this.modeloCompra.getSelectedItem();
-            this.veiculo = new Automovel(modelo, marca, estado, null, categoria, valorCompra, placa, ano);
+            this.veiculo = new Automovel(null, modelo, marca, estado, null, categoria, valorCompra, placa, ano);
         } else if (this.motocicletaCompra.isSelected()) {
             ModeloMotocicleta modelo = (ModeloMotocicleta) this.modeloCompra.getSelectedItem();
-            this.veiculo = new Motocicleta(modelo, marca, estado, null, categoria, valorCompra, placa, ano);
+            this.veiculo = new Motocicleta(null, modelo, marca, estado, null, categoria, valorCompra, placa, ano);
         } else if (this.vanCompra.isSelected()) {
             ModeloVan modelo = (ModeloVan) this.modeloCompra.getSelectedItem();
-            this.veiculo = new Van(modelo, marca, estado, null, categoria, valorCompra, placa, ano);
+            this.veiculo = new Van(null, modelo, marca, estado, null, categoria, valorCompra, placa, ano);
         }
         
         try {

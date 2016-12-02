@@ -104,6 +104,7 @@ public class MotocicletaDao extends VeiculoDao implements DaoI<Veiculo> {
             close();
         }
         return new Motocicleta(
+                null,
                 ModeloMotocicleta.fromValue(rs.getInt(1)),
                 Marca.fromValue(rs.getInt(2)),
                 Estado.fromValue(rs.getInt(rs.getInt(3))),
@@ -154,13 +155,13 @@ public class MotocicletaDao extends VeiculoDao implements DaoI<Veiculo> {
 //        if (motocicleta.getAno() != 0) {
 //            sql.append(String.format(" AND v.ano = '%d' ", motocicleta.getAno()));
 //        }
-
         stmt = con.prepareStatement(sql.toString());
 
         List<Motocicleta> list = new LinkedList<>();
         try {
             rs = stmt.executeQuery();
             list.add(new Motocicleta(
+                    null, 
                     ModeloMotocicleta.fromValue(rs.getInt(1)),
                     Marca.fromValue(rs.getInt(2)),
                     Estado.fromValue(rs.getInt(rs.getInt(3))),
