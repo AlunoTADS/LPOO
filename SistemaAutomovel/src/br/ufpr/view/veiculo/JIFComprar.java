@@ -61,7 +61,7 @@ public class JIFComprar extends javax.swing.JInternalFrame {
             NumberFormatter formatter = new NumberFormatter(dFormat);
             formatter.setFormat(dFormat);
             formatter.setAllowsInvalid(false);
-            MaskFormatter maskPlaca = new MaskFormatter("UUU-####");
+            MaskFormatter maskPlaca = new MaskFormatter("UUUU-####");
             maskPlaca.setPlaceholderCharacter('_');
             this.valorCompra.setFormatterFactory(new DefaultFormatterFactory(formatter));
             maskPlaca.install(placaCompra);
@@ -586,7 +586,7 @@ public class JIFComprar extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField anoCompra;
     private javax.swing.JCheckBox automovelCompra;
     private javax.swing.ButtonGroup buttonGroupTipo;
-    private javax.swing.JComboBox<String> categoriaCompra;
+    private javax.swing.JComboBox<Categoria> categoriaCompra;
     private javax.swing.JComboBox<String> estadoCompra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -615,8 +615,8 @@ public class JIFComprar extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jmi_VoltarTelaPrincipal;
     private javax.swing.JMenuItem jmi_duplicarveiculo;
     private javax.swing.JMenuItem jmi_sair_do_sistema;
-    private javax.swing.JComboBox<String> marcaCompra;
-    private javax.swing.JComboBox<String> modeloCompra;
+    private javax.swing.JComboBox<Marca> marcaCompra;
+    private javax.swing.JComboBox<Object> modeloCompra;
     private javax.swing.JCheckBox motocicletaCompra;
     private javax.swing.JFormattedTextField placaCompra;
     private javax.swing.JFormattedTextField valorCompra;

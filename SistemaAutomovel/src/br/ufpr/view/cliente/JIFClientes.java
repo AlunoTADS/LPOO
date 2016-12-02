@@ -8,6 +8,7 @@ import java.awt.Component;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -90,7 +91,6 @@ public class JIFClientes extends javax.swing.JInternalFrame {
     }
 
     private void gravar() {
-
         try {
             cliente.setNome(jtf_nome.getText());
             cliente.setSobrenome(jtf_sobrenome.getText());
@@ -105,11 +105,13 @@ public class JIFClientes extends javax.swing.JInternalFrame {
                 cliente.setIdCliente(clienteDao.getNextId());
                 clienteDao.inserir(cliente);
             }
+            JOptionPane.showMessageDialog(null, "Gravado com sucesso");
             cliente = new Cliente();
             disableForm();
             refreshForm();
             refreshTable();
         } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
 
@@ -134,12 +136,13 @@ public class JIFClientes extends javax.swing.JInternalFrame {
     private void excluir() {
         try {
             clienteDao.excluir(cliente);
+            JOptionPane.showMessageDialog(null, "Excluido com sucesso");
             cliente = new Cliente();
             refreshTable();
             refreshForm();
             disableForm();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
 

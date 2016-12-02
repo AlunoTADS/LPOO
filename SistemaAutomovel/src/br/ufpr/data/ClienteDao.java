@@ -105,14 +105,16 @@ public class ClienteDao extends Dao<Cliente> implements DaoI<Cliente> {
         open();
         List<Cliente> resultado = new ArrayList<>();
 
-        stmt = con.prepareStatement(this.montarQuery(t));
-        rs = stmt.executeQuery();
-        while (rs.next()) {
-            Cliente a = new Cliente(rs.getInt("idcliente"), rs.getString("nome"), rs.getString("sobrenome"), rs.getString("cpf"), rs.getString("rg"), UnidadeFederativa.fromValue(rs.getString("rgsiglauf")), rs.getString("endereco"));
-            resultado.add(a);
+        try {
+            stmt = con.prepareStatement(this.montarQuery(t));
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Cliente a = new Cliente(rs.getInt("idcliente"), rs.getString("nome"), rs.getString("sobrenome"), rs.getString("cpf"), rs.getString("rg"), UnidadeFederativa.fromValue(rs.getString("rgsiglauf")), rs.getString("endereco"));
+                resultado.add(a);
+            }
+        } finally {
+            close();
         }
-
-        close();
         return resultado;
     }
 
@@ -128,27 +130,27 @@ public class ClienteDao extends Dao<Cliente> implements DaoI<Cliente> {
             }
 
             if (t.getNome() != null) {
-                query.append(String.format(" AND nome = '%s' ", t.getNome()));
+                query.append(String.format(" AND UPPER(nome) LIKE UPPER('%s') ", t.getNome()));
             }
 
             if (t.getSobrenome() != null) {
-                query.append(String.format(" AND sobrenome = '%s' ", t.getSobrenome()));
+                query.append(String.format(" AND UPPER(sobrenome) LIKE UPPER('%s') ", t.getSobrenome()));
             }
 
             if (t.getCpf() != null) {
-                query.append(String.format(" AND cpf = '%s' ", t.getCpf()));
+                query.append(String.format(" AND cpf LIKE '%s' ", t.getCpf()));
             }
 
             if (t.getRg() != null) {
-                query.append(String.format(" AND rg = '%s' ", t.getRg()));
+                query.append(String.format(" AND rg LIKE '%s' ", t.getRg()));
             }
 
-            if (t.getRgUF()!= null) {
-                query.append(String.format(" AND rguf = '%s' ", t.getRgUF().getSiglaUF()));
+            if (t.getRgUF() != null) {
+                query.append(String.format(" AND rgsiglauf LIKE '%s' ", t.getRgUF().getSiglaUF()));
             }
 
-            if (t.getEndereco()!= null) {
-                query.append(String.format(" AND endereco = '%s' ", t.getEndereco()));
+            if (t.getEndereco() != null) {
+                query.append(String.format(" AND UPPER(endereco) LIKE UPPER('%s') ", t.getEndereco()));
             }
         }
         query.append(" ORDER BY idcliente ");

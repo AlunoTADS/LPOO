@@ -23,17 +23,15 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
                 .append(" VALUES (?, ?, ?, ?, ?) ")
                 .toString();
 
-        stmt = con.prepareStatement(sql);
-
-        int idx = 0;
-        stmt.setInt(++idx, locacao.getIdVeiculo());
-        stmt.setDate(++idx, (Date) locacao.getDataInicio());
-        stmt.setInt(++idx, locacao.getDias());
-        stmt.setInt(++idx, locacao.getCliente().getIdCliente());
-
-        stmt.execute();
-
         try {
+            stmt = con.prepareStatement(sql);
+
+            int idx = 0;
+            stmt.setInt(++idx, locacao.getIdVeiculo());
+            stmt.setDate(++idx, new java.sql.Date(locacao.getDataInicio().getTime()));
+            stmt.setInt(++idx, locacao.getDias());
+            stmt.setInt(++idx, locacao.getCliente().getIdCliente());
+            stmt.setDouble(++idx, locacao.getValor());
             stmt.execute();
         } finally {
             close();
@@ -50,15 +48,15 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
                 .append(" WHERE idveiculo = ? ")
                 .toString();
 
-        stmt = con.prepareStatement(sql);
-
-        int idx = 0;
-        stmt.setDate(++idx, (Date) locacao.getDataInicio());
-        stmt.setInt(++idx, locacao.getDias());
-        stmt.setInt(++idx, locacao.getCliente().getIdCliente());
-        stmt.setInt(++idx, locacao.getIdVeiculo());
-
         try {
+
+            stmt = con.prepareStatement(sql);
+
+            int idx = 0;
+            stmt.setDate(++idx, (Date) locacao.getDataInicio());
+            stmt.setInt(++idx, locacao.getDias());
+            stmt.setInt(++idx, locacao.getCliente().getIdCliente());
+            stmt.setInt(++idx, locacao.getIdVeiculo());
             stmt.execute();
         } finally {
             close();
@@ -75,11 +73,9 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
                 .append(" WHERE idveiculo = ? ")
                 .toString();
 
-        stmt = con.prepareStatement(sql);
-
-        stmt.setInt(0, locacao.getIdVeiculo());
-
         try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(0, locacao.getIdVeiculo());
             stmt.execute();
         } finally {
             close();
@@ -99,7 +95,12 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
             if (rs.next()) {
-                locacao = new Locacao(rs.getInt(1), new Cliente(rs.getInt(2)), rs.getInt(3), rs.getDate(4), rs.getDouble(5));
+                locacao = new Locacao(
+                        rs.getInt("idveiculo"), 
+                        new Cliente(rs.getInt("idcliente")),
+                        rs.getInt("dias"),
+                        rs.getDate("datainicio"), 
+                        rs.getDouble("valor"));
             } else {
                 locacao = null;
             }
@@ -144,7 +145,7 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
             stmt = con.prepareStatement(sql.toString());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                list.add(new Locacao(rs.getInt("idlocacao"),
+                list.add(new Locacao(rs.getInt("idveiculo"),
                         new Cliente(rs.getInt("idcliente")),
                         rs.getInt("dias"),
                         rs.getDate("datainicio"),

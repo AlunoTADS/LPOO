@@ -85,7 +85,7 @@ public abstract class Veiculo implements VeiculoI {
 
     @Override
     public void locar(int dias, Calendar dataInicio, Cliente cliente) {
-        this.locacao = new Locacao(this.getIdVeiculo(), cliente, dias, dataInicio.getTime(), getValorCompra());
+        this.locacao = new Locacao(this.getIdVeiculo(), cliente, dias, dataInicio.getTime(), dias * this.getValorDiariaLocacao());
         this.estado = Estado.LOCADO;
     }
 
@@ -133,22 +133,25 @@ public abstract class Veiculo implements VeiculoI {
         return valorVenda;
     }
 
-    @Column(label = "Marca", position = 3)
+    @Column(label = "Marca", position = 4)
     public String getMarcaDescricao() {
         return this.marca != null ? this.marca.getDescricao() : "";
     }
 
-    @Column(label = "Categoria", position = 4)
+    @Column(label = "Categoria", position = 5)
     public String getCategoriaDescricao() {
         return this.marca != null ? this.categoria.getDescricao() : "";
     }
 
-    @Column(label = "Valor Compra", position = 5, format = "%10.2f")
+    @Column(label = "Vlr Dia Locação", position = 6, format = "%10.2f")
+    public abstract double getValorDiariaLocacao();
+
+//    @Column(label = "Valor Compra", position = 5, format = "%10.2f")
     public Double getValorCompra() {
         return this.valorCompra;
     }
 
-    @Column(label = "Estado", position = 6)
+    @Column(label = "Estado", position = 7)
     public String getEstadoDescricao() {
         return this.estado != null ? this.estado.getDescricao() : "";
     }

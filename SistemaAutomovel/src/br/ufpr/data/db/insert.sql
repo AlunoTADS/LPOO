@@ -152,5 +152,5 @@ INSERT INTO Van(idVeiculo, idModeloVan) VALUES (7, 1);
 INSERT INTO Van(idVeiculo, idModeloVan) VALUES (8, 2);
 INSERT INTO Van(idVeiculo, idModeloVan) VALUES (9, 3);
 
-UPDATE Sequence SET valor = (SELECT MAX(idCliente) + 1 FROM Cliente) WHERE idsequence = 'seq_Clientedao';
+UPDATE Sequence SET valor = (SELECT MAX(idCliente) + 1 FROM Cliente) WHERE idsequence = 'seq_clientedao';
 UPDATE Sequence SET valor = (SELECT MAX(idveiculo) + 1 FROM Veiculo) WHERE idsequence = 'seq_veiculodao';

@@ -19,8 +19,8 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
     private Cliente cliente;
     private Locacao locacao;
     private Veiculo veiculo;
-    private VeiculoDao veiculoDao;
-    private ClienteDao clienteDao;
+    private VeiculoDao veiculoDao = new VeiculoDao();
+    private ClienteDao clienteDao = new ClienteDao();
     private LocacaoDao locacaoDao = new LocacaoDao();
 
     /**
@@ -53,7 +53,9 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
         try {
             List<Locacao> locacoes = locacaoDao.listar(new Locacao(null));
             for (Locacao locacao : locacoes) {
-                locacao.setCliente(clienteDao.buscar(locacao.getCliente()));
+                Cliente c = locacao.getCliente();
+                c = clienteDao.buscar(c);
+                locacao.setCliente(c);
             }
             table.getTableModel().setDataList(locacoes);
         } catch (Exception ex) {

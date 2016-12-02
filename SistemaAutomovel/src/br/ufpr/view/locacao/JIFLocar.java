@@ -5,6 +5,7 @@ import br.ufpr.data.ClienteDao;
 import br.ufpr.data.LocacaoDao;
 import br.ufpr.data.MotocicletaDao;
 import br.ufpr.data.VanDao;
+import br.ufpr.data.VeiculoDao;
 import br.ufpr.model.Automovel;
 import br.ufpr.model.Categoria;
 import br.ufpr.model.Cliente;
@@ -16,9 +17,11 @@ import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -29,6 +32,7 @@ import javax.swing.event.ListSelectionListener;
 public class JIFLocar extends javax.swing.JInternalFrame {
 
     private ClienteDao clienteDao = new ClienteDao();
+    private VeiculoDao veiculoDao = new VeiculoDao();
     private AutomovelDao automovelDao = new AutomovelDao();
     private MotocicletaDao motocicletaDao = new MotocicletaDao();
     private VanDao vanDao = new VanDao();
@@ -46,7 +50,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         initComponents();
 
         jft_dataLocacao.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
-        
+
         tableCliente.setClass(Cliente.class);
         tableVeiculo.setClass(Veiculo.class);
 
@@ -54,9 +58,13 @@ public class JIFLocar extends javax.swing.JInternalFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 try {
-                    cliente = (Cliente) tableCliente.getTableModel().getDataList().get(tableCliente.getTable().getSelectedRow());
+                    int row = tableCliente.getTable().getSelectedRow();
+                    if (row >= 0) {
+                        cliente = (Cliente) tableCliente.getTableModel().getDataList().get(row);
+                    }
                     refreshFormCliente();
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
         });
@@ -65,9 +73,14 @@ public class JIFLocar extends javax.swing.JInternalFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 try {
-                    veiculo = (Veiculo) tableVeiculo.getTableModel().getDataList().get(tableVeiculo.getTable().getSelectedRow());
-                    refreshFormCliente();
+                    int row = tableVeiculo.getTable().getSelectedRow();
+                    if (row >= 0) {
+                        veiculo = (Veiculo) tableVeiculo.getTableModel().getDataList().get(row);
+                    } else {
+                        veiculo = null;
+                    }
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
         });
@@ -81,8 +94,15 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     }
 
     private void refreshTableCliente() {
+        if (cliente == null) {
+            cliente = new Cliente();
+        }
+        cliente.setNome(jtf_nome.getText().equals("") ? null : jtf_nome.getText());
+        cliente.setSobrenome(jtf_sobrenome.getText().equals("") ? null : jtf_sobrenome.getText());
+        cliente.setCpf(jtf_cpf.getText().equals("") ? null : jtf_cpf.getText());
+
         try {
-            tableCliente.getTableModel().setDataList(clienteDao.listar(null));
+            tableCliente.getTableModel().setDataList(clienteDao.listar(cliente));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -108,30 +128,34 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     }
 
     private void gravar() {
+        if (cliente == null || cliente.getIdCliente() == null) {
+            JOptionPane.showMessageDialog(null, "Selecione um cliente");
+            return;
+        }
+
+        if (veiculo == null || veiculo.getIdVeiculo() == null) {
+            JOptionPane.showMessageDialog(null, "Selecione um veiculo");
+            return;
+        }
+
+        Integer numeroDias;
+        try {
+            numeroDias = Integer.parseInt(jft_dias.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Numero de dias inválido");
+            return;
+        }
+
+        veiculo.locar(numeroDias, Calendar.getInstance(), cliente);
 
         try {
-            cliente.setNome(jtf_nome.getText());
-            cliente.setSobrenome(jtf_sobrenome.getText());
-            cliente.setCpf(jtf_cpf.getText());
-
-            if (cliente.getIdCliente() != null) {
-                clienteDao.editar(cliente);
-            } else {
-                cliente.setIdCliente(clienteDao.getNextId());
-                clienteDao.inserir(cliente);
-            }
-            cliente = new Cliente();
-            refreshFormCliente();
-            refreshTableCliente();
+            veiculoDao.editar(veiculo);
+            locacaoDao.inserir(veiculo.getLocacao());
+            JOptionPane.showMessageDialog(null, "Gravado com sucesso");
+            cancelar();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-    }
-
-    private void incluir() {
-        cliente = new Cliente();
-        jtf_nome.requestFocus();
-        refreshFormCliente();
     }
 
     private void buscar() {
@@ -142,23 +166,13 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     private void cancelar() {
         jcb_categoria.setSelectedIndex(-1);
         jcb_marca.setSelectedIndex(-1);
+        jft_dias.setText("");
         cliente = null;
         veiculo = null;
 
+        refreshFormCliente();
         refreshTableCliente();
         refreshTableVeiculo();
-        refreshFormCliente();
-    }
-
-    private void excluir() {
-        try {
-            clienteDao.excluir(cliente);
-            cliente = new Cliente();
-            refreshTableCliente();
-            refreshFormCliente();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     private void setaCategoria() {
@@ -200,6 +214,8 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jft_dataLocacao = new javax.swing.JFormattedTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jft_dias = new javax.swing.JFormattedTextField();
         tableVeiculo = new br.ufpr.view.util.SimpleReflectTable();
         tableCliente = new br.ufpr.view.util.SimpleReflectTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -370,16 +386,21 @@ public class JIFLocar extends javax.swing.JInternalFrame {
                     .addComponent(jtf_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtf_sobrenome, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtf_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Período de Locação", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Data");
 
         jft_dataLocacao.setBackground(new java.awt.Color(240, 235, 240));
         jft_dataLocacao.setEnabled(false);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Dias");
+
+        jft_dias.setBackground(new java.awt.Color(240, 235, 240));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -389,8 +410,10 @@ public class JIFLocar extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jft_dataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jft_dias, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,7 +421,11 @@ public class JIFLocar extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jft_dataLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jft_dias, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         tableVeiculo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -459,6 +486,11 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jb_gravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/salvar.png"))); // NOI18N
         jb_gravar.setText("LOCAR (F4)");
         jb_gravar.setPreferredSize(new java.awt.Dimension(150, 25));
+        jb_gravar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_gravarMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jb_gravar);
 
         jb_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/atualizar.png"))); // NOI18N
@@ -489,29 +521,32 @@ public class JIFLocar extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tableVeiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(tableCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(tableCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tableCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tableCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tableVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel4.getAccessibleContext().setAccessibleName("Locação");
@@ -533,8 +568,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jm_sairdosistemaActionPerformed
 
     private void jb_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_buscarMouseClicked
-        refreshTableVeiculo();
-        refreshTableCliente();
+        buscar();
     }//GEN-LAST:event_jb_buscarMouseClicked
 
     private void jb_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_cancelarMouseClicked
@@ -561,6 +595,10 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         setaCategoria();        // TODO add your handling code here:
     }//GEN-LAST:event_jcb_categoriaActionPerformed
 
+    private void jb_gravarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_gravarMouseClicked
+        gravar();        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_gravarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTipo;
@@ -568,6 +606,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -589,6 +628,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jcb_motocicleta;
     private javax.swing.JCheckBox jcb_van;
     private javax.swing.JFormattedTextField jft_dataLocacao;
+    private javax.swing.JFormattedTextField jft_dias;
     private javax.swing.JMenuItem jm_duplicarregistro;
     private javax.swing.JMenu jm_menuprincipalclientes;
     private javax.swing.JMenuItem jm_sairdosistema;

@@ -73,7 +73,6 @@ public class Main extends javax.swing.JFrame {
         });
         menucadastro.add(jSeparator1);
 
-        jmi_CadastroClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jmi_CadastroClientes.setText("Clientes");
         jmi_CadastroClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +82,6 @@ public class Main extends javax.swing.JFrame {
         menucadastro.add(jmi_CadastroClientes);
         menucadastro.add(jSeparator5);
 
-        jmi_CadastroVeiculosComprar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         jmi_CadastroVeiculosComprar.setText("Comprar Veículos");
         jmi_CadastroVeiculosComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +91,6 @@ public class Main extends javax.swing.JFrame {
         menucadastro.add(jmi_CadastroVeiculosComprar);
         menucadastro.add(jSeparator2);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
         jMenuItem1.setText("Vender Veículo");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +118,6 @@ public class Main extends javax.swing.JFrame {
 
         MenuLocacao.setText("LOCAÇÃO");
 
-        jmi_LocacaoLocar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         jmi_LocacaoLocar.setText("Locar");
         jmi_LocacaoLocar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -136,7 +132,6 @@ public class Main extends javax.swing.JFrame {
         MenuLocacao.add(jmi_LocacaoLocar);
         MenuLocacao.add(jSeparator3);
 
-        jmi_LocacaoDevolver.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
         jmi_LocacaoDevolver.setText("Devolver");
         jmi_LocacaoDevolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -20,6 +20,7 @@ public class Motocicleta extends Veiculo {
         return modelo;
     }
     
+    @Override
     public double getValorDiariaLocacao(){
         if(categoria == Categoria.POPULAR){
                 return 70.00;

@@ -25,6 +25,7 @@ public class Van extends Veiculo {
         return modelo;
     }
 
+    @Override
     public double getValorDiariaLocacao() {
         if (categoria == Categoria.POPULAR){
                 return 200.00;
