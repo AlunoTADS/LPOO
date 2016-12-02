@@ -18,6 +18,8 @@ import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -94,6 +96,7 @@ public class JIFVender extends javax.swing.JInternalFrame {
      private void setaTipoVan(){
         this.modeloVenda.setModel(new DefaultComboBoxModel(ModeloVan.values()));  
      }
+
      
     /**
      * This method is called from within the constructor to initialize the form.
@@ -459,11 +462,12 @@ public class JIFVender extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_filtrarVendaActionPerformed
 
     private void vendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vendaActionPerformed
-        int v = table.getTable().getSelectedRow();
-        /*if (cbTipoAutomovelVenda.isSelected()){
-            Veiculo veiculo = new Automovel(, Marca.HONDA, Estado.LOCADO, locacao, Categoria.POPULAR, Double.NaN, title, v)
-        }*/
-        
+        veiculo.vender();
+        try {
+            veiculoDao.editar(veiculo);
+        } catch (Exception ex) {
+            Logger.getLogger(JIFVender.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_vendaActionPerformed
 
 
