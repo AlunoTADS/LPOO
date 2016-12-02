@@ -68,14 +68,13 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
         open();
 
         String sql = new StringBuilder()
-                .append(" UPDATE locacao SET ")
-                .append(" datainicio = ?, dias = ?, idcliente = ?, valor = ? ")
+                .append(" DELETE FROM locacao ")
                 .append(" WHERE idveiculo = ? ")
                 .toString();
 
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setInt(0, locacao.getIdVeiculo());
+            stmt.setInt(1, locacao.getIdVeiculo());
             stmt.execute();
         } finally {
             close();

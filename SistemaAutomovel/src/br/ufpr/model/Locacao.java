@@ -52,7 +52,12 @@ public class Locacao {
         return dias;
     }
 
-    @Column(label = "Valor", position = 5, format = "R$ %10.2f")
+    @Column(label = "Valor Diario", position = 5, format = "R$ %10.2f")
+    public Double getValorDiario() {
+        return this.getDias() != null && this.getValor() != null && this.getDias() != 0.00 ? this.getValor() / this.getDias() : 0.00;
+    }
+
+    @Column(label = "Valor", position = 6, format = "R$ %10.2f")
     public Double getValor() {
         return valor;
     }

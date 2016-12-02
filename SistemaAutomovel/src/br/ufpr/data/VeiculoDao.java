@@ -132,6 +132,7 @@ public class VeiculoDao extends Dao implements DaoI<Veiculo> {
             stmt = con.prepareStatement(this.montarQuery(veiculo));
             rs = stmt.executeQuery();
             while (rs.next()) {
+                Integer idVeiculo = rs.getInt("idveiculo");
                 Marca marca = Marca.fromValue(rs.getInt("idmarca"));
                 Estado estado = Estado.fromValue(rs.getInt("idestado"));
                 Categoria categoria = Categoria.fromValue(rs.getInt("idcategoria"));
@@ -140,17 +141,24 @@ public class VeiculoDao extends Dao implements DaoI<Veiculo> {
                 Integer ano = rs.getInt("ano");
                 Locacao locacao = null;
                 if (estado.equals(Estado.LOCADO)) {
-                    locacao = new Locacao(rs.getInt("idveiculo"));
+                    locacao = new Locacao(idVeiculo);
                     LocacaoDao locacaoDao = new LocacaoDao();
                     locacao = locacaoDao.buscar(locacao);
                 }
                 Veiculo v = null;
                 if (veiculo instanceof Automovel) {
-                    v = new Automovel(null, null, marca, estado, locacao, categoria, valorCompra, placa, ano);
+                    v = new Automovel(idVeiculo, null, marca, estado, locacao, categoria, valorCompra, placa, ano);
                 } else if (veiculo instanceof Motocicleta) {
-                    v = new Motocicleta(null, null, marca, estado, locacao, categoria, valorCompra, placa, ano);
+                    v = new Motocicleta(idVeiculo, null, marca, estado, locacao, categoria, valorCompra, placa, ano);
                 } else if (veiculo instanceof Van) {
-                    v = new Van(null, null, marca, estado, locacao, categoria, valorCompra, placa, ano);
+                    v = new Van(idVeiculo, null, marca, estado, locacao, categoria, valorCompra, placa, ano);
+                } else {
+                    v = new Veiculo(idVeiculo, marca, estado, locacao, categoria, valorCompra, placa, ano) {
+                        @Override
+                        public double getValorDiariaLocacao() {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+                    };
                 }
                 resultado.add(v);
             }

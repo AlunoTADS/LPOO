@@ -3,10 +3,14 @@ package br.ufpr.view.locacao;
 import br.ufpr.data.ClienteDao;
 import br.ufpr.data.LocacaoDao;
 import br.ufpr.data.VeiculoDao;
+import br.ufpr.model.Categoria;
 import br.ufpr.model.Cliente;
+import br.ufpr.model.Estado;
 import br.ufpr.model.Locacao;
+import br.ufpr.model.Marca;
 import br.ufpr.model.Veiculo;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -32,39 +36,31 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
         refreshTable();
         table.setClass(Locacao.class);
 
-        table.getTable()
-                .getSelectionModel()
-                .addListSelectionListener(new ListSelectionListener() {
-                    @Override
-                    public void valueChanged(ListSelectionEvent e) {
-                        try {
-                            locacao = (Locacao) table
-                                    .getTableModel()
-                                    .getDataList()
-                                    .get(table.getTable().getSelectedRow());
-                            refreshForm();
-                        } catch (Exception ex) {
-                        }
-                    }
-                });
-        
-         table.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        table.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 try {
                     int row = table.getTable().getSelectedRow();
                     if (row >= 0) {
                         locacao = (Locacao) table.getTableModel().getDataList().get(row);
+                        locacao.setCliente(clienteDao.buscar(locacao.getCliente()));
+                        cliente = locacao.getCliente();
+                        veiculo = veiculoDao.buscar(new Veiculo(locacao.getIdVeiculo(), null, null, null, null, null, null, null) {
+                            @Override
+                            public double getValorDiariaLocacao() {
+                                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                            }
+                        });
                     } else {
                         locacao = null;
                     }
+                    refreshForm();
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
         });
     }
-    
 
     private void refreshTable() {
         try {
@@ -81,16 +77,40 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
     }
 
     private void refreshForm() {
-        nomeClienteForm.setText(locacao.getCliente()!= null && locacao.getCliente().getNome() != null ? locacao.getCliente().getNome() :"TA NULL");
-        //placaForm.setText(locacao.getPlaca() != null ? locacao.getPlaca() : "");
-        //modeloForm.setText("");
-        //dataLocacaoForm.setText("");
-        //precoDiariaForm.setText("");
-        //qtdeDiasLocadoForm.setText("");
-        //valorLocacaoForm.setText("");
-        //marcaForm.setText("");
-        //anoForm.setInt();
-       
+        nomeClienteForm.setText(locacao != null && locacao.getCliente() != null && locacao.getCliente().getNome() != null ? locacao.getCliente().getNome() : "");
+        dataLocacaoForm.setText(locacao != null && locacao.getDataInicioFormatada() != null ? locacao.getDataInicioFormatada() : "");
+        precoDiariaForm.setText(locacao != null && locacao.getValor() != null ? String.format("%10.2f", locacao.getValor()) : "");
+        qtdeDiasLocadoForm.setText(locacao != null && locacao.getDias() != null ? String.format("%10d", locacao.getDias()) : "");
+        valorLocacaoForm.setText(locacao != null && locacao.getValorDiario() != null ? String.format("%10.2f", locacao.getValorDiario()) : "");
+        marcaForm.setText(veiculo != null && veiculo.getMarcaDescricao() != null ? veiculo.getMarcaDescricao() : "");
+        anoForm.setText(veiculo != null && veiculo.getAno() != 0 ? String.format("%10d", veiculo.getAno()) : "");
+        categriaForm.setText(veiculo != null && veiculo.getCategoriaDescricao() != null ? veiculo.getCategoriaDescricao() : "");
+        placaForm.setText(veiculo != null && veiculo.getPlaca() != null ? veiculo.getPlaca() : "");
+
+        devolverForm.setEnabled(locacao != null && locacao.getIdVeiculo() != null && veiculo != null && veiculo.getIdVeiculo() != null);
+
+    }
+
+    private void gravar() {
+        if (!(locacao != null && locacao.getIdVeiculo() != null && veiculo != null && veiculo.getIdVeiculo() != null)) {
+            JOptionPane.showMessageDialog(null, "Selecione uma locação");
+            return;
+        }
+
+        veiculo.devolver();
+        try {
+            veiculoDao.editar(veiculo);
+            locacaoDao.excluir(locacao);
+            JOptionPane.showMessageDialog(null, "Gravado com sucesso");
+            veiculo = null;
+            cliente = null;
+            locacao = null;
+            refreshForm();
+            refreshTable();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
     }
 
     /**
@@ -110,7 +130,7 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
         placaForm = new javax.swing.JTextField();
         nomeClienteForm = new javax.swing.JTextField();
         devolverForm = new javax.swing.JButton();
-        modeloForm = new javax.swing.JTextField();
+        categriaForm = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         dataLocacaoForm = new javax.swing.JTextField();
@@ -160,14 +180,14 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
 
         devolverForm.setText("DEVOLVER");
         devolverForm.setEnabled(false);
-        devolverForm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                devolverFormActionPerformed(evt);
+        devolverForm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                devolverFormMouseClicked(evt);
             }
         });
 
-        modeloForm.setBackground(new java.awt.Color(240, 235, 240));
-        modeloForm.setEnabled(false);
+        categriaForm.setBackground(new java.awt.Color(240, 235, 240));
+        categriaForm.setEnabled(false);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Modelo");
@@ -236,7 +256,7 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(anoForm, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                            .addComponent(anoForm))
                         .addGap(47, 47, 47)
                         .addComponent(devolverForm)
                         .addGap(60, 60, 60))
@@ -250,7 +270,7 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(modeloForm, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(categriaForm, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,7 +295,7 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nomeClienteForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(placaForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(modeloForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(categriaForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,6 +324,8 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
                             .addComponent(devolverForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel10.getAccessibleContext().setAccessibleName("Categoria");
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
 
@@ -409,14 +431,15 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jm_menuprincipalclientesActionPerformed
 
-    private void devolverFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_devolverFormActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_devolverFormActionPerformed
+    private void devolverFormMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_devolverFormMouseClicked
+        gravar();        // TODO add your handling code here:
+    }//GEN-LAST:event_devolverFormMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField anoForm;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField categriaForm;
     private javax.swing.JTextField dataLocacaoForm;
     private javax.swing.JButton devolverForm;
     private javax.swing.JLabel jLabel10;
@@ -441,7 +464,6 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
     private javax.swing.JMenuItem jm_sairdosistema;
     private javax.swing.JMenuItem jm_voltatelaprincipal;
     private javax.swing.JTextField marcaForm;
-    private javax.swing.JTextField modeloForm;
     private javax.swing.JTextField nomeClienteForm;
     private javax.swing.JTextField placaForm;
     private javax.swing.JTextField precoDiariaForm;

@@ -62,10 +62,6 @@ public abstract class Veiculo implements VeiculoI {
             throw new IllegalArgumentException("estado == Estado.LOCADO implica em locacao != null");
         }
 
-        if ((estado != Estado.LOCADO || estado != Estado.VENDIDO) && locacao != null) {
-            throw new IllegalArgumentException("(estado != Estado.LOCADO || Estado.VENDIDO) implica em locacao == null");
-        }
-
         if (ano != null && ano <= 0) {
             throw new IllegalArgumentException("ano não pode ser <= 0");
         }
