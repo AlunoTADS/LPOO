@@ -49,12 +49,12 @@ public abstract class Veiculo implements VeiculoI {
      * @param categoria
      * @param valorCompra
      * @param placa a placa deve ser nula ou seguir a expressao regular
-     * [A-Z]{4,4}-\\d{4,4}
+     * [A-Z]{3,3}-\\d{4,4}
      * @param ano ano do modelo do veiculo, não pode ser menor ou igual a zero.
      */
     public Veiculo(Integer idVeiculo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
 
-        if (placa != null && !Pattern.compile("[A-Z]{4,4}-\\d{4,4}").matcher(placa).matches()) {
+        if (placa != null && !Pattern.compile("[A-Z]{3,3}-\\d{4,4}").matcher(placa).matches()) {
             throw new IllegalArgumentException("placa não é um argumento valido");
         }
 

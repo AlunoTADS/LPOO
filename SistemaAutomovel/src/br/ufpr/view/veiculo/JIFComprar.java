@@ -57,18 +57,17 @@ public class JIFComprar extends javax.swing.JInternalFrame {
         this.estadoCompra.setModel(new DefaultComboBoxModel(Estado.values()));
         
         try {
-            DecimalFormat dFormat = new DecimalFormat("#,###,###.00");
+            DecimalFormat dFormat = new DecimalFormat("####,###,###,###.00");
             NumberFormatter formatter = new NumberFormatter(dFormat);
             formatter.setFormat(dFormat);
             formatter.setAllowsInvalid(false);
-            MaskFormatter maskPlaca = new MaskFormatter("UUUU-####");
+            MaskFormatter maskPlaca = new MaskFormatter("UUU-####");
             maskPlaca.setPlaceholderCharacter('_');
             this.valorCompra.setFormatterFactory(new DefaultFormatterFactory(formatter));
             maskPlaca.install(placaCompra);
         } catch (ParseException ex) {
             Logger.getLogger(JIFComprar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
     
     public void refreshForm() {
