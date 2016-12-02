@@ -121,9 +121,9 @@ public class VanDao extends VeiculoDao implements DaoI<Veiculo> {
             if (van.getPlaca() != null) {
                 query.append(String.format(" AND placa = '%s' ", van.getPlaca()));
             }
-            if (van.getAno() != 0) {
-                query.append(String.format(" AND ano = %d ", van.getAno()));
-            }
+//            if (van.getAno() != 0) {
+//                query.append(String.format(" AND ano = %d ", van.getAno()));
+//            }
         }
         
         return query.toString();

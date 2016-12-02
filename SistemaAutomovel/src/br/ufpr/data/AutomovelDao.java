@@ -116,9 +116,9 @@ public class AutomovelDao extends VeiculoDao implements DaoI<Veiculo> {
             if (automovel.getPlaca() != null) {
                 query.append(String.format(" AND placa = '%s' ", automovel.getPlaca()));
             }
-            if (automovel.getAno() != 0) {
-                query.append(String.format(" AND ano = %d ", automovel.getAno()));
-            }
+//            if (automovel.getAno() != 0) {
+//                query.append(String.format(" AND ano = %d ", automovel.getAno()));
+//            }
         }
         
         return query.toString();

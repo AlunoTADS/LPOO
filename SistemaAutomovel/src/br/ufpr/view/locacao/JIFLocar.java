@@ -1,8 +1,10 @@
 package br.ufpr.view.locacao;
 
+import br.ufpr.data.AutomovelDao;
 import br.ufpr.data.ClienteDao;
 import br.ufpr.data.LocacaoDao;
-import br.ufpr.data.VeiculoDao;
+import br.ufpr.data.MotocicletaDao;
+import br.ufpr.data.VanDao;
 import br.ufpr.model.Automovel;
 import br.ufpr.model.Categoria;
 import br.ufpr.model.Cliente;
@@ -25,7 +27,9 @@ import javax.swing.event.ListSelectionListener;
 public class JIFLocar extends javax.swing.JInternalFrame {
 
     private ClienteDao clienteDao = new ClienteDao();
-    private VeiculoDao veiculoDao = new VeiculoDao();
+    private AutomovelDao automovelDao = new AutomovelDao();
+    private MotocicletaDao motocicletaDao = new MotocicletaDao();
+    private VanDao vanDao = new VanDao();
     private LocacaoDao locacaoDao = new LocacaoDao();
     private Cliente cliente;
     private Veiculo veiculo;
@@ -36,9 +40,6 @@ public class JIFLocar extends javax.swing.JInternalFrame {
      */
     public JIFLocar() {
         initComponents();
-
-        refreshFormCliente();
-        refreshTableCliente();
 
         tableCliente.setClass(Cliente.class);
         tableVeiculo.setClass(Veiculo.class);
@@ -65,6 +66,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
             }
         });
 
+        cancelar();
     }
 
     private void refreshFormCliente() {
@@ -74,25 +76,9 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     }
 
     private void refreshFormVeiculo() {
-         List<Veiculo> veiculos = new ArrayList<>();
-        try {
-            if (jcb_automovel.isSelected()) {
-                tableVeiculo.setClass(Automovel.class);
-                veiculos = veiculoDao.listar(new Automovel(null, (Marca) jcb_marca.getSelectedItem(), Estado.DISPONIVEL, null, null, null, null, null));
-                //public Automovel(ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
-            } else if (jcb_motocicleta.isSelected()) {
-                tableVeiculo.setClass(Motocicleta.class);
-                veiculos = veiculoDao.listar(new Motocicleta(null, (Marca) jcb_marca.getSelectedItem(), Estado.DISPONIVEL, null, null, null, null, null));
-            } else if (jcb_van.isSelected()) {
-                tableVeiculo.setClass(Van.class);
-                veiculos = veiculoDao.listar(new Van(null, (Marca) jcb_marca.getSelectedItem(), Estado.DISPONIVEL, null, null, null, null, null));
-            }
-            tableVeiculo.getTableModel().setDataList(veiculos);
-        } catch (Exception e) {
-            e.getMessage();
-        }       
+
     }
-    
+
     private void refreshTableCliente() {
         try {
             tableCliente.getTableModel().setDataList(clienteDao.listar(null));
@@ -102,10 +88,22 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     }
 
     private void refreshTableVeiculo() {
+        List<? extends Veiculo> veiculos = new ArrayList<>();
         try {
-            tableVeiculo.getTableModel().setDataList(veiculoDao.listar(null));
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            if (jcb_automovel.isSelected()) {
+                tableVeiculo.setClass(Automovel.class);
+                veiculos = automovelDao.listar(new Automovel(null, (Marca) jcb_marca.getSelectedItem(), Estado.DISPONIVEL, null, null, null, null, null));
+                //public Automovel(ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
+            } else if (jcb_motocicleta.isSelected()) {
+                tableVeiculo.setClass(Motocicleta.class);
+                veiculos = motocicletaDao.listar(new Motocicleta(null, (Marca) jcb_marca.getSelectedItem(), Estado.DISPONIVEL, null, null, null, null, null));
+            } else if (jcb_van.isSelected()) {
+                tableVeiculo.setClass(Van.class);
+                veiculos = vanDao.listar(new Van(null, (Marca) jcb_marca.getSelectedItem(), Estado.DISPONIVEL, null, null, null, null, null));
+            }
+            tableVeiculo.getTableModel().setDataList(veiculos);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -142,6 +140,9 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     }
 
     private void cancelar() {
+        jcb_categoria.setSelectedIndex(-1);
+        jcb_marca.setSelectedIndex(-1);
+
         cliente = null;
         veiculo = null;
         refreshTableCliente();
@@ -217,6 +218,7 @@ public class JIFLocar extends javax.swing.JInternalFrame {
 
         bgTipo.add(jcb_automovel);
         jcb_automovel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jcb_automovel.setSelected(true);
         jcb_automovel.setText("Automóvel");
 
         bgTipo.add(jcb_motocicleta);
@@ -375,11 +377,6 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jMenuBar1.add(jMenu1);
 
         jm_menuprincipalclientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/menu40.png"))); // NOI18N
-        jm_menuprincipalclientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jm_menuprincipalclientesActionPerformed(evt);
-            }
-        });
 
         jm_duplicarregistro.setText("Duplicar registro selecionado");
         jm_duplicarregistro.setEnabled(false);
@@ -432,11 +429,21 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jb_buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/atualizar.png"))); // NOI18N
         jb_buscar.setText("BUSCAR (F5)");
         jb_buscar.setPreferredSize(new java.awt.Dimension(150, 25));
+        jb_buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_buscarMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jb_buscar);
 
         jb_cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufpr/view/imagens/Cancelar25.png"))); // NOI18N
         jb_cancelar.setText("CANCELAR (F6)");
         jb_cancelar.setPreferredSize(new java.awt.Dimension(150, 25));
+        jb_cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_cancelarMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jb_cancelar);
 
         setJMenuBar(jMenuBar1);
@@ -491,9 +498,13 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jm_sairdosistemaActionPerformed
 
-    private void jm_menuprincipalclientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_menuprincipalclientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jm_menuprincipalclientesActionPerformed
+    private void jb_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_buscarMouseClicked
+        refreshTableVeiculo();        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_buscarMouseClicked
+
+    private void jb_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_cancelarMouseClicked
+        cancelar();
+    }//GEN-LAST:event_jb_cancelarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

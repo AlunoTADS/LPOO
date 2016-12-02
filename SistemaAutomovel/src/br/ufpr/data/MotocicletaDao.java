@@ -151,9 +151,9 @@ public class MotocicletaDao extends VeiculoDao implements DaoI<Veiculo> {
             sql.append(String.format(" AND v.placa = '%s' ", motocicleta.getPlaca()));
         }
 
-        if (motocicleta.getAno() != 0) {
-            sql.append(String.format(" AND v.ano = '%d' ", motocicleta.getAno()));
-        }
+//        if (motocicleta.getAno() != 0) {
+//            sql.append(String.format(" AND v.ano = '%d' ", motocicleta.getAno()));
+//        }
 
         stmt = con.prepareStatement(sql.toString());
 

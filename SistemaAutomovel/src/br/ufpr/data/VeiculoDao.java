@@ -175,7 +175,7 @@ public class VeiculoDao extends Dao implements DaoI<Veiculo> {
             if (veiculo.getPlaca() != null) {
                 query.append(String.format(" AND placa = '%s' ", veiculo.getPlaca()));
             }
-//            if (veiculo.getAno() != 0) {
+//            if (veiculo.getAno() != null) {
 //                query.append(String.format(" AND ano = %d ", veiculo.getAno()));
 //            }
         }

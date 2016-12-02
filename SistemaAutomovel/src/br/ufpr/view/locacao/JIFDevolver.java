@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.ufpr.view.locacao;
 
 import br.ufpr.data.VeiculoDao;
 import br.ufpr.model.Automovel;
 import br.ufpr.model.Estado;
+import br.ufpr.model.Locacao;
 import br.ufpr.model.Motocicleta;
 import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
@@ -21,7 +17,8 @@ import javax.swing.event.ListSelectionListener;
  * @author edenm
  */
 public class JIFDevolver extends javax.swing.JInternalFrame {
-    
+
+    private Locacao locacao;
     private Veiculo veiculo;
     private VeiculoDao veiculoDao;
 
@@ -30,17 +27,17 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
      */
     public JIFDevolver() {
         initComponents();
-        
+
         refreshTable();
-        table.setClass(Veiculo.class);
-        
+        table.setClass(Locacao.class);
+
         table.getTable()
                 .getSelectionModel()
                 .addListSelectionListener(new ListSelectionListener() {
                     @Override
                     public void valueChanged(ListSelectionEvent e) {
                         try {
-                            veiculo = (Veiculo) table
+                            locacao = (Locacao) table
                                     .getTableModel()
                                     .getDataList()
                                     .get(table.getTable().getSelectedRow());
@@ -50,21 +47,21 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
                     }
                 });
     }
-    
-    private void refreshTable() {        
-        try {
-            List<Veiculo> automoveis = veiculoDao.listar(new Automovel(null, null, Estado.LOCADO, null, null, null, null, null));
-            List<Veiculo> motocicletas = veiculoDao.listar(new Motocicleta(null, null, Estado.LOCADO, null, null, null, null, null));
-            List<Veiculo> vans = veiculoDao.listar(new Van(null, null, Estado.LOCADO, null, null, null, null, null));
-            List<Veiculo> veiculos = new ArrayList<>();
-            veiculos.addAll(automoveis);
-            veiculos.addAll(motocicletas);
-            veiculos.addAll(vans);
-            
-            table.getTableModel().setDataList(veiculos);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+
+    private void refreshTable() {
+//        try {
+//            List<Veiculo> automoveis = veiculoDao.listar(new Automovel(null, null, Estado.LOCADO, null, null, null, null, null));
+//            List<Veiculo> motocicletas = veiculoDao.listar(new Motocicleta(null, null, Estado.LOCADO, null, null, null, null, null));
+//            List<Veiculo> vans = veiculoDao.listar(new Van(null, null, Estado.LOCADO, null, null, null, null, null));
+//            List<Veiculo> veiculos = new ArrayList<>();
+//            veiculos.addAll(automoveis);
+//            veiculos.addAll(motocicletas);
+//            veiculos.addAll(vans);
+//
+//            table.getTableModel().setDataList(veiculos);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
     }
     
     private void refreshForm() {
