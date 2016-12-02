@@ -64,8 +64,9 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
     }
 
     private void refreshForm() {
-        nomeClienteForm.setText(this.veiculo.getLocacao().getCliente() != null && this.veiculo.getLocacao().getCliente().getNome() != null ? this.veiculo.getLocacao().getCliente().getNome() : "");
-        placaForm.setText(this.veiculo.getPlaca() != null ? this.veiculo.getPlaca() : "");
+        Locacao selected = veiculo.getLocacao();
+        nomeClienteForm.setText(selected.getCliente()!= null && selected.getCliente().getNome() != null ? selected.getCliente().getNome() : "TA NULL");
+        placaForm.setText(veiculo.getPlaca() != null ? veiculo.getPlaca() : "");
     }
 
     /**
