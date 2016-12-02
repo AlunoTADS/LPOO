@@ -14,7 +14,9 @@ import br.ufpr.model.Marca;
 import br.ufpr.model.Motocicleta;
 import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
@@ -43,6 +45,8 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     public JIFLocar() {
         initComponents();
 
+        jft_dataLocacao.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date()));
+        
         tableCliente.setClass(Cliente.class);
         tableVeiculo.setClass(Veiculo.class);
 
@@ -74,10 +78,6 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jtf_nome.setText(cliente != null && cliente.getNome() != null ? cliente.getNome() : "");
         jtf_sobrenome.setText(cliente != null && cliente.getSobrenome() != null ? cliente.getSobrenome() : "");
         jtf_cpf.setText(cliente != null && cliente.getCpf() != null ? cliente.getCpf() : "");
-    }
-
-    private void refreshFormVeiculo() {
-
     }
 
     private void refreshTableCliente() {
@@ -230,14 +230,29 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jcb_automovel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jcb_automovel.setSelected(true);
         jcb_automovel.setText("Automóvel");
+        jcb_automovel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcb_automovelActionPerformed(evt);
+            }
+        });
 
         bgTipo.add(jcb_motocicleta);
         jcb_motocicleta.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jcb_motocicleta.setText("Motocicleta");
+        jcb_motocicleta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcb_motocicletaActionPerformed(evt);
+            }
+        });
 
         bgTipo.add(jcb_van);
         jcb_van.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jcb_van.setText("Van");
+        jcb_van.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcb_vanActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Tipo");
@@ -256,6 +271,11 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jLabel1.setText("Categoria");
 
         jcb_categoria.setModel(new DefaultComboBoxModel<>(Categoria.values()));
+        jcb_categoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcb_categoriaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -524,6 +544,22 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     private void jcb_marcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_marcaActionPerformed
         setaMarca();        // TODO add your handling code here:
     }//GEN-LAST:event_jcb_marcaActionPerformed
+
+    private void jcb_automovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_automovelActionPerformed
+        refreshTableVeiculo();        // TODO add your handling code here:
+    }//GEN-LAST:event_jcb_automovelActionPerformed
+
+    private void jcb_motocicletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_motocicletaActionPerformed
+        refreshTableVeiculo();        // TODO add your handling code here:
+    }//GEN-LAST:event_jcb_motocicletaActionPerformed
+
+    private void jcb_vanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_vanActionPerformed
+        refreshTableVeiculo();        // TODO add your handling code here:
+    }//GEN-LAST:event_jcb_vanActionPerformed
+
+    private void jcb_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_categoriaActionPerformed
+        setaCategoria();        // TODO add your handling code here:
+    }//GEN-LAST:event_jcb_categoriaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

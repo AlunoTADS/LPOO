@@ -4,7 +4,7 @@ import br.ufpr.model.Cliente;
 import br.ufpr.model.Locacao;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -113,6 +113,7 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
 
     @Override
     public List<Locacao> listar(Locacao locacao) throws Exception {
+        open();
         StringBuilder sql = new StringBuilder()
                 .append(" SELECT idveiculo, idcliente, dias, datainicio, valor ")
                 .append(" FROM locacao ")
@@ -138,12 +139,17 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
             sql.append(String.format(" AND valor = %f ", locacao.getValor()));
         }
 
-        stmt = con.prepareStatement(sql.toString());
-
-        List<Locacao> list = new LinkedList<>();
+        List<Locacao> list = new ArrayList<>();
         try {
+            stmt = con.prepareStatement(sql.toString());
             rs = stmt.executeQuery();
-            list.add(new Locacao(rs.getInt(1), new Cliente(rs.getInt(2)), rs.getInt(3), rs.getDate(4), rs.getDouble(5)));
+            while (rs.next()) {
+                list.add(new Locacao(rs.getInt("idlocacao"),
+                        new Cliente(rs.getInt("idcliente")),
+                        rs.getInt("dias"),
+                        rs.getDate("datainicio"),
+                        rs.getDouble("valor")));
+            }
         } catch (Exception e) {
             throw e;
         } finally {
