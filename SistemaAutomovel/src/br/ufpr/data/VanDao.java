@@ -71,6 +71,7 @@ public class VanDao extends VeiculoDao implements DaoI<Veiculo> {
         stmt = con.prepareStatement(this.montarQuery(van));
         rs = stmt.executeQuery();
         while (rs.next()) {
+            Integer idVeiculo = rs.getInt("id");
             ModeloVan modeloVan = ModeloVan.fromValue(rs.getInt("idmodelovan"));
             Marca marca = Marca.fromValue(rs.getInt("idmarca"));
             Estado estado = Estado.fromValue(rs.getInt("idestado"));
@@ -83,7 +84,7 @@ public class VanDao extends VeiculoDao implements DaoI<Veiculo> {
                 locacao = new Locacao(rs.getInt("idveiculo"));
                 //locacao = new LocacaoDao.buscar(locacao);
             }
-            Van v = new Van(modeloVan, marca, estado, locacao, categoria, valorCompra, placa, ano);
+            Van v = new Van(idVeiculo,modeloVan, marca, estado, locacao, categoria, valorCompra, placa, ano);
             resultado.add(v);
         }
         
