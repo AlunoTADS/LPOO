@@ -47,7 +47,24 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
                         }
                     }
                 });
+        
+         table.getTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                try {
+                    int row = table.getTable().getSelectedRow();
+                    if (row >= 0) {
+                        locacao = (Locacao) table.getTableModel().getDataList().get(row);
+                    } else {
+                        locacao = null;
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
     }
+    
 
     private void refreshTable() {
         try {
@@ -64,9 +81,16 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
     }
 
     private void refreshForm() {
-        Locacao selected = veiculo.getLocacao();
-        nomeClienteForm.setText(selected.getCliente()!= null && selected.getCliente().getNome() != null ? selected.getCliente().getNome() : "TA NULL");
-        placaForm.setText(veiculo.getPlaca() != null ? veiculo.getPlaca() : "");
+        nomeClienteForm.setText(locacao.getCliente()!= null && locacao.getCliente().getNome() != null ? locacao.getCliente().getNome() :"TA NULL");
+        //placaForm.setText(locacao.getPlaca() != null ? locacao.getPlaca() : "");
+        //modeloForm.setText("");
+        //dataLocacaoForm.setText("");
+        //precoDiariaForm.setText("");
+        //qtdeDiasLocadoForm.setText("");
+        //valorLocacaoForm.setText("");
+        //marcaForm.setText("");
+        //anoForm.setInt();
+       
     }
 
     /**
