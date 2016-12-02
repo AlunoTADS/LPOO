@@ -199,7 +199,7 @@
                                   <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="76" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="anoForm" alignment="0" pref="128" max="32767" attributes="0"/>
+                              <Component id="anoForm" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Component id="devolverForm" min="-2" max="-2" attributes="0"/>
