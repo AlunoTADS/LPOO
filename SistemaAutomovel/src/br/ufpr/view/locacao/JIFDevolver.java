@@ -1,14 +1,11 @@
 package br.ufpr.view.locacao;
 
+import br.ufpr.data.ClienteDao;
 import br.ufpr.data.LocacaoDao;
 import br.ufpr.data.VeiculoDao;
-import br.ufpr.model.Automovel;
-import br.ufpr.model.Estado;
+import br.ufpr.model.Cliente;
 import br.ufpr.model.Locacao;
-import br.ufpr.model.Motocicleta;
-import br.ufpr.model.Van;
 import br.ufpr.model.Veiculo;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -19,9 +16,11 @@ import javax.swing.event.ListSelectionListener;
  */
 public class JIFDevolver extends javax.swing.JInternalFrame {
 
+    private Cliente cliente;
     private Locacao locacao;
     private Veiculo veiculo;
     private VeiculoDao veiculoDao;
+    private ClienteDao clienteDao;
     private LocacaoDao locacaoDao = new LocacaoDao();
 
     /**
@@ -53,13 +52,15 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
     private void refreshTable() {
         try {
             List<Locacao> locacoes = locacaoDao.listar(new Locacao(null));
-
+            for (Locacao locacao : locacoes) {
+                locacao.setCliente(clienteDao.buscar(locacao.getCliente()));
+            }
             table.getTableModel().setDataList(locacoes);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    
+
     private void refreshForm() {
         nomeClienteForm.setText(this.veiculo.getLocacao().getCliente() != null && this.veiculo.getLocacao().getCliente().getNome() != null ? this.veiculo.getLocacao().getCliente().getNome() : "");
         placaForm.setText(this.veiculo.getPlaca() != null ? this.veiculo.getPlaca() : "");
@@ -208,7 +209,7 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(anoForm))
+                            .addComponent(anoForm, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
                         .addGap(47, 47, 47)
                         .addComponent(devolverForm)
                         .addGap(60, 60, 60))
@@ -340,13 +341,15 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(24, 24, 24))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 920, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,7 +357,7 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
