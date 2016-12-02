@@ -54,7 +54,7 @@ public abstract class Veiculo implements VeiculoI {
      */
     public Veiculo(Integer idVeiculo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
 
-        if (placa != null && !Pattern.compile("[A-Z]{3,3}-\\d{4,4}").matcher(placa).matches()) {
+        if (placa != null && !Pattern.compile("[A-Z]{4,4}-\\d{4,4}").matcher(placa).matches()) {
             throw new IllegalArgumentException("placa não é um argumento valido");
         }
 
@@ -66,7 +66,7 @@ public abstract class Veiculo implements VeiculoI {
             throw new IllegalArgumentException("(estado != Estado.LOCADO || Estado.VENDIDO) implica em locacao == null");
         }
 
-        if (ano!= null && ano <= 0) {
+        if (ano != null && ano <= 0) {
             throw new IllegalArgumentException("ano não pode ser <= 0");
         }
 
@@ -100,8 +100,28 @@ public abstract class Veiculo implements VeiculoI {
         this.estado = Estado.DISPONIVEL;
     }
 
+    /**
+     * @return o idVeiculo
+     */
+    @Column(label = "Cód", position = 0, format = "%10d")
+    public Integer getIdVeiculo() {
+        return this.idVeiculo;
+    }
+
     @Override
-     @Column(label = "Preço p/ Venda", position = 3)
+    @Column(label = "Placa", position = 1)
+    public String getPlaca() {
+        return this.placa;
+    }
+
+    @Override
+    @Column(label = "Ano", position = 2, format = "%10d")
+    public int getAno() {
+        return this.ano;
+    }
+
+    @Override
+    @Column(label = "Preço p/ Venda", position = 3, format = "R$ %10.2f")
     public double getValorParaVenda() {
         @SuppressWarnings("LocalVariableHidesMemberVariable")
         double valorCompra = this.getValorCompra() == null ? 0.00 : this.getValorCompra();
@@ -113,14 +133,32 @@ public abstract class Veiculo implements VeiculoI {
         return valorVenda;
     }
 
-    //@Column(label = "Estado", position = 0)
+    @Column(label = "Marca", position = 3)
+    public String getMarcaDescricao() {
+        return this.marca != null ? this.marca.getDescricao() : "";
+    }
+
+    @Column(label = "Categoria", position = 4)
+    public String getCategoriaDescricao() {
+        return this.marca != null ? this.categoria.getDescricao() : "";
+    }
+
+    @Column(label = "Valor Compra", position = 5, format = "%10.2f")
+    public Double getValorCompra() {
+        return this.valorCompra;
+    }
+
+    @Column(label = "Estado", position = 6)
+    public String getEstadoDescricao() {
+        return this.estado != null ? this.estado.getDescricao() : "";
+    }
+
     @Override
     public Estado getEstado() {
         return this.estado;
     }
 
     @Override
-     @Column(label = "Marca", position = 1)
     public Marca getMarca() {
         return this.marca;
     }
@@ -133,33 +171,6 @@ public abstract class Veiculo implements VeiculoI {
     @Override
     public Locacao getLocacao() {
         return this.locacao;
-    }
-
-    @Override
-    @Column(label = "Placa", position = 0)
-    public String getPlaca() {
-        return this.placa;
-    }
-
-    @Override
-     @Column(label = "Ano", position = 2)
-    public int getAno() {
-        return this.ano;
-    }
-
-    /**
-     * @return o idVeiculo
-     */
-    public Integer getIdVeiculo() {
-        return this.idVeiculo;
-    }
-
-    /**
-     * @return o valorCompra
-     */
-    //@Column(label = "Valor Compra", position = 1, format = "%.2f")
-    public Double getValorCompra() {
-        return this.valorCompra;
     }
 
 }
