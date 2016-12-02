@@ -1,5 +1,6 @@
 package br.ufpr.view.locacao;
 
+import br.ufpr.data.LocacaoDao;
 import br.ufpr.data.VeiculoDao;
 import br.ufpr.model.Automovel;
 import br.ufpr.model.Estado;
@@ -21,6 +22,7 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
     private Locacao locacao;
     private Veiculo veiculo;
     private VeiculoDao veiculoDao;
+    private LocacaoDao locacaoDao = new LocacaoDao();
 
     /**
      * Creates new form jif_devolver
@@ -49,19 +51,13 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
     }
 
     private void refreshTable() {
-//        try {
-//            List<Veiculo> automoveis = veiculoDao.listar(new Automovel(null, null, Estado.LOCADO, null, null, null, null, null));
-//            List<Veiculo> motocicletas = veiculoDao.listar(new Motocicleta(null, null, Estado.LOCADO, null, null, null, null, null));
-//            List<Veiculo> vans = veiculoDao.listar(new Van(null, null, Estado.LOCADO, null, null, null, null, null));
-//            List<Veiculo> veiculos = new ArrayList<>();
-//            veiculos.addAll(automoveis);
-//            veiculos.addAll(motocicletas);
-//            veiculos.addAll(vans);
-//
-//            table.getTableModel().setDataList(veiculos);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
+        try {
+            List<Locacao> locacoes = locacaoDao.listar(new Locacao(null));
+
+            table.getTableModel().setDataList(locacoes);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
     private void refreshForm() {
@@ -86,16 +82,20 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
         placaForm = new javax.swing.JTextField();
         nomeClienteForm = new javax.swing.JTextField();
         devolverForm = new javax.swing.JButton();
-        placaForm1 = new javax.swing.JTextField();
+        modeloForm = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        placaForm2 = new javax.swing.JTextField();
+        dataLocacaoForm = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        placaForm3 = new javax.swing.JTextField();
+        precoDiariaForm = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        placaForm4 = new javax.swing.JTextField();
+        qtdeDiasLocadoForm = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        placaForm5 = new javax.swing.JTextField();
+        valorLocacaoForm = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        marcaForm = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        anoForm = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jm_menuprincipalclientes = new javax.swing.JMenu();
@@ -125,8 +125,10 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
         jLabel2.setText("Nome do Cliente");
 
         placaForm.setBackground(new java.awt.Color(240, 235, 240));
+        placaForm.setEnabled(false);
 
         nomeClienteForm.setBackground(new java.awt.Color(240, 235, 240));
+        nomeClienteForm.setEnabled(false);
 
         devolverForm.setText("DEVOLVER");
         devolverForm.setEnabled(false);
@@ -136,7 +138,8 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
             }
         });
 
-        placaForm1.setBackground(new java.awt.Color(240, 235, 240));
+        modeloForm.setBackground(new java.awt.Color(240, 235, 240));
+        modeloForm.setEnabled(false);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Modelo");
@@ -144,22 +147,38 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Data Locação");
 
-        placaForm2.setBackground(new java.awt.Color(240, 235, 240));
+        dataLocacaoForm.setBackground(new java.awt.Color(240, 235, 240));
+        dataLocacaoForm.setEnabled(false);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Preço Diária");
 
-        placaForm3.setBackground(new java.awt.Color(240, 235, 240));
+        precoDiariaForm.setBackground(new java.awt.Color(240, 235, 240));
+        precoDiariaForm.setEnabled(false);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Qtde. Dias Locado");
 
-        placaForm4.setBackground(new java.awt.Color(240, 235, 240));
+        qtdeDiasLocadoForm.setBackground(new java.awt.Color(240, 235, 240));
+        qtdeDiasLocadoForm.setEnabled(false);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Valor Locação");
 
-        placaForm5.setBackground(new java.awt.Color(240, 235, 240));
+        valorLocacaoForm.setBackground(new java.awt.Color(240, 235, 240));
+        valorLocacaoForm.setEnabled(false);
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setText("Marca");
+
+        marcaForm.setBackground(new java.awt.Color(240, 235, 240));
+        marcaForm.setEnabled(false);
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setText("Ano");
+
+        anoForm.setBackground(new java.awt.Color(240, 235, 240));
+        anoForm.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -170,19 +189,29 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(placaForm3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel12)
+                            .addComponent(precoDiariaForm, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(qtdeDiasLocadoForm))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(placaForm4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel14)
+                            .addComponent(valorLocacaoForm, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel15)
+                            .addComponent(marcaForm, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(placaForm5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(devolverForm))
-                            .addComponent(jLabel14)))
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(anoForm))
+                        .addGap(47, 47, 47)
+                        .addComponent(devolverForm)
+                        .addGap(60, 60, 60))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -193,13 +222,13 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(placaForm1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(modeloForm, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(placaForm2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(dataLocacaoForm, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(22, 22, 22))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +237,7 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(placaForm2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dataLocacaoForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -218,24 +247,34 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nomeClienteForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(placaForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(placaForm1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(modeloForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(precoDiariaForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(qtdeDiasLocadoForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel14)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(valorLocacaoForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
+                        .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(placaForm3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(marcaForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(placaForm4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
+                        .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(placaForm5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(anoForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(devolverForm, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(56, 60));
@@ -312,10 +351,10 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -346,13 +385,17 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField anoForm;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField dataLocacaoForm;
     private javax.swing.JButton devolverForm;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -367,13 +410,13 @@ public class JIFDevolver extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jm_menuprincipalclientes;
     private javax.swing.JMenuItem jm_sairdosistema;
     private javax.swing.JMenuItem jm_voltatelaprincipal;
+    private javax.swing.JTextField marcaForm;
+    private javax.swing.JTextField modeloForm;
     private javax.swing.JTextField nomeClienteForm;
     private javax.swing.JTextField placaForm;
-    private javax.swing.JTextField placaForm1;
-    private javax.swing.JTextField placaForm2;
-    private javax.swing.JTextField placaForm3;
-    private javax.swing.JTextField placaForm4;
-    private javax.swing.JTextField placaForm5;
+    private javax.swing.JTextField precoDiariaForm;
+    private javax.swing.JTextField qtdeDiasLocadoForm;
     private br.ufpr.view.util.SimpleReflectTable table;
+    private javax.swing.JTextField valorLocacaoForm;
     // End of variables declaration//GEN-END:variables
 }
