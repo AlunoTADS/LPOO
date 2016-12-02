@@ -7,6 +7,7 @@ import br.ufpr.model.Marca;
 import br.ufpr.model.ModeloMotocicleta;
 import br.ufpr.model.Motocicleta;
 import br.ufpr.model.Veiculo;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -118,8 +119,9 @@ public class MotocicletaDao extends VeiculoDao implements DaoI<Veiculo> {
     }
 
     public List<Motocicleta> listar(Motocicleta motocicleta) throws Exception {
+        open();
         StringBuilder sql = new StringBuilder()
-                .append(" SELECT m.idmodelomotocicleta, v.idveiculo, v.idmarca, v.idestado, v.idcategoria, v.valorcompra, v.placa, v.ano ")
+                .append(" SELECT v.idveiculo, m.idmodelomotocicleta, v.idveiculo, v.idmarca, v.idestado, v.idcategoria, v.valorcompra, v.placa, v.ano ")
                 .append(" FROM   veiculo v ")
                 .append("        INNER JOIN motocicleta m ON m.idveiculo = v.idveiculo ")
                 .append(" WHERE 1 = 1 ");
@@ -157,20 +159,22 @@ public class MotocicletaDao extends VeiculoDao implements DaoI<Veiculo> {
 //        }
         stmt = con.prepareStatement(sql.toString());
 
-        List<Motocicleta> list = new LinkedList<>();
+        List<Motocicleta> list = new ArrayList<>();
         try {
             rs = stmt.executeQuery();
-            list.add(new Motocicleta(
-                    null, 
-                    ModeloMotocicleta.fromValue(rs.getInt(1)),
-                    Marca.fromValue(rs.getInt(2)),
-                    Estado.fromValue(rs.getInt(rs.getInt(3))),
-                    new LocacaoDao().buscar(new Locacao(rs.getInt(4), null, null, null, null)),
-                    Categoria.fromValue(rs.getInt(5)),
-                    rs.getDouble(6),
-                    rs.getString(7),
-                    rs.getInt(8)
-            ));
+            while (rs.next()) {
+                list.add(new Motocicleta(
+                        rs.getInt("idveiculo"),
+                        ModeloMotocicleta.fromValue(rs.getInt("idmodelomotocicleta")),
+                        Marca.fromValue(rs.getInt("idmarca")),
+                        Estado.fromValue(rs.getInt("idestado")),
+                        Estado.fromValue(rs.getInt("idestado")).equals(Estado.LOCADO) ? new Locacao(rs.getInt("idveiculo")) : null,
+                        Categoria.fromValue(rs.getInt("idcategoria")),
+                        rs.getDouble("valorcompra"),
+                        rs.getString("placa"),
+                        rs.getInt("ano")
+                ));
+            }
         } catch (Exception e) {
             throw e;
         } finally {

@@ -88,22 +88,27 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
 
     @Override
     public Locacao buscar(Locacao locacao) throws Exception {
+        open();
         String sql = new StringBuilder()
                 .append(" SELECT idveiculo, idcliente, dias, datainicio, valor ")
                 .append(" FROM locacao ")
                 .append(String.format(" WHERE idveiculo = %d ", locacao.getIdVeiculo()))
                 .toString();
 
-        stmt = con.prepareStatement(sql);
-
         try {
+            stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
+            if (rs.next()) {
+                locacao = new Locacao(rs.getInt(1), new Cliente(rs.getInt(2)), rs.getInt(3), rs.getDate(4), rs.getDouble(5));
+            } else {
+                locacao = null;
+            }
         } catch (Exception e) {
             throw e;
         } finally {
             close();
         }
-        return new Locacao(rs.getInt(1), new Cliente(rs.getInt(2)), rs.getInt(3), rs.getDate(4), rs.getDouble(5));
+        return locacao;
     }
 
     @Override
@@ -116,7 +121,7 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
         if (locacao.getIdVeiculo() != null) {
             sql.append(String.format(" AND idveiculo = %d ", locacao.getIdVeiculo()));
         }
-        
+
         if (locacao.getCliente() != null && locacao.getCliente().getIdCliente() != null) {
             sql.append(String.format(" AND idcliente = %d ", locacao.getCliente().getIdCliente()));
         }
@@ -124,7 +129,7 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
         if (locacao.getDias() != null) {
             sql.append(String.format(" AND dias = %d ", locacao.getIdVeiculo()));
         }
-        
+
         if (locacao.getDataInicio() != null) {
             sql.append(String.format(" AND datainicio = '%s' ", new SimpleDateFormat("yyyy-MM-dd").format(locacao.getDataInicio())));
         }
@@ -132,7 +137,7 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
         if (locacao.getValor() != null) {
             sql.append(String.format(" AND valor = %f ", locacao.getValor()));
         }
-        
+
         stmt = con.prepareStatement(sql.toString());
 
         List<Locacao> list = new LinkedList<>();
@@ -143,8 +148,7 @@ public class LocacaoDao extends Dao implements DaoI<Locacao> {
             throw e;
         } finally {
             close();
-        }       
+        }
         return list;
     }
-
 }

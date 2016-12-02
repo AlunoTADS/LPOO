@@ -34,6 +34,8 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     private Cliente cliente;
     private Veiculo veiculo;
     private Locacao locacao;
+    private Categoria categoria;
+    private Marca marca;
 
     /**
      * Creates new form JIFLocar
@@ -65,7 +67,6 @@ public class JIFLocar extends javax.swing.JInternalFrame {
                 }
             }
         });
-
         cancelar();
     }
 
@@ -92,14 +93,13 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         try {
             if (jcb_automovel.isSelected()) {
                 tableVeiculo.setClass(Automovel.class);
-                veiculos = automovelDao.listar(new Automovel(null, null, null, Estado.DISPONIVEL, null, null, null, null, null));
-                //public Automovel(ModeloAutomovel modelo, Marca marca, Estado estado, Locacao locacao, Categoria categoria, Double valorCompra, String placa, Integer ano) {
+                veiculos = automovelDao.listar(new Automovel(null, null, marca, Estado.DISPONIVEL, null, categoria, null, null, null));
             } else if (jcb_motocicleta.isSelected()) {
                 tableVeiculo.setClass(Motocicleta.class);
-                veiculos = motocicletaDao.listar(new Motocicleta(null, null, null, Estado.DISPONIVEL, null, null, null, null, null));
+                veiculos = motocicletaDao.listar(new Motocicleta(null, null, marca, Estado.DISPONIVEL, null, categoria, null, null, null));
             } else if (jcb_van.isSelected()) {
                 tableVeiculo.setClass(Van.class);
-                veiculos = vanDao.listar(new Van(null, null, null, Estado.DISPONIVEL, null, null, null, null, null));
+                veiculos = vanDao.listar(new Van(null, null, marca, Estado.DISPONIVEL, null, categoria, null, null, null));
             }
             tableVeiculo.getTableModel().setDataList(veiculos);
         } catch (Exception e) {
@@ -142,9 +142,9 @@ public class JIFLocar extends javax.swing.JInternalFrame {
     private void cancelar() {
         jcb_categoria.setSelectedIndex(-1);
         jcb_marca.setSelectedIndex(-1);
-
         cliente = null;
         veiculo = null;
+
         refreshTableCliente();
         refreshTableVeiculo();
         refreshFormCliente();
@@ -159,6 +159,16 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void setaCategoria() {
+        categoria = (Categoria) jcb_categoria.getSelectedItem();
+        refreshTableVeiculo();
+    }
+
+    private void setaMarca() {
+        marca = (Marca) jcb_marca.getSelectedItem();
+        refreshTableVeiculo();
     }
 
     /**
@@ -233,6 +243,11 @@ public class JIFLocar extends javax.swing.JInternalFrame {
         jLabel8.setText("Tipo");
 
         jcb_marca.setModel(new DefaultComboBoxModel<>(Marca.values()));
+        jcb_marca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcb_marcaActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Marca");
@@ -495,16 +510,20 @@ public class JIFLocar extends javax.swing.JInternalFrame {
 
     private void jm_sairdosistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jm_sairdosistemaActionPerformed
         System.exit(0);
-        // TODO add your handling code here:
     }//GEN-LAST:event_jm_sairdosistemaActionPerformed
 
     private void jb_buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_buscarMouseClicked
-        refreshTableVeiculo();        // TODO add your handling code here:
+        refreshTableVeiculo();
+        refreshTableCliente();
     }//GEN-LAST:event_jb_buscarMouseClicked
 
     private void jb_cancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_cancelarMouseClicked
         cancelar();
     }//GEN-LAST:event_jb_cancelarMouseClicked
+
+    private void jcb_marcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_marcaActionPerformed
+        setaMarca();        // TODO add your handling code here:
+    }//GEN-LAST:event_jcb_marcaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -130,24 +130,24 @@ INSERT INTO Cliente (idCliente, nome, sobrenome, cpf, rg, rgSiglaUF, endereco) V
 INSERT INTO Cliente (idCliente, nome, sobrenome, cpf, rg, rgSiglaUF, endereco) VALUES (49, 'Kevin', 'Sanchez', '824.195.086-79', '34.541.442-9', 'RS', '53 Lillian Point');
 INSERT INTO Cliente (idCliente, nome, sobrenome, cpf, rg, rgSiglaUF, endereco) VALUES (50, 'Willie', 'Garrett', '883.204.722-41', '38.521.297-7', 'SC', '3 Glacier Hill Parkway');
 
-INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (1, 1, 2, 1, 10, 'AAAA-0000', 1991);
-INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (2, 2, 3, 1, 10, 'BBBB-1111', 1997);
-INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (3, 3, 2, 1, 10, 'CCCC-2222', 1997);
+INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (1, 1, 3, 1, 13465, 'AAAA-0000', 1991);
+INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (2, 2, 3, 2, 82371, 'BBBB-1111', 1997);
+INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (3, 3, 3, 3, 15065, 'CCCC-2222', 1997);
 INSERT INTO Motocicleta(idVeiculo, idModeloMotocicleta) VALUES (1, 1);
 INSERT INTO Motocicleta(idVeiculo, idModeloMotocicleta) VALUES (2, 2);
 INSERT INTO Motocicleta(idVeiculo, idModeloMotocicleta) VALUES (3, 3);
 
 
-INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (4, 4, 3, 1, 10, 'DDDD-3333', 1991);
-INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (5, 5, 2, 1, 10, 'EEEE-4444', 1991);
-INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (6, 6, 3, 1, 10, 'FFFF-5555', 1991);
+INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (4, 4, 3, 3, 23461, 'DDDD-3333', 1991);
+INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (5, 5, 3, 2, 12357, 'EEEE-4444', 1992);
+INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (6, 6, 3, 1, 62845, 'FFFF-5555', 1993);
 INSERT INTO Automovel(idVeiculo, idModeloAutomovel) VALUES (4, 1);
 INSERT INTO Automovel(idVeiculo, idModeloAutomovel) VALUES (5, 2);
 INSERT INTO Automovel(idVeiculo, idModeloAutomovel) VALUES (6, 3);
 
-INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (7, 7, 2, 1, 10, 'GGGG-6666', 1991);
-INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (8, 8, 3, 1, 10, 'HHHH-7777', 1991);
-INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (9, 9, 2, 1, 10, 'IIII-8888', 1991);
+INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (7, 7, 3, 1, 10345, 'GGGG-6666', 1994);
+INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (8, 8, 3, 2, 15355, 'HHHH-7777', 1995);
+INSERT INTO Veiculo (idVeiculo, idMarca, idEstado, idCategoria, valorcompra, placa, ano) VALUES (9, 9, 3, 1, 37655, 'IIII-8888', 1996);
 INSERT INTO Van(idVeiculo, idModeloVan) VALUES (7, 1);
 INSERT INTO Van(idVeiculo, idModeloVan) VALUES (8, 2);
 INSERT INTO Van(idVeiculo, idModeloVan) VALUES (9, 3);
