@@ -104,7 +104,7 @@ public class VanDao extends VeiculoDao implements DaoI<Veiculo> {
                 query.append(String.format(" AND idveiculo = %d ", van.getIdVeiculo()));
             }
             if (van.getModelo() != null && van.getModelo().getIdModeloVan() != null) {
-                query.append(String.format(" AND idmodeloautomovel = %d ", van.getModelo().getIdModeloVan()));
+                query.append(String.format(" AND idmodelovan = %d ", van.getModelo().getIdModeloVan()));
             }
             if (van.getMarca() != null && van.getMarca().getIdMarca() != null) {
                 query.append(String.format(" AND idmarca = %d ", van.getMarca().getIdMarca()));

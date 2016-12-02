@@ -143,7 +143,7 @@ public abstract class Veiculo implements VeiculoI {
         return this.marca != null ? this.categoria.getDescricao() : "";
     }
 
-    @Column(label = "Vlr Dia Locação", position = 6, format = "%10.2f")
+    @Column(label = "Vlr Dia Locação", position = 6, format = "R$ %10.2f")
     public abstract double getValorDiariaLocacao();
 
 //    @Column(label = "Valor Compra", position = 5, format = "%10.2f")

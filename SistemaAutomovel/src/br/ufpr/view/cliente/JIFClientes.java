@@ -11,6 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import org.postgresql.util.PSQLException;
 
 /**
  *
@@ -141,6 +142,8 @@ public class JIFClientes extends javax.swing.JInternalFrame {
             refreshTable();
             refreshForm();
             disableForm();
+        } catch (PSQLException ex) {
+            JOptionPane.showMessageDialog(null, "O cliente selecionado possui veículo(s) locado(s) e não pode ser excluído.");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
