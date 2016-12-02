@@ -134,7 +134,8 @@ public class VeiculoDao extends Dao implements DaoI<Veiculo> {
             Locacao locacao = null;
             if (estado.equals(Estado.LOCADO)) {
                 locacao = new Locacao(rs.getInt("idveiculo"));
-                //locacao = new LocacaoDao.buscar(locacao);
+                LocacaoDao locacaoDao = new LocacaoDao();
+                locacao = locacaoDao.buscar(locacao);
             }
             Veiculo v = null;
             if (veiculo instanceof Automovel) {
